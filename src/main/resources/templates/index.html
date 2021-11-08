@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th ="http://www.thymeleaf.org">
 <head>
     <title>Hello, world! Balenciaga Prada Gucci, ich bin immer fly. Mein neuer AMG-Coupé fährt Lichtgeschwindigkeit</title>
     <link rel="stylesheet" type="text/css"href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"/>
@@ -7,9 +7,8 @@
 <body>
 <div class ="container">
     <div class ="mt-4">
-        <h1>Hello, moin!</h1>
-        <h1> 4 8 15 16 23 42</h1>
-        <h1>test</h1>
+        <h1 th:if="${greeting!= null}" th:text="${greeting}">
+        </h1>
     </div>
 </div>
 </body>
