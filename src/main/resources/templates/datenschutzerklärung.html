@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns:th ="http://www.thymeleaf.org">
+<head>
+    <title>Hello, world!</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" th:href="@{/main.css}">
+</head>
+<body>
+<div th:replace="allPages/header :: header">...</div>
+
+<div class="ClassOverview">
+    <div>Datenschutzerklärung</div>
+</div>
+
+<div th:replace="allPages/footer :: footer">...</div>
+
+</body>
+</html>

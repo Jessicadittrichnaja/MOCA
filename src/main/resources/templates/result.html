@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Handling Form Submission</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<h1>Result</h1>
+<p th:text="'id: ' + ${form.title}" />
+<p th:text="'content: ' + ${form.category}" />
+<a href="/overview">Submit another message</a>
+
+<div th:replace="allPages/footer :: footer">...</div>
+
+</body>
+</html>
