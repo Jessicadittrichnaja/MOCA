@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<!DOCTYPE html>
+<html xmlns:th ="http://www.thymeleaf.org">
+<head>
+    <title>Übersicht</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" th:href="@{/main.css}">
+</head>
+<body>
+<div th:replace="allPages/header :: header">...</div>
+
+<!--<form method="POST" th:action="@{/filter}" th:object="${filteredEvents}">-->
+<div>
+    <form action="#" th:action="@{/overview}" th:object="${form}" method="post">
+        <p>Title: <input type="text" th:field="*{title}" /></p>
+        <p>Category: <input type="text" th:field="*{category}" /></p>
+        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    </form>
+</div>
+
+    <div class="CourseList">
+        <div>Kurs 1</div>
+        <div>Kurs 2</div>
+        <div>Kurs 3</div>
+    </div>
+
+<div th:replace="allPages/footer :: footer">...</div>
+
+</body>
+</html>
