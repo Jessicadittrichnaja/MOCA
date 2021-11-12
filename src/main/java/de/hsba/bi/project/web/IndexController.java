@@ -40,6 +40,12 @@ public class IndexController {
         return "datenschutzerklärung";
     }
 
+    @RequestMapping("/createEvent")
+    public String createEvent(Model model) {
+
+        return "createEvent";
+    }
+
 }
 
 

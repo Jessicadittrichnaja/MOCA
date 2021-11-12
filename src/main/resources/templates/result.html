@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th ="http://www.thymeleaf.org">
+<html xmlns:th ="http://thymeleaf.org">
 <head>
     <title>Hello, world!</title>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"/>
@@ -9,11 +9,17 @@
 
 <div th:replace="allPages/header :: header">...</div>
 
-<p th:text="'id: ' + ${form.title}" />
-<p th:text="'content: ' + ${form.category}" />
-<a href="/overview">Submit another message</a>
+<h2>Ergebnis</h2>
+<div class="my-3">
+    <p><strong>ID:</strong> <span th:text="${event.id}"></span></p>
+    <p><strong>Titel:</strong> <span th:text="${event.name}"></span></p>
+    <p><strong>Kategorie:</strong> <span th:text="${event.category}"></span></p>
+    <p><strong>Dauer:</strong> <span th:text="${event.duration}"></span></p>
+</div>
+<a th:href="@{/createEvent}">Erstelle eine weitere Veranstaltung</a>
 
 <div th:replace="allPages/footer :: footer">...</div>
 
 </body>
 </html>
+
