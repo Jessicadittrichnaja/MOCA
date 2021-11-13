@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th ="http://thymeleaf.org">
+<head>
+    <title>Hello, world!</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" th:href="@{/main.css}">
+</head>
+<body>
+
+<div th:replace="allPages/header :: header">...</div>
+
+<form th:action="@{/saveEvent}" th:object="${event}" method="post">
+    <div class="form-row">
+        <div class="col-md-6 form-group">
+            <label>Veranstaltungs-ID</label>
+            <input type="number" class="form-control" th:field="*{id}">
+        </div>
+        <div class="col-md-6 form-group">
+            <label>Titel</label>
+            <input type="text" class="form-control" th:field="*{name}">
+        </div>
+        <div class="col-md-6 form-group">
+            <label>Kategorie</label>
+            <select class="form-control" th:field="*{category}">
+                <option value="">Auswählen...</option>
+                <option value="Design">Seminar</option>
+                <option value="Engineering">Workshop</option>
+                <option value="Marketing">Teamtag</option>
+            </select>
+        </div>
+        <div class="col-md-6 form-group">
+            <label>Dauer</label>
+            <input type="number" class="form-control" th:field="*{duration}">
+        </div>
+        <div class="col-md-6 form-group">
+            <input type="submit" value="Veranstaltung anlegen" />
+        </div>
+    </div>
+</form>
+
+<div th:replace="allPages/footer :: footer">...</div>
+
+</body>
+</html>
