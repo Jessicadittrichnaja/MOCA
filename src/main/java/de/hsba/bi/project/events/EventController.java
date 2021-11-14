@@ -18,7 +18,7 @@ public class EventController {
     @PostMapping("/saveEvent")
     public String saveProjectSubmission(@ModelAttribute Event event) {
 
-/*        model.addAttribute("event", EventRepository.findAll());*/
+        model.addAttribute("event", EventRepository.findAll());
 
         return "result";
     }
