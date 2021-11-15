@@ -1,19 +1,19 @@
 package de.hsba.bi.project.events;
 
-import java.io.Serializable;
 import lombok.Getter;
 import lombok.Setter;
 
-/*import javax.persistence.Entity;
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
-import javax.persistence.Id;*/
+import javax.persistence.Id;
+import java.io.Serializable;
 
-/*@Entity*/
+@Entity
 public class Event implements Serializable {
 
- /*   @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)*/
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     @Setter
     private Long id;
@@ -34,12 +34,14 @@ public class Event implements Serializable {
     @Setter
     private Integer duration;
 
-/*        public Event(Long id, String name, String description, Integer duration) {
-            super();
-            this.id = id;
+        public Event(String name, String description, String category, Integer duration) {
             this.name = name;
             this.description = description;
+            this.category = category;
             this.duration = duration;
         }
-*/
+
+    public Event() {
+
+    }
 }

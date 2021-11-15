@@ -1,21 +1,29 @@
 /*package de.hsba.bi.project.events;
 
-        import de.hsba.bi.project.events.Event;
-        import de.hsba.bi.project.events.EventRepository;
-        import org.springframework.beans.factory.annotation.Autowired;
-        import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Service;
 
-        import java.util.List;
+import java.util.List;
 
 @Service
 public class EventService implements IEventService {
 
-    @Autowired
-    private EventRepository repository;
+    private final EventRepository eventRepository;
+
+    public EventService(EventRepository eventRepository) {
+        this.eventRepository = eventRepository;
+    }
+
+    public void Seed(String name, String description, String category, int duration) {
+        eventRepository.save(new Event(name, description, category, duration));
+    }
 
     @Override
     public List<Event> findAll() {
 
-        return (List<Event>) repository.findAll();
+        return eventRepository.findAll();
     }
-*/
+
+    public Event save(Event event) {
+        return eventRepository.save(event);
+    }
+}*/
