@@ -11,10 +11,33 @@
 
 <!--<form method="POST" th:action="@{/filter}" th:object="${filteredEvents}">-->
 <div>
-    <form action="#" th:action="@{/overview}" th:object="${form}" method="post">
-        <p>Title: <input type="text" th:field="*{title}" /></p>
-        <p>Category: <input type="text" th:field="*{category}" /></p>
-        <p><input type="submit" value="Submit" /> <input type="reset" value="Reset" /></p>
+    <form action="#" th:action="@{/overview}" th:object="${event}" method="post">
+        <div class="form-row">
+            <div class="col-md-6 form-group">
+                <label>Veranstaltungs-ID</label>
+                <input type="number" class="form-control" th:field="*{id}">
+            </div>
+            <div class="col-md-6 form-group">
+                <label>Titel</label>
+                <input type="text" class="form-control" th:field="*{name}">
+            </div>
+            <div class="col-md-6 form-group">
+                <label>Kategorie</label>
+                <select class="form-control" th:field="*{category}">
+                    <option value="">Auswählen...</option>
+                    <option value="Seminar">Seminar</option>
+                    <option value="Workshop">Workshop</option>
+                    <option value="Teamtag">Teamtag</option>
+                </select>
+            </div>
+            <div class="col-md-6 form-group">
+                <label>Dauer</label>
+                <input type="number" class="form-control" th:field="*{duration}">
+            </div>
+            <div class="col-md-6 form-group">
+                <input type="submit" value="Veranstaltung anlegen" />
+            </div>
+        </div>
     </form>
 </div>
 

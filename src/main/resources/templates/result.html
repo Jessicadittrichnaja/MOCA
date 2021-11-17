@@ -11,12 +11,15 @@
 
 <h2>Ergebnis</h2>
 <div class="my-3">
-    <p><strong>ID:</strong> <span th:text="${event.id}"></span></p>
-    <p><strong>Titel:</strong> <span th:text="${event.name}"></span></p>
-    <p><strong>Kategorie:</strong> <span th:text="${event.category}"></span></p>
-    <p><strong>Dauer:</strong> <span th:text="${event.duration}"></span></p>
+    <tr th:each = "event: ${event}">
+        <td th:text="${event.id}"></span></td>
+        <td th:text="${event.name}"></span></td>
+        <td th:text="${event.category}"></span></td>
+        <td th:text="${event.duration}"></span></td>
+    </tr>
 </div>
-<a th:href="@{/createEvent}">Erstelle eine weitere Veranstaltung</a>
+<a th:href="@{/overview}">Erstelle eine weitere Veranstaltung</a>
+<a th:href="@{/event}">Sieh dir alle Veranstaltungen an</a>
 
 <div th:replace="allPages/footer :: footer">...</div>
 
