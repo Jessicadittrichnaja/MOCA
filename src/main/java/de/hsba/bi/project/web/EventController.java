@@ -1,25 +1,25 @@
 package de.hsba.bi.project.web;
 
-import de.hsba.bi.project.events.Event;
-import de.hsba.bi.project.events.EventRepository;
-import de.hsba.bi.project.events.EventService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
+import de.hsba.bi.project.events.EventService;
+import lombok.RequiredArgsConstructor;
 
-@RestController
-@RequestMapping("event")
+@Controller
+@RequestMapping("/event")
+@ComponentScan("de.hsba.bi.project.events")
+@RequiredArgsConstructor
 public class EventController {
 
-    @Autowired
-    EventService eventService;
-    EventRepository eventRepository;
+    private final EventService eventService;
 
-    @GetMapping()
-    public List<Event> getEvents() {
-        return eventService.getEvents();
+    @GetMapping
+    public String eventList(Model model) {
+        model.addAttribute("events", eventService.findAll());
+        return "event";
     }
 }

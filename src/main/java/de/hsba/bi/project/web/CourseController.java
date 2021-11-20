@@ -17,13 +17,13 @@ public class CourseController {
     private EventRepository eventRepository;
     EventService eventService;
 
-    @GetMapping("/overview")
+    @GetMapping("/createEvent")
     public String Form(Model model) {
         model.addAttribute("event", new Event());
-        return "overview";
+        return "createEvent";
     }
 
-     @PostMapping("/overview")
+     @PostMapping("/createEvent")
     public String saveEvent(@ModelAttribute Event event) {
         eventRepository.save(event);
         return "result";
