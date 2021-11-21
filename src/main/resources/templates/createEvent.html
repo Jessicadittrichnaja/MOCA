@@ -8,8 +8,8 @@
 </head>
 <body>
 <div th:replace="allPages/header :: header">...</div>
-
-<div>
+<br>
+<div style="margin-left:34vw;font-size:20px;">
     <form action="#" th:action="@{/createEvent}" th:object="${event}" method="post">
         <div class="form-row">
             <div class="col-md-6 form-group">
@@ -34,8 +34,8 @@
                 <input type="number" class="form-control" th:field="*{duration}">
             </div>
             <br>
-            <div class="col-md-6 form-group">
-                <input type="submit" style="background-color: rosybrown" value="Veranstaltung anlegen" />
+            <div>
+                <input type="submit" style="background-color: rosybrown;border-radius: 5px;border-style:none;color:ghostwhite" value="Veranstaltung anlegen"/>
             </div>
         </div>
     </form>
