@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html xmlns:th ="http://thymeleaf.org">
+<head>
+    <title>Hello, world!</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" th:href="@{/main.css}">
+</head>
+<body>
+<h2>List of countries</h2>
+
+<table>
+    <tr th:each = "event: ${events}">
+        <td th:text="${events.description}"></span></td>
+        <td th:text="${events.name}"></span></td>
+        <td th:text="${events.category}"></span></td>
+        <td th:text="${events.duration}"></span></td>
+    </tr>
+</table>
+<div th:replace="allPages/footer :: footer">...</div>
+
+</body>
+</html>
