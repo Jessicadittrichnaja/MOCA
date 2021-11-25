@@ -9,6 +9,88 @@
 <body>
 <div th:replace="allPages/header :: header">...</div>
 
+<div class="whole1">
+    <div class="inhalt1">
+        <div class="sidenav">
+            <div class="fone">
+                <div class="sncontainer">Titel: <br>
+                    <select name="titel" id="titel">
+                    </select>
+                </div>
+                <div class="sncontainer">Kategorie: <br>
+                    <select name="kategorie" id="kategorie">
+                        <option value=""></option>
+                        <option value="seminar">Seminar</option>
+                        <option value="workshop">Workshop</option>
+                        <option value="teamtag">Teamtag</option>
+                    </select>
+                </div>
+                <div class="sncontainer">Datum: <br>
+                    <input type="date" id="date" name="date">
+                </div>
+                <div class="sncontainer">Uhrzeit: <br>
+                    <input type="time" id="time" name="time">
+                </div>
+                <div class="sncontainer1">
+                    <input type="submit" id="refine" value="Suchen">
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="kurse">
+        <div class="kurs">
+            <div class="KursAnzeige">
+                <div class="KursBild">
+
+                </div>
+                <div class="Beschreibung">
+                    <div class="KursName">Seminar</div>
+                    <div class="KursZeit"> 8:00 - 9:30</div>
+                </div>
+            </div>
+        </div>
+        <div class="kurs">
+            <div class="KursAnzeige">
+                <div class="KursBild">
+
+                </div>
+                <div class="Beschreibung">
+                    <div class="KursName">Seminar</div>
+                    <div class="KursZeit"> 10:00 - 11:00</div>
+                </div>
+            </div>
+        </div>
+        <div class="kurs">
+            <div class="KursAnzeige">
+                <div class="KursBild">
+
+                </div>
+                <div class="Beschreibung">
+                    <div class="KursName">Teamtag</div>
+                    <div class="KursZeit"> 9:00 - 15:30</div>
+                </div>
+            </div>
+        </div>
+        <div class="kurs">
+            <div class="KursAnzeige">
+                <div class="KursBild">
+
+                </div>
+                <div class="Beschreibung">
+                    <div class="KursName">Workshop</div>
+                    <div class="KursZeit"> 13:00 - 14:00</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
 <!--<div>
     <form action="#" th:action="@{/overview}" th:object="${event}" method="post">
         <div class="form-row">
@@ -40,11 +122,11 @@
     </form>
 </div>-->
 
-    <div class="CourseList">
+<!--    <div class="CourseList">
         <div>Kurs 1</div>
         <div>Kurs 2</div>
         <div>Kurs 3</div>
-    </div>
+    </div>-->
 
 <div th:replace="allPages/footer :: footer">...</div>
 

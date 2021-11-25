@@ -32,7 +32,7 @@ public class Event implements Serializable {
     @Setter
     private Integer duration;
 
-        public Event(String name, String description, String category, Integer duration) {
+        public Event(String name, String description, String category, Integer duration){
             this.name = name;
             this.description = description;
             this.category = category;
