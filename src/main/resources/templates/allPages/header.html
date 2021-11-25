@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th ="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"/>
     <link rel="stylesheet" th:href="@{/main.css}">
@@ -7,12 +7,21 @@
 
 
 <header>
-    <div class="header">
-        <a style="font-size: 30px;color: rosybrown;" th:href="@{/index}" class="logo">MOCA</a>
+    <div class="header" sec:authorize="anonymous">
+        <a style="font-size: 35px;color: rosybrown;" th:href="@{/index}" class="logo">MOCA</a>
         <div class="header-right">
             <!--<a class="active" th:href="@{/index}">Startseite</a>-->
             <a th:href="@{/overview}">Veranstaltungen buchen</a>
             <a th:href="@{/login}">Login</a>
+            <a th:href="@{/createEvent}">Neue Veranstaltung erstellen</a>
+        </div>
+    </div>
+    <div class="header" sec:authorize="authenticated">
+        <a style="font-size: 35px;color: rosybrown;" th:href="@{/index}" class="logo">MOCA</a>
+        <div class="header-right">
+            <!--<a class="active" th:href="@{/index}">Startseite</a>-->
+            <a th:href="@{/overview}">Veranstaltungen buchen</a>
+            <a th:href="@{/logout}">Logout</a>
             <a th:href="@{/createEvent}">Neue Veranstaltung erstellen</a>
         </div>
     </div>
