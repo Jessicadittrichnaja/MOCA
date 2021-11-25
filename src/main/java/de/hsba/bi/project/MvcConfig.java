@@ -1,4 +1,4 @@
-package de.hsba.bi.project;//package com.example.demo;
+//package de.hsba.bi.project;//package com.example.demo;
 //
 //import org.springframework.context.annotation.Configuration;
 //import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;

@@ -23,6 +23,11 @@ public class IndexController {
 
         return "login";
     }
+    @RequestMapping("/logout")
+    public String logout(Model model) {
+
+        return "logout";
+    }
     @RequestMapping("/impressum")
     public String impressum(Model model) {
 
