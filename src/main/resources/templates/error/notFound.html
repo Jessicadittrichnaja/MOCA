@@ -1,7 +1,14 @@
 <!DOCTYPE html>
 <html layout:decorate="~{layout}"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th ="http://www.thymeleaf.org">
+<head>
+    <title>Datenschutz</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" th:href="@{/main.css}">
+</head>
 <body>
+<div th:replace="allPages/header :: header">...</div>
 <div layout:fragment="content">
     <div class="my-4">
         <h1>Daer Eintrag konnte nicht gefunden werden</h1>
@@ -11,5 +18,6 @@
         <a href="/journals/">Startseite</a>
     </p>
 </div>
+<div th:replace="allPages/footer :: footer">...</div>
 </body>
 </html>

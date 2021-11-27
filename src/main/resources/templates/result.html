@@ -6,21 +6,28 @@
     <link rel="stylesheet" th:href="@{/main.css}">
 </head>
 <body>
-
 <div th:replace="allPages/header :: header">...</div>
-
-<h2>Ergebnis</h2>
-<div class="my-3">
-    <tr th:each = "event: ${event}">
-        <td th:text="${event.name}"></span></td>
-        <td th:text="${event.description}"></span></td>
-        <td th:text="${event.category}"></span></td>
-        <td th:text="${event.duration}"></span></td>
+<br>
+<h2 style="text-align: center;">Erstellte Veranstaltung</h2>
+<table style="background-color: rosybrown; color:ghostwhite; margin-left:25vw; width:50%;font-size:20px;border-radius: 5px;">
+    <tr style="font-weight:bold;">
+        <td>Name</td>
+        <td>Beschreibung</td>
+        <td>Kategorie</td>
+        <td>Dauer</td>
     </tr>
+    <tr th:each = "event: ${event}">
+        <td style="width:25%;" th:text="${event.name}"></span></td>
+        <td style="width:25%;" th:text="${event.description}"></span></td>
+        <td style="width:25%;" th:text="${event.category}"></span></td>
+        <td style="width:25%;" th:text="${event.duration}"></span></td>
+    </tr>
+</table>
+<br>
+<div class="link" style="margin-left:39vw; width:22%;background-color: lightgray;border-radius: 5px;">
+    <p><a th:href="@{/createEvent}">Erstelle eine weitere Veranstaltung</a></p>
+    <p><a th:href="@{/event}">Sieh dir alle Veranstaltungen an</a></p>
 </div>
-<a th:href="@{/createEvent}">Erstelle eine weitere Veranstaltung</a>
-<a th:href="@{/event}">Sieh dir alle Veranstaltungen an</a>
-
 <div th:replace="allPages/footer :: footer">...</div>
 
 </body>
