@@ -42,4 +42,8 @@ public class Event implements Serializable {
     public Event() {
 
     }
+
+    public boolean hasOverTwoDuration() {
+        return this.duration > 2;
+    }
 }

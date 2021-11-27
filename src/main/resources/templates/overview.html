@@ -13,8 +13,12 @@
     <div class="inhalt1">
         <div class="sidenav">
             <div class="fone">
-                <div class="sncontainer">Titel: <br>
+                <div class="sncontainer">Location: <br>
                     <select name="titel" id="titel">
+                        <option value=""></option>
+                        <option value="hamburg">Hamburg</option>
+                        <option value="berlin">Berlin</option>
+                        <option value="muenchen">München</option>
                     </select>
                 </div>
                 <div class="sncontainer">Kategorie: <br>
@@ -40,51 +44,22 @@
     </div>
 
 
-    <div class="kurse">
-        <div class="kurs">
-            <div class="KursAnzeige">
-                <div class="KursBild">
+
+    <div th:each="event : ${events}">
+        <div class="Event" >
+            <div class="EventAnzeige">
+                <div class="EventBild">
 
                 </div>
-                <div class="Beschreibung">
-                    <div class="KursName">Seminar</div>
-                    <div class="KursZeit"> 8:00 - 9:30</div>
+                <div class="EventBeschreibung">
+                    <div class="EventName" th:text="${event.name}"></div>
+                    <div class="EventInfo" th:text="${event.description}"></div>
+                    <div class="EventInfo" th:text="${event.category}"></div>
+                    <div class="EventInfo" th:text="${event.duration}"></div>
                 </div>
             </div>
         </div>
-        <div class="kurs">
-            <div class="KursAnzeige">
-                <div class="KursBild">
-
-                </div>
-                <div class="Beschreibung">
-                    <div class="KursName">Seminar</div>
-                    <div class="KursZeit"> 10:00 - 11:00</div>
-                </div>
-            </div>
-        </div>
-        <div class="kurs">
-            <div class="KursAnzeige">
-                <div class="KursBild">
-
-                </div>
-                <div class="Beschreibung">
-                    <div class="KursName">Teamtag</div>
-                    <div class="KursZeit"> 9:00 - 15:30</div>
-                </div>
-            </div>
-        </div>
-        <div class="kurs">
-            <div class="KursAnzeige">
-                <div class="KursBild">
-
-                </div>
-                <div class="Beschreibung">
-                    <div class="KursName">Workshop</div>
-                    <div class="KursZeit"> 13:00 - 14:00</div>
-                </div>
-            </div>
-        </div>
+    </div>
 
     </div>
 </div>

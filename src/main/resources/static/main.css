@@ -151,46 +151,36 @@ select {
 }
 
 #refine:hover {
-    transform: scale(1.05);
+    transform: scale(1.07);
 }
 
-.kurse {
-    display: flex;
-    flex-wrap : wrap;
-
-    width: 100%;
-    height: 100%;
-    margin-left: 5%;
-}
-
-.kurs {
+.Event {
     transition: all ease-in-out .15s;
     flex: 0 1 calc(33.3% - 22px);
     min-width:33.3%;
 }
 
-.kurs:hover {
+.Event:hover {
     transform: scale(1.05);
 }
 
-.KursAnzeige {
+.EventAnzeige {
     margin: 0 10px 10px 10px;
     border: 1px solid white;
     border-radius: 5px;
     background-color: #fff;
     display: flex;
     flex-direction:column;
-
 }
 
-.KursBild {
+.EventBild {
     width: 100%;
     height: 80%;
     content:url(https://www.schoenzeit.ch/wp-content/uploads/2018/03/Platzhalterbild.jpg);
     border-radius: 3px 3px 0 0;
 }
 
-.Beschreibung {
+.EventBeschreibung {
     height: 20%;
     background-color: rosybrown;
     border-radius: 0 0 3px 3px;
@@ -202,14 +192,19 @@ select {
 
 }
 
-.KursName {
+.EventName {
     font-size: 100%;
     color: #fff;
     text-decoration: underline;
     font-weight: bold;
 }
 
-.KursZeit {
+.EventInfo {
+    font-size: 90%;
+    color: #fff;
+}
+
+.EventZeit {
     font-size: 75%;
 }
 
