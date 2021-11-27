@@ -21,7 +21,9 @@
         <div class="header-right">
             <!--<a class="active" th:href="@{/index}">Startseite</a>-->
             <a th:href="@{/overview}">Veranstaltungen buchen</a>
-            <a th:href="@{/logout}">Logout</a>
+            <form th:action="@{/logout}" method="post">
+                <button type="submit">Abmelden</button>
+            </form>
             <a th:href="@{/createEvent}">Neue Veranstaltung erstellen</a>
         </div>
     </div>
