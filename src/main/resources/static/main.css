@@ -420,3 +420,7 @@ select {
     border: 1px solid white;
     width: inherit;
 }
+
+.Index:hover {
+    transform: scale(1.05);
+}
