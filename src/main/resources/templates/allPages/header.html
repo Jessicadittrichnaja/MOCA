@@ -24,6 +24,7 @@
             <form th:action="@{/logout}" method="post">
                 <button type="submit">Abmelden</button>
             </form>
+            <a href="/admin/" sec:authorize="hasRole('ADMIN')">Admin-Bereich</a>
             <a th:href="@{/createEvent}">Neue Veranstaltung erstellen</a>
         </div>
     </div>
