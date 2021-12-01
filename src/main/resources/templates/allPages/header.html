@@ -11,22 +11,33 @@
         <a style="font-size: 35px;color: rosybrown;" th:href="@{/index}" class="logo">MOCA</a>
         <div class="header-right">
             <!--<a class="active" th:href="@{/index}">Startseite</a>-->
-            <a th:href="@{/overview}">Veranstaltungen buchen</a>
+<!--            <a th:href="@{/overview}">Veranstaltungen buchen</a>-->
             <a th:href="@{/login}">Login</a>
-            <a th:href="@{/createEvent}">Neue Veranstaltung erstellen</a>
+<!--            <a th:href="@{/createEvent}">Neue Veranstaltung erstellen</a>-->
         </div>
     </div>
     <div class="header" sec:authorize="authenticated">
         <a style="font-size: 35px;color: rosybrown;" th:href="@{/index}" class="logo">MOCA</a>
         <div class="header-right">
+            <div style="width: 150px; height:100px;float: right;background-color: green;margin-right: 50px;">
             <!--<a class="active" th:href="@{/index}">Startseite</a>-->
-            <a th:href="@{/overview}">Veranstaltungen buchen</a>
-            <form th:action="@{/logout}" method="post">
-                <button type="submit">Abmelden</button>
-            </form>
-            <a th:href="@{/createEvent}">Neue Veranstaltung erstellen</a>
+                <a th:href="@{/overview}">Veranstaltungen buchen</a>
+            </div>
+            <div style="width: 150px; height:100px;float: right;background-color: blue;margin-right: 50px;">
+                <form th:action="@{/logout}" method="post">
+    <!--                <span th:text="${#httpServletRequest.remoteUser}" />-->
+                   <a> <button type="submit">Abmelden</button></a>
+                </form>
+            </div>
+            <div style="width: 150px; height: 100px;float: right;background-color: red;margin-right: 50px;" sec:authorize="hasRole('ADMIN')">
+                <a th:href="@{/createEvent}" >Neue Veranstaltung erstellen</a>
+<!--            <a href="/createEvent/" sec:authorize="hasRole('ADMIN')"> Gelange zu dem Admin Event</a>-->
+<!--            <a href="/event/" sec:authorize="hasRole('USER')"> Gelange zu dem User Event</a>-->
+            </div>
+            <div style="width: 150px; height: 100px;float: right;background-color: black;margin-right: 50px;" sec:authorize="hasRole('ADMIN')">
+                <a th:href="@{/event}">Veranstaltung ansehen</a>
+            </div>
         </div>
     </div>
 </header>
-
 </html>
