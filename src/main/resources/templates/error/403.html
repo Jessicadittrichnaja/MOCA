@@ -10,10 +10,14 @@
 <body>
 <div th:replace="allPages/header :: header">...</div>
 <div layout:fragment="content">
-    <div class="my-4">
-        <h1>Zutritt verboten</h1>
+    <div style="width: 100%; height: 500px; text-align: center;">
+        <div style="border-radius: 7px; background-color: #f5f5f5; margin-left:25%; margin-right:25%; width: 50%;padding:4%;margin-top: 50px;">
+            <h1>Sie haben keine Berechtigung für diese Seite</h1>
+            <p></p>
+            <p><a href="/">Hier</a> gelangen Sie zur Startseite zurück</p>
+        </div>
+
     </div>
-    <p><strong>Bitte gehen Sie <a href="/">zurück</a> auf Los.</strong></p>
 </div>
 <div th:replace="allPages/footer :: footer">...</div>
 </body>

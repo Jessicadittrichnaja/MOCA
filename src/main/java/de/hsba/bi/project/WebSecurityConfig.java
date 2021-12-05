@@ -21,7 +21,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.authorizeRequests()
 				.antMatchers("/").permitAll()
 //					Wenn etwas unter /admin liegt, kann nur jemand mit der Rolle ADMIN darauf zugreifen:
-				.antMatchers("/admin/**").hasRole("ADMIN")
+				.antMatchers("/createEvent").hasRole("ADMIN")
 //				.anyRequest().authenticated()
 				.and()
 				.formLogin()
