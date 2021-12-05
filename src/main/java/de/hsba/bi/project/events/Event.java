@@ -5,6 +5,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 
 @Entity
 public class Event implements Serializable {
@@ -13,7 +14,7 @@ public class Event implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     @Setter
-    private Long id;
+    private Integer id;
 
     @Getter
     @Setter
@@ -26,24 +27,26 @@ public class Event implements Serializable {
 
     @Getter
     @Setter
-    private String category;
+    private Category category;
 
     @Getter
     @Setter
     private Integer duration;
 
-        public Event(String name, String description, String category, Integer duration){
+    @Getter
+    @Setter
+    private Integer spots;
+
+
+        public Event(String name, String description, Category category, Integer duration, Integer spots) {
             this.name = name;
             this.description = description;
             this.category = category;
             this.duration = duration;
+            this.spots = spots;
         }
 
     public Event() {
 
-    }
-
-    public boolean hasOverTwoDuration() {
-        return this.duration > 2;
     }
 }

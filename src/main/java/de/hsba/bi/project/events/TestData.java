@@ -18,8 +18,8 @@ public class TestData {
         @Transactional
         public void init() {
             // add some events
-            Event programmierung = new Event ("Programmierung 2", "Projekt", "Uni", 10);
-            Event stadttour = new Event("Stadttour", "Freizeitveranstaltung", "Teamtag", 3);
+            Event programmierung = new Event ("Programmierung 2", "Projekt", Category.Seminar, 10, 20);
+            Event stadttour = new Event("Stadttour", "Freizeitveranstaltung", Category.Teamtag, 3, 15);
             eventRepository.save(programmierung);
             eventRepository.save(stadttour);
         }

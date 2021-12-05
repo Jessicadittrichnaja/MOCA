@@ -23,15 +23,17 @@
             <div class="col-md-6 form-group">
                 <label>Kategorie</label>
                 <select class="form-control" th:field="*{category}">
-                    <option value="">Auswählen...</option>
-                    <option value="Seminar">Seminar</option>
-                    <option value="Workshop">Workshop</option>
-                    <option value="Teamtag">Teamtag</option>
+                    <option th:value="${null}" selected>Kategorie wählen..</option>
+                    <option th:each="category: ${T(de.hsba.bi.project.events.Category).values()}" th:value="${category}" th:text="${category.displayValue}">
                 </select>
             </div>
             <div class="col-md-6 form-group">
                 <label>Dauer</label>
-                <input type="number" class="form-control" th:field="*{duration}">
+                <input type="number" min="1" max="8" class="form-control" th:field="*{duration}">
+            </div>
+            <div class="col-md-6 form-group">
+                <label>Anzahl Teilnehmer</label>
+                <input type="number" min="1" max="50" class="form-control" th:field="*{spots}">
             </div>
             <br>
             <div>

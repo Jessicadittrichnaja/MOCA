@@ -9,18 +9,22 @@
 <div th:replace="allPages/header :: header">...</div>
 <br>
 <h2 style="text-align: center;">Erstellte Veranstaltung</h2>
+<br>
 <table style="background-color: rosybrown; color:ghostwhite; margin-left:25vw; width:50%;font-size:20px;border-radius: 5px;">
     <tr style="font-weight:bold;">
         <td>Name</td>
         <td>Beschreibung</td>
         <td>Kategorie</td>
         <td>Dauer</td>
+        <td>Anzahl Teilnehmer</td>
     </tr>
     <tr th:each = "event: ${event}">
-        <td style="width:25%;" th:text="${event.name}"></span></td>
-        <td style="width:25%;" th:text="${event.description}"></span></td>
-        <td style="width:25%;" th:text="${event.category}"></span></td>
-        <td style="width:25%;" th:text="${event.duration}"></span></td>
+        <td style="width:2o%;" th:text="${event.name}"></span></td>
+        <td style="width:20%;" th:text="${event.description}"></span></td>
+        <td style="width:20%;" th:text="${event.category}"></span></td>
+        <td style="width:20%;" th:text="${event.duration}"></span></td>
+        <td style="width:20%;" th:text="${event.spots}"></td>
+
     </tr>
 </table>
 <br>

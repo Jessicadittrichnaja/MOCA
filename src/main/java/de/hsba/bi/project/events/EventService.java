@@ -21,4 +21,17 @@ public class EventService {
     return event;
     }
 
+    public Event findById(Integer id) {
+
+        Event event = eventRepository.findById(id).orElse(null);
+
+        return event;
+
+    };
+    public void removeEvent(Event event)  {
+        eventRepository.delete(event);
+    }
+
+    public void save(Event event) { eventRepository.save(event);
+    }
 }
