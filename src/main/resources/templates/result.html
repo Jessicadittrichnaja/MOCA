@@ -17,13 +17,19 @@
         <td>Kategorie</td>
         <td>Dauer</td>
         <td>Anzahl Teilnehmer</td>
+        <td>Standort</td>
+        <td>Datum</td>
+        <td>Tageszeit</td>
     </tr>
     <tr th:each = "event: ${event}">
-        <td style="width:2o%;" th:text="${event.name}"></span></td>
-        <td style="width:20%;" th:text="${event.description}"></span></td>
-        <td style="width:20%;" th:text="${event.category}"></span></td>
-        <td style="width:20%;" th:text="${event.duration}"></span></td>
-        <td style="width:20%;" th:text="${event.spots}"></td>
+        <td style="width:14%;" th:text="${event.name}"></span></td>
+        <td style="width:14%;" th:text="${event.description}"></span></td>
+        <td style="width:14%;" th:text="${event.category}"></span></td>
+        <td style="width:14%;" th:text="${event.duration}"></span></td>
+        <td style="width:14%;" th:text="${event.spots}"></td>
+        <td style="width:14%;" th:text="${event.location}"></td>
+        <td style="width:14%;" th:text="${event.date}"></td>
+        <td style="width:14%;" th:text="${event.time}"></td>
 
     </tr>
 </table>

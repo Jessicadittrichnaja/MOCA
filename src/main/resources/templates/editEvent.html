@@ -1,0 +1,83 @@
+<!DOCTYPE HTML>
+<!DOCTYPE html>
+<html xmlns:th ="http://www.thymeleaf.org">
+<head>
+  <title>Event bearbeiten</title>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" th:href="@{/main.css}">
+</head>
+<body>
+<div th:replace="allPages/header :: header">...</div>
+<br>
+<div style="margin-left:34vw;font-size:20px;">
+  <form class="form" th:action=" @{${'/event/edit/' + id}}" th:object="${eventForm}" method = "post">
+    <div class="form-row">
+      <div class="col-md-6 form-group">
+        <label>Titel</label>
+        <input type="text" class="form-control" th:field="*{name}"
+               th:classappend="${#fields.hasErrors('name')? 'is-invalid' : ''}"/>
+        <span class="text-danger" th:errors="*{name}"></span>
+      </div>
+      <div class="col-md-6 form-group">
+        <label>Beschreibung</label>
+        <input type="text" class="form-control" th:field="*{description}"
+               th:classappend="${#fields.hasErrors('description')? 'is-invalid' : ''}"/>
+        <span class="text-danger" th:errors="*{description}"></span>
+      </div>
+      <div class="col-md-6 form-group">
+        <label>Kategorie</label>
+        <select class="form-control" th:field="*{category}">
+          <option th:value="${null}" selected>Kategorie wählen..</option>
+          <option th:each="category: ${T(de.hsba.bi.project.events.Category).values()}" th:value="${category}" th:text="${category.displayValue}"
+                  th:classappend="${#fields.hasErrors('category')? 'is-invalid' : ''}"></option>
+          <span class="text-danger" th:errors="*{category}"></span>
+        </select>
+      </div>
+      <div class="col-md-6 form-group">
+        <label>Dauer</label>
+        <input type="number" min="1" max="50" class="form-control" th:field="*{duration}"
+               th:classappend="${#fields.hasErrors('duration')? 'is-invalid' : ''}"/>
+        <span class="text-danger" th:errors="*{duration}"></span>
+      </div>
+      <div class="col-md-6 form-group">
+        <label>Anzahl Teilnehmer</label>
+        <input type="number" min="1" max="50" class="form-control" th:field="*{spots}"
+               th:classappend="${#fields.hasErrors('spots')? 'is-invalid' : ''}"/>
+        <span class="text-danger" th:errors="*{spots}"></span>
+      </div>
+      <div class="col-md-6 form-group">
+        <label>Standort</label>
+        <select class="form-control" th:field="*{location}">
+          <option th:value="${null}" selected>Standort wählen..</option>
+          <option th:each="location: ${T(de.hsba.bi.project.events.Location).values()}" th:value="${location}" th:text="${location.displayValue}"
+                  th:classappend="${#fields.hasErrors('location')? 'is-invalid' : ''}"></option>
+          <span class="text-danger" th:errors="*{location}"></span>
+        </select>
+      </div>
+      <div class="col-md-6 form-group">
+        <label>Datum</label>
+        <input type="date" class="form-control" th:field="*{date}"
+               th:classappend="${#fields.hasErrors('date')? 'is-invalid' : ''}"/>
+        <span class="text-danger" th:errors="*{date}"></span>
+      </div>
+      <div class="col-md-6 form-group">
+        <label>Zeit</label>
+        <select class="form-control" th:field="*{time}">
+          <option th:value="${null}" selected>Tageszeit wählen..</option>
+          <option th:each="time: ${T(de.hsba.bi.project.events.Time).values()}" th:value="${time}" th:text="${time.displayValue}"
+                  th:classappend="${#fields.hasErrors('time')? 'is-invalid' : ''}"></option>
+          <span class="text-danger" th:errors="*{time}"></span>
+        </select>
+      </div>
+      <br>
+      <div>
+        <input class="Index" type="submit" style="background-color: rosybrown;border-radius: 5px;border-style:none;color:ghostwhite" value="Änderungen speichern"/>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div th:replace="allPages/footer :: footer">...</div>
+
+</body>
+</html>

@@ -3,6 +3,7 @@ package de.hsba.bi.project.web;
 import de.hsba.bi.project.events.Event;
 import de.hsba.bi.project.events.EventRepository;
 import de.hsba.bi.project.events.EventService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
 
+@RequiredArgsConstructor
 @Controller
 public class CourseController {
 
@@ -21,6 +23,8 @@ public class CourseController {
     private EventRepository eventRepository;
     @Autowired
     private EventService eventService;
+    @Autowired
+    private FormAssembler formAssembler;
 
     @GetMapping("/createEvent")
     public String Form(Model model) {
@@ -28,9 +32,13 @@ public class CourseController {
         return "createEvent";
     }
 
-     @PostMapping("/createEvent")
-    public String saveEvent(@ModelAttribute Event event) {
-        eventRepository.save(event);
+
+    @PostMapping("/createEvent")
+    public String saveEvent(@ModelAttribute("event") @Valid EventForm eventForm, BindingResult result) {
+        if (result.hasErrors()) {
+            return "createEvent";
+        }
+        eventService.save(formAssembler.update(new Event(), eventForm));
         return "result";
     }
 
@@ -44,30 +52,21 @@ public class CourseController {
 
     @GetMapping("/event/edit/{id}")
     public String editEventPage(@PathVariable("id") Integer id, Model model) {
-        Event event = eventService.findById(id);
-        model.addAttribute("event", event);
+        model.addAttribute("eventForm", formAssembler.toForm(eventService.findEvent(id)));
         model.addAttribute("events", eventRepository.findAll());
 
         return "editEvent";
     }
 
     @PostMapping("/event/edit/{id}")
-    public String editEvent(@PathVariable("id") Integer id, @Valid Event event, BindingResult result, Model model) {
-        if (result.hasErrors()) {
-            event.setId(id);
-            return "redirect:/index";
+    public String editEvent(@PathVariable("id") Integer id, @ModelAttribute("eventForm") @Valid EventForm form, BindingResult binding) {
+        if (binding.hasErrors()) {
+            return "editEvent";
         }
 
-        eventService.save(event);
-
+        Event event = eventService.findEvent(id);
+        eventService.save(formAssembler.update(event, form));
         return "redirect:/event";
     }
-
-/*
-   @GetMapping("/showEvents")
-    public String showAllEvents(Model model) {
-        model.addAttribute("events", eventRepository.findAll());
-        return "showEvents";
-    }*/
 
 }

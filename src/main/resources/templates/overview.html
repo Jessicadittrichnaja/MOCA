@@ -12,38 +12,44 @@
 <div class="whole1">
     <div class="inhalt1">
         <div class="sidenav">
+            <form method="POST" th:action="@{/filterEvents}" th:object="${filter}">
             <div class="fone">
-                <div class="sncontainer">Location: <br>
-                    <select name="titel" id="titel">
-                        <option value=""></option>
-                        <option value="hamburg">Hamburg</option>
-                        <option value="berlin">Berlin</option>
-                        <option value="muenchen">München</option>
+                <div class="sncontainer">Standort: <br>
+                    <select id="location" th:field="*{selectedLocation}">
+                        <option th:value="${null}" selected>Standort auswählen</option>
+                        <option th:each="location : ${T(de.hsba.bi.project.events.Location).values()}" th:value="${location}"
+                                th:text="${location.displayValue}">
+                        </option>
                     </select>
                 </div>
                 <div class="sncontainer">Kategorie: <br>
-                    <select name="kategorie" id="kategorie">
-                        <option value=""></option>
-                        <option value="seminar">Seminar</option>
-                        <option value="workshop">Workshop</option>
-                        <option value="teamtag">Teamtag</option>
+                    <select id="category" th:field="*{selectedCategory}">
+                        <option th:value="${null}" selected>Kategorie auswählen</option>
+                        <option th:each="category : ${T(de.hsba.bi.project.events.Category).values()}" th:value="${category}"
+                                th:text="${category.displayValue}">
+                        </option>
                     </select>
                 </div>
-                <div class="sncontainer">Datum: <br>
-                    <input type="date" id="date" name="date">
+                <div class="sncontainer">
+                    <label>Datum:</label>
+                    <input type="date" th:field="*{selectedDate}">
                 </div>
-                <div class="sncontainer">Uhrzeit: <br>
-                    <input type="time" id="time" name="time">
+                <div class="sncontainer">Tageszeit: <br>
+                    <select id="time" th:field="*{selectedTime}">
+                        <option th:value="${null}" selected>Tageszeit auswählen</option>
+                        <option th:each="time : ${T(de.hsba.bi.project.events.Time).values()}" th:value="${time}"
+                                th:text="${time.displayValue}">
+                        </option>
+                    </select>
                 </div>
+                <br>
                 <div class="sncontainer1">
                     <input type="submit" id="refine" value="Suchen">
                 </div>
             </div>
-
+            </form>
         </div>
     </div>
-
-
 
     <div th:each="event : ${events}">
         <div class="Event" >
@@ -52,15 +58,18 @@
 
                 </div>
                 <div class="EventBeschreibung">
-                    <div class="EventName" th:text="${event.name}"></div>
-                    <div class="EventInfo" th:text="${event.description}"></div>
-                    <div class="EventInfo" th:text="${event.category}"></div>
-                    <div class="EventInfo" th:text="${event.duration}"></div>
+                    <div class="EventName" th:text="${'Name: ' + event.name}" th:value="${event.name}"></div>
+                    <div class="EventInfo" th:text="${'Kategorie: ' + event.category}" th:value="${event.category}"></div>
+                    <div class="EventInfo" th:text="${'Dauer: ' + event.duration} + ' Stunden'" th:value="${event.duration}"></div>
+                    <div class="EventInfo" th:text="${'Standort: ' + event.location}" th:value="${event.location}"></div>
+                    <div class="EventInfo" th:text="${'Datum: ' + event.date}" th:value="${event.date}"></div>
+                    <div class="EventInfo" th:text="${'Tageszeit: ' + event.time}" th:value="${event.time}"></div>
+                    <a th:href="@{/bookingOverview/{id}(id=${event.id})}" th:text="Buchen"></a>
+
                 </div>
             </div>
         </div>
     </div>
-
     </div>
 </div>
 

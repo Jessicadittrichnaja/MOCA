@@ -1,21 +1,22 @@
 package de.hsba.bi.project.filter;
 
 import de.hsba.bi.project.events.Category;
+import de.hsba.bi.project.events.Time;
 import de.hsba.bi.project.events.Event;
-import org.springframework.cglib.core.CollectionUtils;
+import de.hsba.bi.project.events.Location;
+import java.sql.Date;
 
-import java.util.ArrayList;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public class overviewFilter {
+
     public static void main(String[] args) {
-        Event e1 = new Event("NameEins", "BeschreibungEins", Category.Seminar, 1, 10);
-        Event e2 = new Event("NameZwei", "BeschreibungZwei", Category.ELearning, 2, 15);
-        Event e3 = new Event("NameDrei", "BeschreibungDrei", Category.Teamtag, 3, 20);
-        Event e4 = new Event("NameVier", "BeschreibungVier", Category.Workshop, 4, 5);
+        Event e1 = new Event("NameEins", "BeschreibungEins", Category.Seminar, 1, 10, Location.Berlin, LocalDate.of(2016, 8, 23), Time.Vormittags);
+        Event e2 = new Event("NameZwei", "BeschreibungZwei", Category.ELearning, 2, 15, Location.Hamburg, LocalDate.of(2016, 8, 23), Time.Vormittags);
+        Event e3 = new Event("NameDrei", "BeschreibungDrei", Category.Teamtag, 3, 20, Location.München, LocalDate.of(2016, 8, 23), Time.Vormittags);
+        Event e4 = new Event("NameVier", "BeschreibungVier", Category.Workshop, 4, 5, Location.Berlin, LocalDate.of(2016, 8, 23), Time.Vormittags);
 
         //var events = Arrays.asList(e1, e2, e3, e4);
         List<Event> events1 = Arrays.asList(e1, e2, e3, e4);

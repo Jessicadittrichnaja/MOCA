@@ -18,11 +18,11 @@ import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.authorizeRequests()
+				http.authorizeRequests()
 				.antMatchers("/").permitAll()
 //					Wenn etwas unter /admin liegt, kann nur jemand mit der Rolle ADMIN darauf zugreifen:
 				.antMatchers("/createEvent").hasRole("ADMIN")
-//				.anyRequest().authenticated()
+				.anyRequest().authenticated()
 				.and()
 				.formLogin()
 				.loginPage("/login")
@@ -30,12 +30,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.and()
 				.logout()
 				.permitAll();
-
+				http.requestCache().disable();
 	}
 
 	@Override
 	public void configure(WebSecurity web) {
 		web.ignoring().antMatchers("/h2-console/**");
+		web.ignoring().antMatchers("/header");
+		web.ignoring().antMatchers("/footer");
+		web.ignoring().antMatchers("/main.css");
 	}
 
 	@Bean

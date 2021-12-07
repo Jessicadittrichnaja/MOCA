@@ -1,6 +1,7 @@
-package de.hsba.bi.project.filter;
+package de.hsba.bi.project.web;
 
 import de.hsba.bi.project.events.EventService;
+import de.hsba.bi.project.filter.Filter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.stereotype.Controller;
@@ -18,6 +19,7 @@ public class FilterController {
     @GetMapping
     public String eventList(Model model) {
         model.addAttribute("events", eventService.findAll());
+        model.addAttribute("filter", new Filter());
         return "overview";
     }
 }
