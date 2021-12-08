@@ -431,3 +431,7 @@ select {
 .Index:hover {
     transform: scale(1.05);
 }
+
+.form-control {
+    height: inherit;
+}

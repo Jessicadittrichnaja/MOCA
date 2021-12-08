@@ -56,13 +56,13 @@
             </div>
             <div class="col-md-6 form-group">
                 <label>Datum</label>
-                <input type="date" class="form-control" th:field="*{date}"
+                <input type="date" style="height: inherit;" class="form-control" th:field="*{date}"
                        th:classappend="${#fields.hasErrors('date')? 'is-invalid' : ''}"/>
                 <span class="text-danger" th:errors="*{date}"></span>
             </div>
             <div class="col-md-6 form-group">
                 <label>Zeit</label>
-                <select class="form-control" th:field="*{time}">
+                <select class="form-control" style="height: inherit;" th:field="*{time}">
                     <option th:value="${null}" selected>Tageszeit wählen..</option>
                     <option th:each="time: ${T(de.hsba.bi.project.events.Time).values()}" th:value="${time}" th:text="${time.displayValue}"
                             th:classappend="${#fields.hasErrors('time')? 'is-invalid' : ''}"></option>
