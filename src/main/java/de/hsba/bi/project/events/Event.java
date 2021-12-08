@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -53,6 +54,17 @@ public class Event implements Serializable {
     @Setter
     private Time time;
 
+ /*   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "event")
+    @OrderBy
+    private List<Booking> bookings;
+
+    public List<Booking> getBookings() {
+        if (bookings == null) {
+            bookings = new ArrayList<>();
+        }
+        return bookings;
+    }
+*/
 
     public Event(String name, String description, Category category, Integer duration, Integer spots, Location location, LocalDate date, Time time) {
             this.name = name;

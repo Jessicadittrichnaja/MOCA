@@ -1,4 +1,4 @@
-<!--<!DOCTYPE HTML>
+<!DOCTYPE HTML>
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
@@ -23,18 +23,23 @@
         <td>Zeit</td>
     </tr>
     <tr th:each="booking : ${bookings}">
-        <td style="width:33%;" th:text="${event.name}"></td>
-        <td style="width:33%;" th:text="${event.description}"></td>
-        <td style="width:33%;" th:text="${event.category}"></td>
-        <td style="width:33%;" th:text="${event.duration}"></td>
-        <td style="width:33%;" th:text="${event.location}"></td>
-        <td style="width:33%;" th:text="${event.date}"></td>
-        <td style="width:33%;" th:text="${event.time}"></td>
+        <td style="width:33%;" th:text="${booking.name}"></td>
+        <td style="width:33%;" th:text="${booking.description}"></td>
+        <td style="width:33%;" th:text="${booking.category}"></td>
+        <td style="width:33%;" th:text="${booking.duration}"></td>
+        <td style="width:33%;" th:text="${booking.location}"></td>
+        <td style="width:33%;" th:text="${booking.date}"></td>
+        <td style="width:33%;" th:text="${booking.time}"></td>
+        <td>
+            <div class="link" style="background-color: rosybrown;">
+                <a th:href="@{/booking/delete/{id}(id=${booking.id})}">Abmelden</a>
+            </div>
+        </td>
     </tr>
+
 </table>
 </div>
 <div th:replace="allPages/footer :: footer">...</div>
 
 </body>
 </html>
--->

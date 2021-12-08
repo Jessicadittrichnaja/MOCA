@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Component
@@ -36,12 +37,13 @@ public class BookingService {
         for (Booking booking : bookings) {
         }
         return bookings;
-    };*/
-
+    };
+*/
     public void removeBooking(Booking booking)  {
         bookingRepository.delete(booking);
     }
 
     public void save(Booking booking) { bookingRepository.save(booking);
     }
+
 }

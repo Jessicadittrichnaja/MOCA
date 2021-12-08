@@ -33,4 +33,6 @@ public class Booking implements Serializable {
     private Event event;
 
     public Booking(Event event, User user) {this.event = event; this.user = user;};
+
+    public Booking() {};
 }
