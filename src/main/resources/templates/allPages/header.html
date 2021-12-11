@@ -25,9 +25,13 @@
             </div>
             <div class="auswahl" sec:authorize="hasRole('ADMIN')">
                 <a th:href="@{/createEvent}" >Veranstaltung erstellen</a>
-            </div><div class="auswahl" sec:authorize="hasRole('ADMIN')">
+            </div>
+            <div class="auswahl" sec:authorize="hasRole('ADMIN')">
+                <a th:href="@{/createUser}" >Neuen User anlegen</a>
+            </div>
+            <div class="auswahl" sec:authorize="hasRole('ADMIN')">
             <a th:href="@{/event}">Veranstaltung ansehen</a>
-        </div>
+            </div>
         </div>
     </div>
 </header>

@@ -57,6 +57,17 @@ public class IndexController {
         return "createEvent";
     }
 
+    @RequestMapping("/createUser")
+    public String createUser(Model model) {
+
+        return "createUser";
+    }
+    @RequestMapping("/userResult")
+    public String userResult(Model model) {
+
+        return "userResult";
+    }
+
     @GetMapping("/login")
     public String login() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

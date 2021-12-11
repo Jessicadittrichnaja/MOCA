@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th ="http://thymeleaf.org">
+<head>
+    <title>Neuer User</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" th:href="@{/main.css}">
+</head>
+<body>
+<div th:replace="allPages/header :: header">...</div>
+<br>
+<h2 style="text-align: center;">Angelegter User</h2>
+<br>
+<table style="background-color: rosybrown; color:ghostwhite; margin-left:25vw; width:50%;font-size:20px;border-radius: 5px;">
+    <tr style="font-weight:bold;">
+        <td>Benutzername</td>
+        <td>Rolle</td>
+
+    </tr>
+    <tr th:each = "user: ${user}">
+        <td style="width:14%;" th:text="${user.name}"></span></td>
+        <td style="width:14%;" th:text="${user.role}"></span></td>
+
+
+    </tr>
+</table>
+<br>
+<div class="link" style="margin-left:39vw; width:22%;background-color: lightgray;border-radius: 5px;">
+    <p><a th:href="@{/createUser}">Lege einen weiteren User an</a></p>
+    <p><a th:href="@{/userlist}">Userliste</a></p>
+</div>
+<div th:replace="allPages/footer :: footer">...</div>
+
+</body>
+</html>
+
