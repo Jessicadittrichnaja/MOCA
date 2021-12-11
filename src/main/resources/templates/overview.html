@@ -64,8 +64,10 @@
                     <div class="EventInfo" th:text="${'Standort: ' + event.location}" th:value="${event.location}"></div>
                     <div class="EventInfo" th:text="${'Datum: ' + event.date}" th:value="${event.date}"></div>
                     <div class="EventInfo" th:text="${'Tageszeit: ' + event.time}" th:value="${event.time}"></div>
+                    <div class="EventInfo" th:text="${'Verfügbare Plätze: ' + event.spots}" th:value="${event.spots}"></div>
+                    <div class = "header" style="background-color: rosybrown;">
                     <a th:href="@{/bookingOverview/{id}(id=${event.id})}" th:text="Buchen"></a>
-
+                    </div>
                 </div>
             </div>
         </div>

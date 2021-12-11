@@ -25,17 +25,12 @@ public class BookingController {
     private final BookingRepository bookingRepository;
     private final UserService userService;
 
+    // zeigt Buchungen zu einem User
+
     @GetMapping
     public String bookingList(Model model) {
         model.addAttribute("bookings", bookingRepository.findByUser(userService.findCurrentUser()));
         return "booking";
     }
-/*
-    @GetMapping("/booking/delete/{id}")
-    public String deleteBooking(@PathVariable("id") int id, Model model) {
-        Booking booking = bookingService.findById(bookingRepository.findById(id));
-        bookingService.removeBooking(booking);
-        model.addAttribute("bookings", bookingService.findAll());
-        return "booking";
-    }*/
+
 }

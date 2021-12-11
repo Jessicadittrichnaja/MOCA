@@ -9,6 +9,9 @@ import javax.validation.constraints.NotEmpty;
 
 @Table(name = "USER", uniqueConstraints = @UniqueConstraint(columnNames ={"user"}))
 public class UserForm {
+
+    // ermöglicht Fehlermeldungen, wenn Angaben zu neuem User nicht vollständig sind
+
     @NotEmpty(message = "Bitte einen Namen eingeben")
     @Getter
     @Column(name = "user")

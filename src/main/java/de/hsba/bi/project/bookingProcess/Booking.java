@@ -17,12 +17,8 @@ public class Booking implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
     private Integer id;
-/*
-    @ManyToOne(optional = false)
-    @Getter
-    private User user;
 
-*/
+    // Mapping, um Booking-Datenbanktabelle zu erstellen mit Event- und Booking-IDs. Damit lassen sich die nötigen Datenbankabfragen leicht tätigen.
 
     @OneToOne
     @Getter

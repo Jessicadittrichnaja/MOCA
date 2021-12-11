@@ -12,6 +12,7 @@ import javax.validation.constraints.NotNull;
 
 public class EventForm {
 
+    // ermöglicht Fehlermeldung, wenn nicht alle Felder für neues/ bearbeitetes Event ausgefüllt wurden
 
     @NotEmpty(message = "Bitte einen Namen eingeben")
     @Getter

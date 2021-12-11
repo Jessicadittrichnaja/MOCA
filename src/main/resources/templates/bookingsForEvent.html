@@ -1,0 +1,28 @@
+<!-- Listet für ein Event angemeldete Mitarbeiter auf-->
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Angemeldete Mitarbeiter</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" th:href="@{/main.css}">
+</head>
+<body>
+<div th:replace="allPages/header :: header">...</div>
+<br>
+<h2 style="text-align: center;">Für das Event angemeldete Mitarbeiter</h2>
+<br>
+
+<table style="background-color: rosybrown; color:ghostwhite; margin-left:35vw; width:30%;font-size:20px;border-radius: 5px;text-align:center">
+    <tr style="font-weight:bold;">
+        <td>Name</td>
+    </tr>
+    <tr th:each="booking : ${bookings}">
+        <td style="width:100%;" th:text="${booking.name}"></td>
+    </tr>
+
+</table>
+</div>
+<div th:replace="allPages/footer :: footer">...</div>
+
+</body>
+</html>

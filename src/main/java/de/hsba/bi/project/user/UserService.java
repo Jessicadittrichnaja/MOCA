@@ -11,6 +11,8 @@ import java.util.List;
 @Transactional
 public class UserService {
 
+    // Methoden z.B. zum Finden/ Speichern von Usern
+
     private final UserRepository userRepository;
 
     public List<de.hsba.bi.project.user.User> findAll() {

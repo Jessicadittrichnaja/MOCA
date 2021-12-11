@@ -11,6 +11,8 @@ public class FormAssembler {
     @Autowired
     private PasswordEncoder Encoder;
 
+    // siehe EventForm-Kommentar
+
     EventForm toForm(Event event) {
         EventForm form = new EventForm();
         form.setName(event.getName());

@@ -25,6 +25,7 @@ public class User implements Comparable<User> {
     public static String USER_ROLE = "USER";
     public static String ADMIN_ROLE = "ADMIN";
 
+    // um angemeldeten User zu ermitteln
 
     public static String getCurrentUsername() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();

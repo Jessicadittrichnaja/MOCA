@@ -19,6 +19,7 @@ public class FilteredEventsController {
     @Autowired
     private Filter filter;
 
+    // zeigt gefilterte Events
 
     @PostMapping(path = "/filterEvents")
     public String showFilterResults(@ModelAttribute("filter") Filter filter, BindingResult bindingResult,

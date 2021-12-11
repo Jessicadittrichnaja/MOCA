@@ -16,6 +16,8 @@ public class BookingService {
     @Autowired
     BookingRepository bookingRepository;
 
+    // Methoden z.B. zum Erstellen und Löschen von Buchungen
+
     public List<Booking> findAll() {
         return (List<Booking>) bookingRepository.findAll();
     }
@@ -32,13 +34,6 @@ public class BookingService {
 
     };
 
- /*   public List<Booking> findbyUser(User user) {
-        List<Booking> bookings = bookingRepository.findByUser(user);
-        for (Booking booking : bookings) {
-        }
-        return bookings;
-    };
-*/
     public void removeBooking(Booking booking)  {
         bookingRepository.delete(booking);
     }

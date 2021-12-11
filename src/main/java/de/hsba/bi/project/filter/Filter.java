@@ -11,6 +11,8 @@ import lombok.Setter;
 import java.time.LocalDate;
 import java.util.Date;
 
+// Ermöglicht das Filtern von Events nach verschiedenen Kategorien
+
 @Component
 public class Filter {
 

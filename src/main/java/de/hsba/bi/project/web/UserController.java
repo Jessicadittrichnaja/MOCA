@@ -25,6 +25,7 @@ public class UserController {
     @Autowired
     private UserFormAssembler userFormAssembler;
 
+    // Erstellung eines neuen Users
 
     @GetMapping("/createUser")
     public String Form(Model model) {
@@ -32,12 +33,18 @@ public class UserController {
         return "createUser";
     }
 
+    // Speichern des neuen Users, wenn valide und der Name noch nicht in der Datenbank vorhanden ist
+
     @PostMapping("/createUser")
-    public String saveEvent(@ModelAttribute("user") @Valid UserForm userForm, BindingResult result) {
+    public String saveEvent(@ModelAttribute("user") User user, @Valid UserForm userForm, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "createUser";
         }
-        userService.save(userFormAssembler.update(new User(), userForm));
+        if (userRepository.countNumberUsersWithSameName(user.getName()) == 1){
+            model.addAttribute("user", userService.findCurrentUser());
+            return "createUser";
+        }
+        userService.save(userFormAssembler.update(user, userForm));
         return "userResult";
     }
 }

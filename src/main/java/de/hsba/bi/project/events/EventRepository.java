@@ -1,9 +1,14 @@
 package de.hsba.bi.project.events;
 
+import de.hsba.bi.project.user.User;
 import de.hsba.bi.project.web.EventForm;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
@@ -25,4 +30,25 @@ public interface EventRepository extends CrudRepository<Event, Long> {
     List<Event> findByTime(Time time);
 
     Optional<Event> findById(Integer id);
+
+    // Methoden z.B. zum Runterzählen/ Hochzählen von freien Plätzen für Events bei Buchungen/ Löschen von Buchungen durch Mitarbeiter
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE Event e Set e.spots = e.spots-1 where e.id = :id")
+    void removeSpot(@Param("id") Integer id);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE Event e Set e.spots = e.spots+1 where e.id = :id")
+    void addSpot(@Param("id") Integer id);
+
+    @Query("SELECT Count(id) from User u where u.name= :name")
+    Integer countNumberUsersWithSameName(@Param("name")String name);
+
+    @Query("SELECT e from Event e WHERE e.id NOT IN (SELECT e.id FROM Event e INNER JOIN Booking b ON e.id = b.event WHERE b.user= :user) AND e.spots > 0")
+    List<Event> findAvailableEvents(@Param("user") User user);
+
+
+
 }

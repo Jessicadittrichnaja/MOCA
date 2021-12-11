@@ -17,6 +17,8 @@ public class EventService {
     @Autowired
     EventRepository eventRepository;
 
+    // Methoden z.B. zum Löschen/ Speichern von Events
+
     public List<Event> findAll() {
         return (List<Event>) eventRepository.findAll();
     }

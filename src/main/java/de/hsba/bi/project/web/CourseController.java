@@ -26,12 +26,15 @@ public class CourseController {
     @Autowired
     private FormAssembler formAssembler;
 
+    // Anlegen eines neuen Events
+
     @GetMapping("/createEvent")
     public String Form(Model model) {
         model.addAttribute("event", new Event());
         return "createEvent";
     }
 
+    // Speichern des neuen Events
 
     @PostMapping("/createEvent")
     public String saveEvent(@ModelAttribute("event") @Valid EventForm eventForm, BindingResult result) {
@@ -42,6 +45,8 @@ public class CourseController {
         return "result";
     }
 
+    // Löschen eines Events
+
     @GetMapping("/event/delete/{id}")
     public String deleteCourse(@PathVariable("id") int id, Model model) {
         Event event = eventService.findById(id);
@@ -50,6 +55,8 @@ public class CourseController {
         return "event";
     }
 
+    // Bearbeiten eines Events
+
     @GetMapping("/event/edit/{id}")
     public String editEventPage(@PathVariable("id") Integer id, Model model) {
         model.addAttribute("eventForm", formAssembler.toForm(eventService.findEvent(id)));
@@ -57,6 +64,8 @@ public class CourseController {
 
         return "editEvent";
     }
+
+    // Speichert Änderungen, wenn valide
 
     @PostMapping("/event/edit/{id}")
     public String editEvent(@PathVariable("id") Integer id, @ModelAttribute("eventForm") @Valid EventForm form, BindingResult binding) {

@@ -12,6 +12,8 @@ public class UserFormAssembler {
     @Autowired
     private PasswordEncoder Encoder;
 
+    // siehe UserForm-Kommentar
+
     UserForm toForm(User user) {
         UserForm form = new UserForm();
         form.setName(user.getName());
