@@ -13,7 +13,7 @@ import org.springframework.ui.Model;
 @Controller
 public class IndexController {
 
-    // Mapping von diversen Seiten
+    // Mapping von diversen Seiten, die nicht in anderen Controllern aufgeführt werden
 
 
     @RequestMapping("/index")
@@ -51,23 +51,6 @@ public class IndexController {
     public String datenschutzerklaerung(Model model) {
 
         return "datenschutzerklärung";
-    }
-
-    @RequestMapping("/createEvent")
-    public String createEvent(Model model) {
-
-        return "createEvent";
-    }
-
-    @RequestMapping("/createUser")
-    public String createUser(Model model) {
-
-        return "createUser";
-    }
-    @RequestMapping("/userResult")
-    public String userResult(Model model) {
-
-        return "userResult";
     }
 
     @RequestMapping("/editPassword")

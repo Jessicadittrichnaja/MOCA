@@ -20,7 +20,7 @@
         <td>Anzahl Teilnehmer</td>
         <td>Standort</td>
         <td>Datum</td>
-        <td>Tageszzeit</td>
+        <td>Tageszeit</td>
     </tr>
     <tr th:each="event : ${events}">
         <td style="width:12%;" th:text="${event.name}"></td>
@@ -33,8 +33,8 @@
         <td style="width:12%;" th:text="${event.time}"></td>
         <td>
             <div class="link" style="background-color: rosybrown;">
-                <a th:href="${'/event/delete/' + event.id}">Löschen</a>
-                <a th:href="${'/event/edit/' + event.id}">Bearbeiten</a>
+                <a th:href="${'/eventPlanner/event/delete/' + event.id}">Löschen</a>
+                <a th:href="${'/eventPlanner/event/edit/' + event.id}">Bearbeiten</a>
                 <!-- <a th:href="${'/event/close/' + event.id}">Schließen</a>-->
             </div>
         </td>

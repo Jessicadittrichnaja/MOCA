@@ -14,9 +14,9 @@
         <div class="header-right" style="text-align: center">
             <div class="auswahl">
                 <form th:action="@{/logout}" method="post">
-                <button type="submit" style="border: none;background-color: dimgray;color: white;">
-                    <a><span th:text="${#httpServletRequest.remoteUser}" /> abmelden</a>
-                </button>
+                    <button type="submit" style="border: none;background-color: dimgray;color: white;">
+                        <a><span th:text="${#httpServletRequest.remoteUser}" /> abmelden</a>
+                    </button>
                 </form>
             </div>
             <div class="auswahl">
@@ -29,13 +29,13 @@
                 <a th:href="@{/booking}">Buchungen ansehen</a>
             </div>
             <div class="auswahl" sec:authorize="hasRole('TERMINVERWALTER')">
-                <a th:href="@{/createEvent}" >Veranstaltung erstellen</a>
+                <a th:href="@{/eventPlanner/createEvent}" >Veranstaltung erstellen</a>
             </div>
             <div class="auswahl" sec:authorize="hasRole('PERSONALABTEILUNG')">
-                <a th:href="@{/createUser}" >Neuen User anlegen</a>
+                <a th:href="@{/HR/createUser}" >Neuen User anlegen</a>
             </div>
             <div class="auswahl" sec:authorize="hasRole('TERMINVERWALTER')">
-            <a th:href="@{/event}">Veranstaltungen ansehen</a>
+                <a th:href="@{/eventPlanner/event}">Veranstaltungen ansehen</a>
             </div>
         </div>
     </div>

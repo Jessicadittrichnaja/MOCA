@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 
 
 @Component
-public class UserFormAssembler {
+public class UserFormConverter {
     @Autowired
     private PasswordEncoder Encoder;
 

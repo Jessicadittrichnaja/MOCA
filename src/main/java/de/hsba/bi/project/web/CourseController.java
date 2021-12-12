@@ -24,11 +24,11 @@ public class CourseController {
     @Autowired
     private EventService eventService;
     @Autowired
-    private FormAssembler formAssembler;
+    private EventFormConverter eventFormConverter;
 
     // Anlegen eines neuen Events
 
-    @GetMapping("/createEvent")
+    @GetMapping("/eventPlanner/createEvent")
     public String Form(Model model) {
         model.addAttribute("event", new Event());
         return "eventPlanner/createEvent";
@@ -36,18 +36,18 @@ public class CourseController {
 
     // Speichern des neuen Events
 
-    @PostMapping("/createEvent")
+    @PostMapping("/eventPlanner/createEvent")
     public String saveEvent(@ModelAttribute("event") @Valid EventForm eventForm, BindingResult result) {
         if (result.hasErrors()) {
             return "eventPlanner/createEvent";
         }
-        eventService.save(formAssembler.update(new Event(), eventForm));
+        eventService.save(eventFormConverter.update(new Event(), eventForm));
         return "eventPlanner/result";
     }
 
     // Löschen eines Events
 
-    @GetMapping("/event/delete/{id}")
+    @GetMapping("/eventPlanner/event/delete/{id}")
     public String deleteCourse(@PathVariable("id") int id, Model model) {
         Event event = eventService.findById(id);
         eventService.removeEvent(event);
@@ -57,9 +57,9 @@ public class CourseController {
 
     // Bearbeiten eines Events
 
-    @GetMapping("/event/edit/{id}")
+    @GetMapping("/eventPlanner/event/edit/{id}")
     public String editEventPage(@PathVariable("id") Integer id, Model model) {
-        model.addAttribute("eventForm", formAssembler.toForm(eventService.findEvent(id)));
+        model.addAttribute("eventForm", eventFormConverter.toForm(eventService.findEvent(id)));
         model.addAttribute("events", eventRepository.findAll());
 
         return "eventPlanner/editEvent";
@@ -67,14 +67,14 @@ public class CourseController {
 
     // Speichert Änderungen, wenn valide
 
-    @PostMapping("/event/edit/{id}")
+    @PostMapping("/eventPlanner/event/edit/{id}")
     public String editEvent(@PathVariable("id") Integer id, @ModelAttribute("eventForm") @Valid EventForm form, BindingResult binding, Model model) {
         if (binding.hasErrors()) {
             return "eventPlanner/editEvent";
         }
 
         Event event = eventService.findEvent(id);
-        eventService.save(formAssembler.update(event, form));
+        eventService.save(eventFormConverter.update(event, form));
         model.addAttribute("events", eventService.findAll());
         return "eventPlanner/event";
     }

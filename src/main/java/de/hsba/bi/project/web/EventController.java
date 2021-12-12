@@ -12,7 +12,7 @@ import de.hsba.bi.project.events.EventService;
 import lombok.RequiredArgsConstructor;
 
 @Controller
-@RequestMapping("/event")
+@RequestMapping("/eventPlanner/event")
 @ComponentScan("de.hsba.bi.project.events")
 @RequiredArgsConstructor
 public class EventController {
