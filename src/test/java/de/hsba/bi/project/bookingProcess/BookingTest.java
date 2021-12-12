@@ -38,7 +38,7 @@ class BookingTest {
     void testCreateBooking() {
         // given
         event = new Event ("Programmierung 2", "Projekt", Category.Seminar, 10, 1, Location.Hamburg, LocalDate.of(2021, 10, 23), Time.Morgens);
-        user  = new User("Enrico", "password", User.USER_ROLE);
+        user  = new User("Enrico", "password", User.MITARBEITER_ROLE);
         // when
         Booking booking = new Booking(event, user);
         // then

@@ -19,9 +19,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 				http.authorizeRequests()
-				.antMatchers("/").permitAll()
-//					Wenn etwas unter /admin liegt, kann nur jemand mit der Rolle ADMIN darauf zugreifen:
-				.antMatchers("/createEvent").hasRole("ADMIN")
+//					Wenn etwas unter /eventPlanner liegt, kann nur jemand mit der Rolle TERMINVERWALTER darauf zugreifen:
+				.antMatchers("/eventPlanner/**").hasRole("TERMINVERWALTER")
+				.antMatchers("/HR/**").hasRole("PERSONALABTEILUNG")
 				.anyRequest().authenticated()
 				.and()
 				.formLogin()

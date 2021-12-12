@@ -70,6 +70,12 @@ public class IndexController {
         return "userResult";
     }
 
+    @RequestMapping("/editPassword")
+    public String editPassword(Model model) {
+
+        return "editPassword";
+    }
+
     @GetMapping("/login")
     public String login() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

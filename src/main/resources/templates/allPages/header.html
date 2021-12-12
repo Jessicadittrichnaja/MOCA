@@ -20,17 +20,22 @@
                 </form>
             </div>
             <div class="auswahl">
-                <!--<a class="active" th:href="@{/index}">Startseite</a>-->
+                <a th:href="@{/editPassword}">Passwort ändern</a>
+            </div>
+            <div class="auswahl">
                 <a th:href="@{/overview}">Veranstaltung buchen</a>
             </div>
-            <div class="auswahl" sec:authorize="hasRole('ADMIN')">
+            <div class="auswahl">
+                <a th:href="@{/booking}">Buchungen ansehen</a>
+            </div>
+            <div class="auswahl" sec:authorize="hasRole('TERMINVERWALTER')">
                 <a th:href="@{/createEvent}" >Veranstaltung erstellen</a>
             </div>
-            <div class="auswahl" sec:authorize="hasRole('ADMIN')">
+            <div class="auswahl" sec:authorize="hasRole('PERSONALABTEILUNG')">
                 <a th:href="@{/createUser}" >Neuen User anlegen</a>
             </div>
-            <div class="auswahl" sec:authorize="hasRole('ADMIN')">
-            <a th:href="@{/event}">Veranstaltung ansehen</a>
+            <div class="auswahl" sec:authorize="hasRole('TERMINVERWALTER')">
+            <a th:href="@{/event}">Veranstaltungen ansehen</a>
             </div>
         </div>
     </div>

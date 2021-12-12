@@ -20,7 +20,7 @@ public class UserService {
     }
 
     public List<de.hsba.bi.project.user.User> findUsers() {
-        return userRepository.findByRole(de.hsba.bi.project.user.User.USER_ROLE);
+        return userRepository.findByRole(User.MITARBEITER_ROLE);
     }
 
     public de.hsba.bi.project.user.User save(de.hsba.bi.project.user.User user) {

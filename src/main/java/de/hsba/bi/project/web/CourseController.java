@@ -31,7 +31,7 @@ public class CourseController {
     @GetMapping("/createEvent")
     public String Form(Model model) {
         model.addAttribute("event", new Event());
-        return "createEvent";
+        return "eventPlanner/createEvent";
     }
 
     // Speichern des neuen Events
@@ -39,10 +39,10 @@ public class CourseController {
     @PostMapping("/createEvent")
     public String saveEvent(@ModelAttribute("event") @Valid EventForm eventForm, BindingResult result) {
         if (result.hasErrors()) {
-            return "createEvent";
+            return "eventPlanner/createEvent";
         }
         eventService.save(formAssembler.update(new Event(), eventForm));
-        return "result";
+        return "eventPlanner/result";
     }
 
     // Löschen eines Events
@@ -52,7 +52,7 @@ public class CourseController {
         Event event = eventService.findById(id);
         eventService.removeEvent(event);
         model.addAttribute("events", eventService.findAll());
-        return "event";
+        return "eventPlanner/event";
     }
 
     // Bearbeiten eines Events
@@ -62,20 +62,21 @@ public class CourseController {
         model.addAttribute("eventForm", formAssembler.toForm(eventService.findEvent(id)));
         model.addAttribute("events", eventRepository.findAll());
 
-        return "editEvent";
+        return "eventPlanner/editEvent";
     }
 
     // Speichert Änderungen, wenn valide
 
     @PostMapping("/event/edit/{id}")
-    public String editEvent(@PathVariable("id") Integer id, @ModelAttribute("eventForm") @Valid EventForm form, BindingResult binding) {
+    public String editEvent(@PathVariable("id") Integer id, @ModelAttribute("eventForm") @Valid EventForm form, BindingResult binding, Model model) {
         if (binding.hasErrors()) {
-            return "editEvent";
+            return "eventPlanner/editEvent";
         }
 
         Event event = eventService.findEvent(id);
         eventService.save(formAssembler.update(event, form));
-        return "redirect:/event";
+        model.addAttribute("events", eventService.findAll());
+        return "eventPlanner/event";
     }
 
 }

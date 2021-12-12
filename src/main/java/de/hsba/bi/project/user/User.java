@@ -22,8 +22,9 @@ import java.util.List;
 @NoArgsConstructor
 public class User implements Comparable<User> {
 
-    public static String USER_ROLE = "USER";
-    public static String ADMIN_ROLE = "ADMIN";
+    public static String MITARBEITER_ROLE = "MITARBEITER";
+    public static String PERSONALABTEILUNG_ROLE = "PERSONALABTEILUNG";
+    public static String TERMINVERWALTER_ROLE = "TERMINVERWALTER";
 
     // um angemeldeten User zu ermitteln
 

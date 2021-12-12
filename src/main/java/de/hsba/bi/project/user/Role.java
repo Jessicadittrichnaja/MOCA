@@ -3,7 +3,7 @@ package de.hsba.bi.project.user;
 // Ermöglicht Auswahl verschiedener Rollen beim Erstellen/ Ändern von Usern
 
 public enum Role {
-    Personalabteilung("Personalabteilung"), Terminverwalter("Terminverwalter"), Mitarbeiter("Mitarbeiter");
+    PERSONALABTEILUNG("PERSONALABTEILUNG"), TERMINVERWALTER("TERMINVERWALTER"), MITARBEITER("MITARBEITER");
 
     private final String displayValue;
 

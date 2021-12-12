@@ -25,10 +25,10 @@ public class TestDataCreator {
     @Transactional
     public void init() {
         // add some users
-        User enrico = createUser("Enrico", "password", User.USER_ROLE);
-        User jessica = createUser("Jessica", "password", User.USER_ROLE);
-        User fynn = createUser("Fynn", "password", User.USER_ROLE);
-        createUser("Daniel", "password", User.ADMIN_ROLE);
+        User enrico = createUser("Enrico", "password", User.MITARBEITER_ROLE);
+        User jessica = createUser("Jessica", "password", User.PERSONALABTEILUNG_ROLE);
+        User fynn = createUser("Fynn", "password", User.TERMINVERWALTER_ROLE);
+        User daniel = createUser("Daniel", "password", User.MITARBEITER_ROLE);
     }
 
     private User createUser(String name, String password, String role) {

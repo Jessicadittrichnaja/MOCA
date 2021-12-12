@@ -9,10 +9,10 @@
 <body>
 <div th:replace="allPages/header :: header">...</div>
 <br>
-<h2 style="text-align: center;">Übersicht über deine Buchung</h2>
+<h2 style="text-align: center;">Übersicht über deine Buchungen</h2>
 <br>
 
-<table style="background-color: rosybrown; color:ghostwhite; margin-left:25vw; width:60%;font-size:20px;border-radius: 5px;">
+<table style="background-color: rosybrown; color:ghostwhite; margin-left:20vw; width:60%;font-size:20px;border-radius: 5px;">
     <tr style="font-weight:bold;">
         <td>Name</td>
         <td>Beschreibung</td>
@@ -23,13 +23,13 @@
         <td>Zeit</td>
     </tr>
     <tr th:each="booking : ${bookings}">
-        <td style="width:33%;" th:text="${booking.name}"></td>
-        <td style="width:33%;" th:text="${booking.description}"></td>
-        <td style="width:33%;" th:text="${booking.category}"></td>
-        <td style="width:33%;" th:text="${booking.duration}"></td>
-        <td style="width:33%;" th:text="${booking.location}"></td>
-        <td style="width:33%;" th:text="${booking.date}"></td>
-        <td style="width:33%;" th:text="${booking.time}"></td>
+        <td style="width:14%;" th:text="${booking.name}"></td>
+        <td style="width:14%;" th:text="${booking.description}"></td>
+        <td style="width:14%;" th:text="${booking.category}"></td>
+        <td style="width:14%;" th:text="${booking.duration}"></td>
+        <td style="width:14%;" th:text="${booking.location}"></td>
+        <td style="width:14%;" th:text="${booking.date}"></td>
+        <td style="width:14%;" th:text="${booking.time}"></td>
         <td>
             <div class="link" style="background-color: rosybrown;">
                 <a th:href="@{/booking/delete/{id}(id=${booking.id})}">Abmelden</a>

@@ -24,6 +24,6 @@ public class EventController {
     @GetMapping
     public String eventList(Model model) {
         model.addAttribute("events", eventService.findAll());
-        return "event";
+        return "eventPlanner/event";
     }
 }
