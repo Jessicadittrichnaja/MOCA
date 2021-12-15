@@ -29,7 +29,7 @@ public class EventForm {
     @Setter
     private Category category;
 
-    @NotNull(message = "Bitte eine Beschreibung wählen")
+    @NotEmpty(message = "Bitte eine Beschreibung wählen")
     @Getter
     @Setter
     private String description;

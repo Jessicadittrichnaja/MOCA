@@ -25,4 +25,5 @@ public interface UserRepository extends JpaRepository<de.hsba.bi.project.user.Us
 
     @Query("SELECT Count(id) from User u where u.name= :name")
     Integer countNumberUsersWithSameName(@Param("name")String name);
+
 }

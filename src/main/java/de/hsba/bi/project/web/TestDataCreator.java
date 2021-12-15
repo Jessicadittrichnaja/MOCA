@@ -1,5 +1,6 @@
 package de.hsba.bi.project.web;
 
+import de.hsba.bi.project.user.Role;
 import de.hsba.bi.project.user.User;
 import de.hsba.bi.project.user.UserService;
 import lombok.RequiredArgsConstructor;
@@ -25,13 +26,13 @@ public class TestDataCreator {
     @Transactional
     public void init() {
         // add some users
-        User enrico = createUser("Enrico", "password", User.MITARBEITER_ROLE);
-        User jessica = createUser("Jessica", "password", User.PERSONALABTEILUNG_ROLE);
-        User fynn = createUser("Fynn", "password", User.TERMINVERWALTER_ROLE);
-        User daniel = createUser("Daniel", "password", User.MITARBEITER_ROLE);
+        User enrico = createUser("Enrico", "password", Role.MITARBEITER);
+        User jessica = createUser("Jessica", "password", Role.PERSONALABTEILUNG);
+        User fynn = createUser("Fynn", "password", Role.TERMINVERWALTER);
+        User daniel = createUser("Daniel", "password", Role.TERMINVERWALTER);
     }
 
-    private User createUser(String name, String password, String role) {
+    private User createUser(String name, String password, Role role) {
         return userService.save(new User(name, passwordEncoder.encode(password), role));
     }
 }
