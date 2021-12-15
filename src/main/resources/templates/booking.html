@@ -32,7 +32,10 @@
         <td style="width:14%;" th:text="${booking.time}"></td>
         <td>
             <div class="link" style="background-color: rosybrown;">
-                <a th:href="@{/booking/delete/{id}(id=${booking.id})}">Abmelden</a>
+                <div th:switch="${booking.isClosed}">
+                    <a th:case="false" th:href="@{/booking/delete/{id}(id=${booking.id})}">Abmelden</a>
+                    <p th:case="true">Geschlossen</p>
+                </div>
                 <a th:href="@{/booking/users/{id}(id=${booking.id})}">Teilnehmerliste</a>
             </div>
         </td>

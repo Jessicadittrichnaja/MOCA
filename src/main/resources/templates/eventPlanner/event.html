@@ -21,6 +21,7 @@
         <td>Standort</td>
         <td>Datum</td>
         <td>Tageszeit</td>
+        <td>Status</td>
     </tr>
     <tr th:each="event : ${events}">
         <td style="width:12%;" th:text="${event.name}"></td>
@@ -31,11 +32,12 @@
         <td style="width:12%;" th:text="${event.location}"></td>
         <td style="width:12%;" th:text="${event.date}"></td>
         <td style="width:12%;" th:text="${event.time}"></td>
+        <td style="width:12%;" th:text="${event.isClosed}"></td>
         <td>
             <div class="link" style="background-color: rosybrown;">
                 <a th:href="${'/eventPlanner/event/delete/' + event.id}">Löschen</a>
                 <a th:href="${'/eventPlanner/event/edit/' + event.id}">Bearbeiten</a>
-                <!-- <a th:href="${'/event/close/' + event.id}">Schließen</a>-->
+                 <a th:href="${'/eventPlanner/event/close/' + event.id}">Schließen</a>
             </div>
         </td>
     </tr>

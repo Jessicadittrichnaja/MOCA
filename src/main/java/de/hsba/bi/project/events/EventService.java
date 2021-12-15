@@ -61,9 +61,14 @@ public class EventService {
         for (Event event : events) {
         }
         return events;
-    };
+    }
+
     public void removeEvent(Event event)  {
         eventRepository.delete(event);
+    }
+
+    public void closeEvent(int id)  {
+        eventRepository.closeEvent(id);
     }
 
     public Event save(Event event) {
@@ -74,4 +79,7 @@ public class EventService {
         return eventRepository.findById(id).orElse(null);
     }
 
+    public boolean isEventClosed(Integer id) {
+        return eventRepository.isEventClosed(id);
+    }
 }
