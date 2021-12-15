@@ -1,5 +1,6 @@
 package de.hsba.bi.project.user;
 
+import de.hsba.bi.project.events.Event;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface UserRepository extends JpaRepository<de.hsba.bi.project.user.User, Long> {
@@ -15,6 +17,8 @@ public interface UserRepository extends JpaRepository<de.hsba.bi.project.user.Us
     de.hsba.bi.project.user.User findByName(String name);
 
     List<de.hsba.bi.project.user.User> findByRole(String role);
+
+    Optional<User> findById(Integer id);
 
     @Transactional
     @Modifying

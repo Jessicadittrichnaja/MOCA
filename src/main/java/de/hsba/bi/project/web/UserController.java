@@ -1,5 +1,6 @@
 package de.hsba.bi.project.web;
 
+import de.hsba.bi.project.events.Event;
 import de.hsba.bi.project.user.User;
 import de.hsba.bi.project.user.UserRepository;
 import de.hsba.bi.project.user.UserService;
@@ -10,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
@@ -46,5 +48,46 @@ public class UserController {
         userService.save(userFormConverter.update(user, userForm));
         return "HR/userResult";
     }
+    @GetMapping("/HR/userlist")
+    public String userList(Model model) {
+        model.addAttribute("user", userService.findAll());
+        return "HR/userlist";
+    }
+    // Löschen eines Users
+
+
+    @GetMapping("/HR/userlist/delete/{id}")
+    public String deleteUser(@PathVariable("id") int id, Model model)
+    {
+        User user = userService.findById(id);
+        userService.removeUser(user);
+        model.addAttribute("user",userService.findAll());
+        return "HR/userlist";
+    }
+
+    // Bearbeiten eines Users
+
+    @GetMapping("/HR/userlist/edit/{id}")
+    public String editUserPage(@PathVariable("id") Integer id, Model model) {
+        model.addAttribute("userForm", userFormConverter.toForm(userService.findUser(id)));
+        model.addAttribute("user", userRepository.findAll());
+
+        return "HR/editUser";
+    }
+
+    // Speichert Änderungen, wenn valide
+
+    @PostMapping("/HR/userlist/edit/{id}")
+    public String editUser(@PathVariable("id") Integer id, @ModelAttribute("userForm") @Valid UserForm form, BindingResult binding, Model model) {
+        if (binding.hasErrors()) {
+            return "HR/editUser";
+        }
+
+        User user = userService.findUser(id);
+        userService.save(userFormConverter.update(user, form));
+        model.addAttribute("user", userService.findAll());
+        return "HR/userliste";
+    }
+
 
 }

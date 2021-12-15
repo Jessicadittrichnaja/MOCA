@@ -11,33 +11,23 @@
 <br>
 <h2 style="text-align: center;">Liste aller User</h2>
 <br>
-<table style="background-color: rosybrown; color:ghostwhite; margin-left:20vw; width:60%;font-size:20px;border-radius: 5px;">
+<table style="background-color: rosybrown; color:ghostwhite; margin-left:25vw; width:50%;font-size:20px;border-radius: 5px;">
     <tr style="font-weight:bold;">
         <td>Benutzername</td>
-        <td>Beschreibung</td>
-        <td>Kategorie</td>
-        <td>Dauer</td>
-        <td>Anzahl Teilnehmer</td>
-        <td>Standort</td>
-        <td>Datum</td>
-        <td>Tageszzeit</td>
+        <td>Rolle</td>
+
     </tr>
-    <tr th:each="event : ${events}">
-        <td style="width:12%;" th:text="${event.name}"></td>
-        <td style="width:12%;" th:text="${event.description}"></td>
-        <td style="width:12%;" th:text="${event.category}"></td>
-        <td style="width:12%;" th:text="${event.duration}"></td>
-        <td style="width:12%;" th:text="${event.spots}"></td>
-        <td style="width:12%;" th:text="${event.location}"></td>
-        <td style="width:12%;" th:text="${event.date}"></td>
-        <td style="width:12%;" th:text="${event.time}"></td>
+    <tr th:each = "user: ${user}">
+        <td style="width:50%;" th:text="${user.name}"></span></td>
+        <td style="width:50%;" th:text="${user.role}"></span></td>
         <td>
             <div class="link" style="background-color: rosybrown;">
-                <a th:href="${'/event/delete/' + event.id}">Löschen</a>
-                <a th:href="${'/event/edit/' + event.id}">Bearbeiten</a>
-                <!-- <a th:href="${'/event/close/' + event.id}">Schließen</a>-->
+                <a th:href="${'/HR/userlist/delete/' + user.id}">Löschen</a>
+                <a th:href="${'/HR/userlist/edit/' + user.id}">Bearbeiten</a>
             </div>
         </td>
+
+
     </tr>
 </table>
 </div>

@@ -40,7 +40,7 @@ public class User implements Comparable<User> {
     @Setter(AccessLevel.NONE)
     @Id
     @GeneratedValue
-    private Long id;
+    private Integer id;
 
     @Getter
     @Setter

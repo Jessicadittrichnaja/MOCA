@@ -1,0 +1,51 @@
+<!DOCTYPE HTML>
+<!DOCTYPE html>
+<html xmlns:th ="http://www.thymeleaf.org">
+<head>
+  <title>Event bearbeiten</title>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"/>
+  <link rel="stylesheet" th:href="@{/main.css}">
+</head>
+<body>
+<div th:replace="allPages/header :: header">...</div>
+<br>
+<div style="margin-left:34vw;font-size:20px;">
+  <form class="form" th:action=" @{${'/HR/userlist/edit/' + id}}" th:object="${eventForm}" method = "post">
+    <form action="#" th:action="@{/HR/createUser}" th:object="${user}" method="post">
+      <div class="form-row">
+        <div class="col-md-6 form-group">
+          <label>Nutzername</label>
+          <input type="text" class="form-control" th:field="*{name}"
+                 th:classappend="${#fields.hasErrors('name')? 'is-invalid' : ''}"/>
+          <span class="text-danger" th:errors="*{name}"></span>
+        </div>
+        <div class="col-md-6 form-group">
+          <label>Passwort</label>
+          <input type="password" class="form-control" th:field="*{password}"
+                 th:classappend="${#fields.hasErrors('password')? 'is-invalid' : ''}"/>
+          <span class="text-danger" th:errors="*{password}"></span>
+        </div>
+        <div class="col-md-6 form-group">
+          <label>Rolle</label>
+          <select class="form-control" th:field="*{role}">
+            <option th:value="${null}" selected>Rolle auswählen</option>
+            <option th:each="role: ${T(de.hsba.bi.project.user.Role).values()}" th:value="${role}" th:text="${role.displayValue}"
+                    th:classappend="${#fields.hasErrors('role')? 'is-invalid' : ''}"></option>
+            <span class="text-danger" th:errors="*{role}"></span>
+          </select>
+        </div>
+        <br>
+
+        <div>
+          <input class="Index" type="submit" style="background-color: rosybrown;border-radius: 5px;border-style:none;color:ghostwhite" value="User anlegen"/>
+        </div>
+      </div>
+
+
+    </form>
+</div>
+
+<div th:replace="allPages/footer :: footer">...</div>
+
+</body>
+</html>
