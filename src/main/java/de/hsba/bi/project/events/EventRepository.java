@@ -46,18 +46,28 @@ public interface EventRepository extends CrudRepository<Event, Long> {
     @Query("SELECT Count(id) from User u where u.name= :name")
     Integer countNumberUsersWithSameName(@Param("name")String name);
 
-    @Query("SELECT e from Event e WHERE e.id NOT IN (SELECT e.id FROM Event e INNER JOIN Booking b ON e.id = b.event WHERE b.user= :user) AND e.spots > 0")
+    @Query("SELECT e from Event e WHERE e.id NOT IN (SELECT e.id FROM Event e INNER JOIN Booking b ON e.id = b.event WHERE b.user= :user) AND e.spots > 0 AND e.isClosed = false")
     List<Event> findAvailableEvents(@Param("user") User user);
 
     @Transactional
     @Modifying
     @Query("UPDATE Event e Set e.spots = e.spots+1 WHERE e.id IN (SELECT e.id FROM Event e INNER JOIN Booking b ON e.id = b.event WHERE b.user= :user)")
     void addSpotWhenUserDeleted(@Param("user") User user);
-    
-  @Query("UPDATE Event e SET e.isClosed = true where e.id = :id")
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE Event e SET e.isClosed = true where e.id = :id")
     void closeEvent(@Param("id") Integer id);
 
     @Query("SELECT e.isClosed FROM Event e WHERE e.id = :id")
     boolean isEventClosed(@Param("id") Integer id);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE Event e SET e.isClosed = false where e.id = :id")
+    void openEvent(@Param("id") Integer id);
+
+    @Query("SELECT e.isClosed FROM Event e WHERE e.id = :id")
+    boolean isEventOpen(@Param("id") Integer id);
 
 }

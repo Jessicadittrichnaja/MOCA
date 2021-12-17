@@ -77,6 +77,16 @@ public class CourseController {
         return "redirect:/eventPlanner/event";
     }
 
+    // Öffnen eines Events
+
+    @GetMapping("/eventPlanner/event/open/{id}")
+    public String openEventPage(@PathVariable("id") Integer id, Model model) {
+        Event event = eventService.findById(id);
+        eventService.openEvent(id);
+
+        return "redirect:/eventPlanner/event";
+    }
+
     // Speichert Änderungen, wenn valide
 
     @PostMapping("/eventPlanner/event/edit/{id}")

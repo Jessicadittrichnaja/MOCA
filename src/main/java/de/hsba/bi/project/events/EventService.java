@@ -82,4 +82,10 @@ public class EventService {
     public boolean isEventClosed(Integer id) {
         return eventRepository.isEventClosed(id);
     }
+
+    public void openEvent(int id)  {
+        eventRepository.openEvent(id);
+    }
+
+    public Boolean isEventOpen(Integer id) {return eventRepository.isEventOpen(id);}
 }
