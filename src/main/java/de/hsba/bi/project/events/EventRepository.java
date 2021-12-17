@@ -51,11 +51,13 @@ public interface EventRepository extends CrudRepository<Event, Long> {
 
     @Transactional
     @Modifying
-    @Query("UPDATE Event e SET e.isClosed = true where e.id = :id")
+    @Query("UPDATE Event e Set e.spots = e.spots+1 WHERE e.id IN (SELECT e.id FROM Event e INNER JOIN Booking b ON e.id = b.event WHERE b.user= :user)")
+    void addSpotWhenUserDeleted(@Param("user") User user);
+    
+  @Query("UPDATE Event e SET e.isClosed = true where e.id = :id")
     void closeEvent(@Param("id") Integer id);
 
     @Query("SELECT e.isClosed FROM Event e WHERE e.id = :id")
     boolean isEventClosed(@Param("id") Integer id);
-
 
 }

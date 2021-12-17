@@ -11,8 +11,8 @@
 <br>
 <h2 style="text-align: center;">Liste der Veranstaltungen</h2>
 <br>
-<table style="background-color: rosybrown; color:ghostwhite; margin-left:20vw; width:60%;font-size:20px;border-radius: 5px;">
-    <tr style="font-weight:bold;">
+<table style="background-color: #DCDCDC; color:black; margin-left:10vw; width:80%;font-size:20px;border-radius: 5px;">
+    <tr style="font-weight:bold;font-style: italic;">
         <td>Name</td>
         <td>Beschreibung</td>
         <td>Kategorie</td>
@@ -34,7 +34,7 @@
         <td style="width:12%;" th:text="${event.time}"></td>
         <td style="width:12%;" th:text="${event.isClosed}"></td>
         <td>
-            <div class="link" style="background-color: rosybrown;">
+            <div class="link" style="background-color: #DCDCDC;">
                 <a th:href="${'/eventPlanner/event/delete/' + event.id}">Löschen</a>
                 <a th:href="${'/eventPlanner/event/edit/' + event.id}">Bearbeiten</a>
                  <a th:href="${'/eventPlanner/event/close/' + event.id}">Schließen</a>

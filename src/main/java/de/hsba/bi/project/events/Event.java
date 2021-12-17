@@ -58,8 +58,9 @@ public class Event implements Serializable {
     @Setter
     private Boolean isClosed = false;
 
- /*   @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "event")
-    @OrderBy
+ 
+    @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+
     private List<Booking> bookings;
 
     public List<Booking> getBookings() {
@@ -68,7 +69,7 @@ public class Event implements Serializable {
         }
         return bookings;
     }
-*/
+
 
     public Event(String name, String description, Category category, Integer duration, Integer spots, Location location, LocalDate date, Time time) {
             this.name = name;

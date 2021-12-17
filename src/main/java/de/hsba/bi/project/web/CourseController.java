@@ -4,6 +4,7 @@ import de.hsba.bi.project.events.Event;
 import de.hsba.bi.project.events.EventRepository;
 import de.hsba.bi.project.events.EventService;
 import lombok.RequiredArgsConstructor;
+import org.dom4j.rule.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +26,7 @@ public class CourseController {
     private EventService eventService;
     @Autowired
     private EventFormConverter eventFormConverter;
+
 
     // Anlegen eines neuen Events
 
