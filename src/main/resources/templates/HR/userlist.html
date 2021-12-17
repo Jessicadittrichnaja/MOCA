@@ -11,7 +11,7 @@
 <br>
 <h2 style="text-align: center;">Liste aller User</h2>
 <br>
-<table style="background-color: rosybrown; color:ghostwhite; margin-left:25vw; width:50%;font-size:20px;border-radius: 5px;">
+<table style="background-color: #DCDCDC; color:black; margin-left:25vw; width:50%;font-size:20px;border-radius: 5px;">
     <tr style="font-weight:bold;">
         <td>Benutzername</td>
         <td>Rolle</td>
@@ -21,7 +21,7 @@
         <td style="width:50%;" th:text="${user.name}"></span></td>
         <td style="width:50%;" th:text="${user.role}"></span></td>
         <td>
-            <div class="link" style="background-color: rosybrown;">
+            <div class="link" style="background-color: #DCDCDC;">
                 <a th:href="${'/HR/userlist/delete/' + user.id}">Löschen</a>
                 <a th:href="${'/HR/userlist/edit/' + user.id}">Bearbeiten</a>
             </div>

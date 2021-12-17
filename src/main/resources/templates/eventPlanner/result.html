@@ -10,7 +10,7 @@
 <br>
 <h2 style="text-align: center;">Erstellte Veranstaltung</h2>
 <br>
-<table style="background-color: rosybrown; color:ghostwhite; margin-left:25vw; width:50%;font-size:20px;border-radius: 5px;">
+<table style="background-color: #DCDCDC; color:black; margin-left:15vw; width:70%;font-size:20px;border-radius: 5px;">
     <tr style="font-weight:bold;">
         <td>Name</td>
         <td>Beschreibung</td>
@@ -35,8 +35,8 @@
 </table>
 <br>
 <div class="link" style="margin-left:39vw; width:22%;background-color: lightgray;border-radius: 5px;">
-    <p><a th:href="@{eventPlanner/createEvent}">Erstelle eine weitere Veranstaltung</a></p>
-    <p><a th:href="@{eventPlanner/event}">Sieh dir alle Veranstaltungen an</a></p>
+    <p><a th:href="@{/eventPlanner/createEvent}">Erstelle eine weitere Veranstaltung</a></p>
+    <p><a th:href="@{/eventPlanner/event}">Sieh dir alle Veranstaltungen an</a></p>
 </div>
 <div th:replace="allPages/footer :: footer">...</div>
 

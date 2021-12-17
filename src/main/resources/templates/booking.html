@@ -12,7 +12,7 @@
 <h2 style="text-align: center;">Übersicht über deine Buchungen</h2>
 <br>
 
-<table style="background-color: rosybrown; color:ghostwhite; margin-left:20vw; width:60%;font-size:20px;border-radius: 5px;">
+<table style="background-color: #DCDCDC; color:black; margin-left:20vw; width:60%;font-size:20px;border-radius: 5px;">
     <tr style="font-weight:bold;">
         <td>Name</td>
         <td>Beschreibung</td>
@@ -31,7 +31,7 @@
         <td style="width:14%;" th:text="${booking.date}"></td>
         <td style="width:14%;" th:text="${booking.time}"></td>
         <td>
-            <div class="link" style="background-color: rosybrown;">
+            <div class="link" style="background-color: #DCDCDC;">
                 <a th:href="@{/booking/delete/{id}(id=${booking.id})}">Abmelden</a>
                 <a th:href="@{/booking/users/{id}(id=${booking.id})}">Teilnehmerliste</a>
             </div>
