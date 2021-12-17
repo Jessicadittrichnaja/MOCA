@@ -49,6 +49,9 @@ public interface EventRepository extends CrudRepository<Event, Long> {
     @Query("SELECT e from Event e WHERE e.id NOT IN (SELECT e.id FROM Event e INNER JOIN Booking b ON e.id = b.event WHERE b.user= :user) AND e.spots > 0")
     List<Event> findAvailableEvents(@Param("user") User user);
 
-
+    @Transactional
+    @Modifying
+    @Query("UPDATE Event e Set e.spots = e.spots+1 WHERE e.id IN (SELECT e.id FROM Event e INNER JOIN Booking b ON e.id = b.event WHERE b.user= :user)")
+    void addSpotWhenUserDeleted(@Param("user") User user);
 
 }

@@ -32,5 +32,6 @@ public interface BookingRepository extends CrudRepository<Booking, Integer> {
 
    @Query("SELECT b.user from Booking b WHERE b.event= :event")
    List<User> findBookingsForEvent(@Param("event") Event event);
+
 }
 

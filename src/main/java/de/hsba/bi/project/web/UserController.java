@@ -1,6 +1,8 @@
 package de.hsba.bi.project.web;
 
+import de.hsba.bi.project.bookingProcess.BookingRepository;
 import de.hsba.bi.project.events.Event;
+import de.hsba.bi.project.events.EventRepository;
 import de.hsba.bi.project.user.User;
 import de.hsba.bi.project.user.UserRepository;
 import de.hsba.bi.project.user.UserService;
@@ -30,6 +32,8 @@ public class UserController {
     private UserFormConverter userFormConverter;
     @Autowired
     private PasswordEncoder encoder;
+    @Autowired
+    private EventRepository eventRepository;
 
     // Erstellung eines neuen Users
 
@@ -66,6 +70,7 @@ public class UserController {
     public String deleteUser(@PathVariable("id") int id, Model model)
     {
         User user = userService.findById(id);
+        eventRepository.addSpotWhenUserDeleted(user);
         userService.removeUser(user);
         model.addAttribute("user",userService.findAll());
         return "HR/userlist";

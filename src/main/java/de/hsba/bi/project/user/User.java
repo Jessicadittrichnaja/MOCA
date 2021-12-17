@@ -52,6 +52,9 @@ public class User implements Comparable<User> {
 
     private Role role;
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Booking> bookings;
+
     public User(String name) {
         this.name = name;
     }
