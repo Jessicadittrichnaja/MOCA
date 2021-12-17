@@ -16,6 +16,9 @@ public class BookingService {
     @Autowired
     BookingRepository bookingRepository;
 
+    @Autowired
+    EventService eventService;
+
     // Methoden z.B. zum Erstellen und Löschen von Buchungen
 
     public List<Booking> findAll() {
@@ -41,4 +44,9 @@ public class BookingService {
     public void save(Booking booking) { bookingRepository.save(booking);
     }
 
+    public void throwErrorIfBookingIsClosed(Integer id) {
+        if(eventService.isEventClosed(id)){
+            throw new IllegalArgumentException("Event is closed");
+        }
+    }
 }

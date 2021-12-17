@@ -36,6 +36,8 @@ public class BookingShowController {
 
     @GetMapping("/bookingOverview/{id}")
     public String showBookedEvent(@PathVariable("id") int id, Model model) {
+        bookingService.throwErrorIfBookingIsClosed(id);
+
         if (bookingRepository.findBookingByUser(userService.findCurrentUser(), eventService.findById(id)) == 1) {
             model.addAttribute("events", eventService.findAll());
             model.addAttribute("filter", new Filter());
@@ -50,6 +52,7 @@ public class BookingShowController {
 
     @GetMapping("/booking/delete/{id}")
     public String deleteBooking(@PathVariable("id") int id, Model model) {
+        bookingService.throwErrorIfBookingIsClosed(id);
         Booking booking = bookingRepository.findBooking(userService.findCurrentUser(), eventService.findById(id));
         bookingService.removeBooking(booking);
         eventRepository.addSpot(id);
