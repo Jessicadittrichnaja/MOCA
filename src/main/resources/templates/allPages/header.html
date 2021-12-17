@@ -34,6 +34,9 @@
             <div class="auswahl" sec:authorize="hasRole('PERSONALABTEILUNG')">
                 <a th:href="@{/HR/createUser}" >Neuen User anlegen</a>
             </div>
+            <div class="auswahl" sec:authorize="hasRole('PERSONALABTEILUNG')">
+                <a th:href="@{/HR/userlist}" >Alle User anzeigen</a>
+            </div>
             <div class="auswahl" sec:authorize="hasRole('TERMINVERWALTER')">
                 <a th:href="@{/eventPlanner/event}">Veranstaltungen ansehen</a>
             </div>

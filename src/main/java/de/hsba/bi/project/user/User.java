@@ -40,7 +40,7 @@ public class User implements Comparable<User> {
     @Setter(AccessLevel.NONE)
     @Id
     @GeneratedValue
-    private Long id;
+    private Integer id;
 
     @Getter
     @Setter
@@ -50,13 +50,16 @@ public class User implements Comparable<User> {
     @Basic(optional = false)
     private String password;
 
-    private String role;
+    private Role role;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Booking> bookings;
 
     public User(String name) {
         this.name = name;
     }
 
-    public User(String name, String password, String role) {
+    public User(String name, String password, Role role) {
         this.name = name;
         this.password = password;
         this.role = role;

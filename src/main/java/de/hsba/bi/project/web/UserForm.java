@@ -1,20 +1,21 @@
 package de.hsba.bi.project.web;
 
+import de.hsba.bi.project.user.Role;
 import lombok.Getter;
 import lombok.Setter;
 
 
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 
-@Table(name = "USER", uniqueConstraints = @UniqueConstraint(columnNames ={"user"}))
+//@Table(name = "USER", uniqueConstraints = @UniqueConstraint(columnNames ={"user"}))
 public class UserForm {
 
     // ermöglicht Fehlermeldungen, wenn Angaben zu neuem User nicht vollständig sind
 
     @NotEmpty(message = "Bitte einen Namen eingeben")
     @Getter
-    @Column(name = "user")
     @Setter
     private String name;
 
@@ -23,18 +24,8 @@ public class UserForm {
     @Setter
     private String password;
 
-    @NotEmpty(message = "Bitte einen Rolle eingeben")
+    @NotNull(message = "Bitte einen Rolle eingeben")
     @Getter
     @Setter
-    private String role;
-    private String id;
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    @Id
-    public String getId() {
-        return id;
-    }
+    private Role role;
 }

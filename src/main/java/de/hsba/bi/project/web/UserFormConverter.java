@@ -26,7 +26,6 @@ public class UserFormConverter {
         user.setName(form.getName());
         user.setPassword(Encoder.encode(form.getPassword()));
         user.setRole(form.getRole());
-
         return user;
     }
 
