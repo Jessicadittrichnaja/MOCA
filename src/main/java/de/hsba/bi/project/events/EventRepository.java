@@ -46,7 +46,7 @@ public interface EventRepository extends CrudRepository<Event, Long> {
     @Query("SELECT Count(id) from User u where u.name= :name")
     Integer countNumberUsersWithSameName(@Param("name")String name);
 
-    @Query("SELECT e from Event e WHERE e.id NOT IN (SELECT e.id FROM Event e INNER JOIN Booking b ON e.id = b.event WHERE b.user= :user) AND e.spots > 0")
+    @Query("SELECT e from Event e WHERE e.id NOT IN (SELECT e.id FROM Event e INNER JOIN Booking b ON e.id = b.event WHERE b.user= :user) AND e.spots > 0 AND e.isClosed = FALSE")
     List<Event> findAvailableEvents(@Param("user") User user);
 
     @Transactional
@@ -56,6 +56,15 @@ public interface EventRepository extends CrudRepository<Event, Long> {
 
     @Query("SELECT e.isClosed FROM Event e WHERE e.id = :id")
     boolean isEventClosed(@Param("id") Integer id);
+
+//    Meine Änderung
+    @Transactional
+    @Modifying
+    @Query("UPDATE Event e SET e.isClosed = false where e.id = :id")
+    void openEvent(@Param("id") Integer id);
+
+    @Query("SELECT e.isClosed FROM Event e WHERE e.id = :id")
+    boolean isEventOpen(@Param("id") Integer id);
 
 
 }

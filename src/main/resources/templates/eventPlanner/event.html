@@ -32,12 +32,20 @@
         <td style="width:12%;" th:text="${event.location}"></td>
         <td style="width:12%;" th:text="${event.date}"></td>
         <td style="width:12%;" th:text="${event.time}"></td>
-        <td style="width:12%;" th:text="${event.isClosed}"></td>
+<!--        <td style="width:12%;" th:text="${event.isClosed}"></td>-->
+        <td th:switch="${event.isClosed}">
+            <div th:case="false">Offen</div>
+            <div th:case="true">Geschlossen</div>
+        </td>
         <td>
             <div class="link" style="background-color: rosybrown;">
                 <a th:href="${'/eventPlanner/event/delete/' + event.id}">Löschen</a>
                 <a th:href="${'/eventPlanner/event/edit/' + event.id}">Bearbeiten</a>
-                 <a th:href="${'/eventPlanner/event/close/' + event.id}">Schließen</a>
+<!--                <a th:href="${'/eventPlanner/event/close/' + event.id}">Schließen</a>-->
+                <a th:switch="${event.isClosed}">
+                    <a th:case="false" th:href="${'/eventPlanner/event/close/' + event.id}">Schließen</a>
+                    <a th:case="true" th:href="${'/eventPlanner/event/open/' + event.id}">Öffnen</a>
+                </a>
             </div>
         </td>
     </tr>

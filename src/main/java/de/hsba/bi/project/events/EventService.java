@@ -71,6 +71,12 @@ public class EventService {
         eventRepository.closeEvent(id);
     }
 
+//    Meine Änderung
+    public void openEvent(int id)  {
+        eventRepository.openEvent(id);
+    }
+
+
     public Event save(Event event) {
         return eventRepository.save(event);
     }
@@ -79,7 +85,8 @@ public class EventService {
         return eventRepository.findById(id).orElse(null);
     }
 
-    public boolean isEventClosed(Integer id) {
-        return eventRepository.isEventClosed(id);
-    }
+    public boolean isEventClosed(Integer id) {return eventRepository.isEventClosed(id);}
+
+//    Meine Änderung
+    public Boolean isEventOpen(Integer id) {return eventRepository.isEventOpen(id);}
 }
