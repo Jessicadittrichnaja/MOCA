@@ -54,7 +54,13 @@ public class Event implements Serializable {
     @Setter
     private Time time;
 
+    @Getter
+    @Setter
+    private Boolean isClosed = false;
+
+ 
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
+
     private List<Booking> bookings;
 
     public List<Booking> getBookings() {

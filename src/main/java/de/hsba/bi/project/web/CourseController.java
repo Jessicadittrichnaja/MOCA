@@ -54,7 +54,7 @@ public class CourseController {
         Event event = eventService.findById(id);
         eventService.removeEvent(event);
         model.addAttribute("events", eventService.findAll());
-        return "eventPlanner/event";
+        return "redirect:/eventPlanner/event";
     }
 
     // Bearbeiten eines Events
@@ -65,6 +65,16 @@ public class CourseController {
         model.addAttribute("events", eventRepository.findAll());
 
         return "eventPlanner/editEvent";
+    }
+
+    // Schließen eines Events
+
+    @GetMapping("/eventPlanner/event/close/{id}")
+    public String closeEventPage(@PathVariable("id") Integer id, Model model) {
+        Event event = eventService.findById(id);
+        eventService.closeEvent(id);
+
+        return "redirect:/eventPlanner/event";
     }
 
     // Speichert Änderungen, wenn valide
