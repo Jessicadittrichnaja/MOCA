@@ -79,7 +79,7 @@ public class UserController {
     // Bearbeiten eines Users
 
     @GetMapping("/HR/userlist/edit/{id}")
-    public String editUserPage(@PathVariable("id") Integer id, Model model) {
+    public String editUserPage(@PathVariable("id") int id, Model model) {
         model.addAttribute("userForm", userFormConverter.toForm(userService.findUser(id)));
         model.addAttribute("user", userRepository.findAll());
 
@@ -89,7 +89,7 @@ public class UserController {
     // Speichert Änderungen, wenn valide
 
     @PostMapping("/HR/userlist/edit/{id}")
-    public String editUser(@PathVariable("id") Integer id, @ModelAttribute("userForm") @Valid UserForm form, BindingResult binding, Model model) {
+    public String editUser(@PathVariable("id") int id, @ModelAttribute("userForm") @Valid UserForm form, BindingResult binding, Model model) {
         if (binding.hasErrors()) {
             return "HR/editUser";
         }
@@ -97,7 +97,7 @@ public class UserController {
         User user = userService.findUser(id);
         userService.save(userFormConverter.update(user, form));
         model.addAttribute("user", userService.findAll());
-        return "HR/userliste";
+        return "HR/userlist";
     }
 
 

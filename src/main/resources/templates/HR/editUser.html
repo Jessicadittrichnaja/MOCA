@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html xmlns:th ="http://www.thymeleaf.org">
 <head>
-  <title>Event bearbeiten</title>
+  <title>User bearbeiten</title>
   <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"/>
   <link rel="stylesheet" th:href="@{/main.css}">
 </head>
@@ -10,8 +10,7 @@
 <div th:replace="allPages/header :: header">...</div>
 <br>
 <div style="margin-left:34vw;font-size:20px;">
-  <form class="form" th:action=" @{${'/HR/userlist/edit/' + id}}" th:object="${eventForm}" method = "post">
-    <form action="#" th:action="@{/HR/createUser}" th:object="${user}" method="post">
+  <form class="form" th:action=" @{${'/HR/userlist/edit/' + id}}" th:object="${userForm}" method = "post">
       <div class="form-row">
         <div class="col-md-6 form-group">
           <label>Nutzername</label>
@@ -19,12 +18,14 @@
                  th:classappend="${#fields.hasErrors('name')? 'is-invalid' : ''}"/>
           <span class="text-danger" th:errors="*{name}"></span>
         </div>
+
         <div class="col-md-6 form-group">
           <label>Passwort</label>
           <input type="password" class="form-control" th:field="*{password}"
                  th:classappend="${#fields.hasErrors('password')? 'is-invalid' : ''}"/>
           <span class="text-danger" th:errors="*{password}"></span>
         </div>
+
         <div class="col-md-6 form-group">
           <label>Rolle</label>
           <select class="form-control" th:field="*{role}">
@@ -37,7 +38,7 @@
         <br>
 
         <div>
-          <input class="Index" type="submit" style="background-color: rosybrown;border-radius: 5px;border-style:none;color:ghostwhite" value="User anlegen"/>
+          <input class="Index" type="submit" style="background-color: rosybrown;border-radius: 5px;border-style:none;color:ghostwhite" value="Änderungen speichern"/>
         </div>
       </div>
 
