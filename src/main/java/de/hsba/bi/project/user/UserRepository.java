@@ -35,5 +35,6 @@ public interface UserRepository extends JpaRepository<de.hsba.bi.project.user.Us
     @Query("UPDATE User u Set u.name = :name , u.role = :role where u.id = :id")
     void updateUserName(@Param("name") String name, @Param("id") Integer id, @Param("role") Role role);
 
-
+    @Query("SELECT Count(id) from User u where u.role = 0")
+    Integer countNumberUsersWithRoleHR();
 }

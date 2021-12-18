@@ -70,4 +70,7 @@ public interface EventRepository extends CrudRepository<Event, Long> {
     @Query("SELECT e.isClosed FROM Event e WHERE e.id = :id")
     boolean isEventOpen(@Param("id") Integer id);
 
+   /* @Query("SELECT Count(id) from Event e u where e.name= :name and ")
+    Integer countNumberUsersWithSameName(@Param("name")String name);
+*/
 }

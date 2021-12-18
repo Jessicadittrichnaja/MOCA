@@ -3,6 +3,7 @@ package de.hsba.bi.project.web;
 import de.hsba.bi.project.bookingProcess.BookingRepository;
 import de.hsba.bi.project.events.Event;
 import de.hsba.bi.project.events.EventRepository;
+import de.hsba.bi.project.user.Role;
 import de.hsba.bi.project.user.User;
 import de.hsba.bi.project.user.UserRepository;
 import de.hsba.bi.project.user.UserService;
@@ -60,46 +61,25 @@ public class UserController {
     }
     @GetMapping("/HR/userlist")
     public String userList(Model model) {
-        model.addAttribute("user", userService.findAll());
+        model.addAttribute("users", userService.findAll());
         return "HR/userlist";
     }
     // Löschen eines Users
 
 
     @GetMapping("/HR/userlist/delete/{id}")
-    public String deleteUser(@PathVariable("id") int id, Model model)
-    {
+    public String deleteUser(@PathVariable("id") int id, Model model) {
+        if (userService.findById(id).getRole() == Role.PERSONALABTEILUNG && userRepository.countNumberUsersWithRoleHR() == 1) {
+            model.addAttribute("error", "Dies ist der einige Mitarbeiter mit der Rolle Personalabteilung. Kein Löschen möglich.");
+            model.addAttribute("users",userService.findAll());
+            return "HR/userlist";
+        }
         User user = userService.findById(id);
         eventRepository.addSpotWhenUserDeleted(user);
         userService.removeUser(user);
-        model.addAttribute("user",userService.findAll());
+        model.addAttribute("users",userService.findAll());
         return "HR/userlist";
     }
-
-    // Bearbeiten eines Users
-
-//    @GetMapping("/HR/userlist/edit/{id}")
-//    public String editUserPage(@PathVariable("id") int id, Model model) {
-//        model.addAttribute("userForm", userFormConverter.toForm(userService.findUser(id)));
-//        model.addAttribute("user", userRepository.findAll());
-//
-//        return "HR/editUser";
-//    }
-
-    // Speichert Änderungen, wenn valide
-
-//    @PostMapping("/HR/userlist/edit/{id}")
-//    public String editUser(@PathVariable("id") int id, @ModelAttribute("userForm") @Valid UserForm form, BindingResult binding, Model model) {
-//        if (binding.hasErrors()) {
-//            return "HR/editUser";
-//        }
-//
-//        User user = userService.findUser(id);
-//        userService.save(userFormConverter.update(user, form));
-//        model.addAttribute("user", userService.findAll());
-//        return "HR/userlist";
-//    }
-
 
     // erster Teil zum Ändern des Passwortes durch den User, prüft altes Passwort
 
@@ -146,7 +126,7 @@ public class UserController {
     @GetMapping("/HR/userlist/edit/{id}")
     public String editUser(@PathVariable("id") int id, Model model){
         model.addAttribute("user", userService.findById(id));
-        return "/HR/editUser";
+        return "HR/editUser";
     }
 
     // Speichern des Users, wenn eine Rolle und ein Nutzername vergeben wurden.
@@ -154,12 +134,18 @@ public class UserController {
     @PostMapping("/HR/userlist/edit/{id}")
     public String saveUser(@ModelAttribute("user") User user, Model model,@PathVariable("id") int id) {
         PasswordEncoder passencoder = new BCryptPasswordEncoder();
-//        if (user.getPassword() == "" || passencoder.matches(user.getPassword(), userService.findCurrentUser().getPassword()) == true) {
-//            model.addAttribute("error", "Da hat etwas nicht geklappt. Du hast dein altes oder gar kein Passwort eingegeben.");
-//            return ("editPassword2");
-//        }
-        userRepository.updateUserName(user.getName(), userService.findById(id).getId(),user.getRole());
-        return "/HR/userlist";
+        if (user.getName() == "" || user.getRole() == null) {
+            model.addAttribute("error", "Da hat etwas nicht geklappt. Es fehlt eine Angabe.");
+            return ("HR/editUser");
+        }
+        if (userService.findById(id).getRole() == Role.PERSONALABTEILUNG && userRepository.countNumberUsersWithRoleHR() == 1 && user.getRole() != Role.PERSONALABTEILUNG) {
+            model.addAttribute("error2", "Dies ist der einige Mitarbeiter mit der Rolle Personalabteilung. Kein Ändern der Rolle möglich.");
+            model.addAttribute("users",userService.findAll());
+            return "HR/editUser";
+        }
+        userRepository.updateUserName(user.getName(), id, user.getRole());
+        model.addAttribute("users", userService.findAll());
+        return "redirect:/HR/userlist";
     }
 
 }

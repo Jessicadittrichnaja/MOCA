@@ -9,7 +9,7 @@
 <div th:replace="allPages/header :: header">...</div>
 <br>
 <div style="margin-left:34vw;font-size:20px;">
-  <form action="#" th:action="@{/HR/editUser}" th:object="${user}" method="post">
+  <form action="#"  th:action=" @{${'/HR/userlist/edit/' + id}}" th:object="${user}" method="post">
     <div class="form-row">
       <div class="col-md-6 form-group">
         <label>Name</label>
@@ -26,11 +26,13 @@
       <div>
         <input class="Index" type="submit" style="background-color: rosybrown;border-radius: 5px;border-style:none;color:ghostwhite" value="User bearbeiten"/>
       </div>
+      <br>
+      <div th:text="${error}">
+        </div>
+      <div th:text="${error2}">
+      </div>
     </div>
   </form>
-  <br>
-  <div th:text="${error}">
-  </div>
 </div>
 
 <div th:replace="allPages/footer :: footer">...</div>
