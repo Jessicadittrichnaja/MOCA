@@ -1,4 +1,3 @@
-<!DOCTYPE HTML>
 <!DOCTYPE html>
 <html xmlns:th ="http://www.thymeleaf.org">
 <head>
@@ -10,40 +9,28 @@
 <div th:replace="allPages/header :: header">...</div>
 <br>
 <div style="margin-left:34vw;font-size:20px;">
-  <form class="form" th:action=" @{${'/HR/userlist/edit/' + id}}" th:object="${userForm}" method = "post">
-      <div class="form-row">
-        <div class="col-md-6 form-group">
-          <label>Nutzername</label>
-          <input type="text" class="form-control" th:field="*{name}"
-                 th:classappend="${#fields.hasErrors('name')? 'is-invalid' : ''}"/>
-          <span class="text-danger" th:errors="*{name}"></span>
-        </div>
-
-        <div class="col-md-6 form-group">
-          <label>Passwort</label>
-          <input type="password" class="form-control" th:field="*{password}"
-                 th:classappend="${#fields.hasErrors('password')? 'is-invalid' : ''}"/>
-          <span class="text-danger" th:errors="*{password}"></span>
-        </div>
-
-        <div class="col-md-6 form-group">
-          <label>Rolle</label>
-          <select class="form-control" th:field="*{role}">
-            <option th:value="${null}" selected>Rolle auswählen</option>
-            <option th:each="role: ${T(de.hsba.bi.project.user.Role).values()}" th:value="${role}" th:text="${role.displayValue}"
-                    th:classappend="${#fields.hasErrors('role')? 'is-invalid' : ''}"></option>
-            <span class="text-danger" th:errors="*{role}"></span>
-          </select>
-        </div>
-        <br>
-
-        <div>
-          <input class="Index" type="submit" style="background-color: rosybrown;border-radius: 5px;border-style:none;color:ghostwhite" value="Änderungen speichern"/>
-        </div>
+  <form action="#" th:action="@{/HR/editUser}" th:object="${user}" method="post">
+    <div class="form-row">
+      <div class="col-md-6 form-group">
+        <label>Name</label>
+        <input type="text" class="form-control" th:field="*{name}">
       </div>
-
-
-    </form>
+      <div class="col-md-6 form-group">
+        <label>Rolle</label>
+        <select class="form-control" th:field="*{role}">
+          <option th:value="${null}" selected>Rolle auswählen</option>
+          <option th:each="role: ${T(de.hsba.bi.project.user.Role).values()}" th:value="${role}" th:text="${role.displayValue}"></option>
+        </select>
+      </div>
+      <br>
+      <div>
+        <input class="Index" type="submit" style="background-color: rosybrown;border-radius: 5px;border-style:none;color:ghostwhite" value="User bearbeiten"/>
+      </div>
+    </div>
+  </form>
+  <br>
+  <div th:text="${error}">
+  </div>
 </div>
 
 <div th:replace="allPages/footer :: footer">...</div>

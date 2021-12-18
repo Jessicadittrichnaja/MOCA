@@ -78,27 +78,27 @@ public class UserController {
 
     // Bearbeiten eines Users
 
-    @GetMapping("/HR/userlist/edit/{id}")
-    public String editUserPage(@PathVariable("id") int id, Model model) {
-        model.addAttribute("userForm", userFormConverter.toForm(userService.findUser(id)));
-        model.addAttribute("user", userRepository.findAll());
-
-        return "HR/editUser";
-    }
+//    @GetMapping("/HR/userlist/edit/{id}")
+//    public String editUserPage(@PathVariable("id") int id, Model model) {
+//        model.addAttribute("userForm", userFormConverter.toForm(userService.findUser(id)));
+//        model.addAttribute("user", userRepository.findAll());
+//
+//        return "HR/editUser";
+//    }
 
     // Speichert Änderungen, wenn valide
 
-    @PostMapping("/HR/userlist/edit/{id}")
-    public String editUser(@PathVariable("id") int id, @ModelAttribute("userForm") @Valid UserForm form, BindingResult binding, Model model) {
-        if (binding.hasErrors()) {
-            return "HR/editUser";
-        }
-
-        User user = userService.findUser(id);
-        userService.save(userFormConverter.update(user, form));
-        model.addAttribute("user", userService.findAll());
-        return "HR/userlist";
-    }
+//    @PostMapping("/HR/userlist/edit/{id}")
+//    public String editUser(@PathVariable("id") int id, @ModelAttribute("userForm") @Valid UserForm form, BindingResult binding, Model model) {
+//        if (binding.hasErrors()) {
+//            return "HR/editUser";
+//        }
+//
+//        User user = userService.findUser(id);
+//        userService.save(userFormConverter.update(user, form));
+//        model.addAttribute("user", userService.findAll());
+//        return "HR/userlist";
+//    }
 
 
     // erster Teil zum Ändern des Passwortes durch den User, prüft altes Passwort
@@ -140,6 +140,26 @@ public class UserController {
         }
         userRepository.updateUserPassword(encoder.encode(user.getPassword()), userService.findCurrentUser().getId());
         return "index";
+    }
+
+
+    @GetMapping("/HR/userlist/edit/{id}")
+    public String editUser(@PathVariable("id") int id, Model model){
+        model.addAttribute("user", userService.findById(id));
+        return "/HR/editUser";
+    }
+
+    // Speichern des Users, wenn eine Rolle und ein Nutzername vergeben wurden.
+
+    @PostMapping("/HR/userlist/edit/{id}")
+    public String saveUser(@ModelAttribute("user") User user, Model model,@PathVariable("id") int id) {
+        PasswordEncoder passencoder = new BCryptPasswordEncoder();
+//        if (user.getPassword() == "" || passencoder.matches(user.getPassword(), userService.findCurrentUser().getPassword()) == true) {
+//            model.addAttribute("error", "Da hat etwas nicht geklappt. Du hast dein altes oder gar kein Passwort eingegeben.");
+//            return ("editPassword2");
+//        }
+        userRepository.updateUserName(user.getName(), userService.findById(id).getId(),user.getRole());
+        return "/HR/userlist";
     }
 
 }
