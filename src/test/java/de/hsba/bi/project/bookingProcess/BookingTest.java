@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import de.hsba.bi.project.events.Category;
 import de.hsba.bi.project.events.Location;
 import de.hsba.bi.project.events.Time;
+import de.hsba.bi.project.user.Role;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.RepeatedTest;
@@ -38,7 +39,7 @@ class BookingTest {
     void testCreateBooking() {
         // given
         event = new Event ("Programmierung 2", "Projekt", Category.Seminar, 10, 1, Location.Hamburg, LocalDate.of(2021, 10, 23), Time.Morgens);
-        user  = new User("Enrico", "password", User.MITARBEITER_ROLE);
+        user  = new User("Enrico", "password", Role.MITARBEITER);
         // when
         Booking booking = new Booking(event, user);
         // then
