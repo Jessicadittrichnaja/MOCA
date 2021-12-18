@@ -52,7 +52,6 @@
     </div>
 
     <div th:each="event : ${events}">
-        <a th:href="@{/kursDetails/{id}(id=${event.id})}">
         <div class="Event" >
             <div class="EventAnzeige">
                 <div class="EventBild">
@@ -71,11 +70,13 @@
                             <a th:case="false" th:href="@{/bookingOverview/{id}(id=${event.id})}">Buchen</a>
                             <p th:case="true">Geschlossen</p>
                         </div>
+                        <a class = "header" style="background-color: rosybrown;" th:href="@{/kursDetails/{id}(id=${event.id})}">
+                            Details
+                        </a>
                     </div>
                 </div>
             </div>
         </div>
-        </a>
     </div>
     </div>
 </div>
