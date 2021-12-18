@@ -64,8 +64,8 @@ public class UserController {
         model.addAttribute("users", userService.findAll());
         return "HR/userlist";
     }
-    // Löschen eines Users
 
+    // Löschen eines Users. Ist nur möglich, wenn es sich nicht um den einzigen User mit der Rolle Personalabteilung handelt.
 
     @GetMapping("/HR/userlist/delete/{id}")
     public String deleteUser(@PathVariable("id") int id, Model model) {
@@ -138,6 +138,9 @@ public class UserController {
             model.addAttribute("error", "Da hat etwas nicht geklappt. Es fehlt eine Angabe.");
             return ("HR/editUser");
         }
+
+        // Wenn der User der einzige User mit Rolle Personalabteilung ist, kann diese nicht geändert werden.
+
         if (userService.findById(id).getRole() == Role.PERSONALABTEILUNG && userRepository.countNumberUsersWithRoleHR() == 1 && user.getRole() != Role.PERSONALABTEILUNG) {
             model.addAttribute("error2", "Dies ist der einige Mitarbeiter mit der Rolle Personalabteilung. Kein Ändern der Rolle möglich.");
             model.addAttribute("users",userService.findAll());

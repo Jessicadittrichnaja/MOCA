@@ -36,14 +36,19 @@ public class CourseController {
         return "eventPlanner/createEvent";
     }
 
-    // Speichern des neuen Events
+    // Speichern des neuen Events. Das Event wird nur gespeichert, wenn es nicht bereits das gleiche Event in der Datenbank gibt (es werden alle Übereinstimmungen außer is_closed geprüft)
 
     @PostMapping("/eventPlanner/createEvent")
-    public String saveEvent(@ModelAttribute("event") @Valid EventForm eventForm, BindingResult result) {
+    public String saveEvent(@ModelAttribute("event") @Valid EventForm eventForm, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "eventPlanner/createEvent";
         }
-        eventService.save(eventFormConverter.update(new Event(), eventForm));
+        Event event = eventFormConverter.update(new Event(), eventForm);
+        if (eventRepository.countNumberEventsWithSameData(event.getName(), event.getCategory(), event.getDate(), event.getDescription(), event.getDuration(), event.getLocation(), event.getTime(), event.getSpots()) == 1) {
+            model.addAttribute("error", "Das Event gibt es schon.");
+            return ("eventPlanner/createEvent");
+        }
+        eventService.save(event);
         return "eventPlanner/result";
     }
 
@@ -67,6 +72,26 @@ public class CourseController {
         return "eventPlanner/editEvent";
     }
 
+    // Speichert Änderungen, wenn valide
+
+    @PostMapping("/eventPlanner/event/edit/{id}")
+    public String editEvent(@PathVariable("id") Integer id, @ModelAttribute("eventForm") @Valid EventForm form, BindingResult binding, Model model) {
+        if (binding.hasErrors()) {
+            return "eventPlanner/editEvent";
+        }
+
+    // Speichert Änderungen nur, wenn es auch welche gibt.
+
+        Event event = eventFormConverter.update(eventService.findEvent(id), form);
+        if (eventRepository.countNumberEventsWithSameData(event.getName(), event.getCategory(), event.getDate(), event.getDescription(), event.getDuration(), event.getLocation(), event.getTime(), event.getSpots()) == 1) {
+            model.addAttribute("error", "Es wurde noch nichts verändert. Es gibt nichts zu speichern.");
+            return "eventPlanner/editEvent";
+        }
+        eventService.save(event);
+        model.addAttribute("events", eventService.findAll());
+        return "eventPlanner/event";
+    }
+
     // Schließen eines Events
 
     @GetMapping("/eventPlanner/event/close/{id}")
@@ -85,20 +110,6 @@ public class CourseController {
         eventService.openEvent(id);
 
         return "redirect:/eventPlanner/event";
-    }
-
-    // Speichert Änderungen, wenn valide
-
-    @PostMapping("/eventPlanner/event/edit/{id}")
-    public String editEvent(@PathVariable("id") Integer id, @ModelAttribute("eventForm") @Valid EventForm form, BindingResult binding, Model model) {
-        if (binding.hasErrors()) {
-            return "eventPlanner/editEvent";
-        }
-
-        Event event = eventService.findEvent(id);
-        eventService.save(eventFormConverter.update(event, form));
-        model.addAttribute("events", eventService.findAll());
-        return "eventPlanner/event";
     }
 
 
