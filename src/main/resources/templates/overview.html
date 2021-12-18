@@ -32,7 +32,7 @@
                 </div>
                 <div class="sncontainer">
                     <label>Datum:</label>
-                    <input type="date" th:field="*{selectedDate}">
+                    <input type="date" th:field="*{selectedDate}" style="width: 100%; height: 20px;">
                 </div>
                 <div class="sncontainer">Tageszeit: <br>
                     <select id="time" th:field="*{selectedTime}">
@@ -52,6 +52,7 @@
     </div>
 
     <div th:each="event : ${events}">
+        <a th:href="@{/kursDetails/{id}(id=${event.id})}">
         <div class="Event" >
             <div class="EventAnzeige">
                 <div class="EventBild">
@@ -74,6 +75,7 @@
                 </div>
             </div>
         </div>
+        </a>
     </div>
     </div>
 </div>
