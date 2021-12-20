@@ -79,8 +79,52 @@ public class UserController {
         userService.removeUser(user);
         model.addAttribute("users",userService.findAll());
         return "HR/userlist";
+        }
+    //Deaktivieren eines Users
+    @GetMapping("/HR/userlist/deactive/{id}")
+    public String deactiveUser(@PathVariable("id") Integer id, Model model) {
+        User user = userService.findById(id);
+        userService.deactiveUser(id);
+
+        return "redirect:/HR/userlist";
     }
 
+    //Aktivieren eines Users
+    @GetMapping("/HR/userlist/active/{id}")
+    public String activeUser(@PathVariable("id") Integer id, Model model) {
+        User user = userService.findById(id);
+        userService.activeUser(id);
+
+        return "redirect:/HR/userlist";
+    }
+
+
+
+    // Bearbeiten eines Users
+
+//    @GetMapping("/HR/userlist/edit/{id}")
+//    public String editUserPage(@PathVariable("id") int id, Model model) {
+//        model.addAttribute("userForm", userFormConverter.toForm(userService.findUser(id)));
+//        model.addAttribute("user", userRepository.findAll());
+//
+//        return "HR/editUser";
+//    }
+
+    // Speichert Änderungen, wenn valide
+
+//    @PostMapping("/HR/userlist/edit/{id}")
+//    public String editUser(@PathVariable("id") int id, @ModelAttribute("userForm") @Valid UserForm form, BindingResult binding, Model model) {
+//        if (binding.hasErrors()) {
+//            return "HR/editUser";
+//        }
+//
+//        User user = userService.findUser(id);
+//        userService.save(userFormConverter.update(user, form));
+//        model.addAttribute("user", userService.findAll());
+//        return "HR/userlist";
+//    }
+
+    
     // erster Teil zum Ändern des Passwortes durch den User, prüft altes Passwort
 
     @GetMapping("/editPassword")
