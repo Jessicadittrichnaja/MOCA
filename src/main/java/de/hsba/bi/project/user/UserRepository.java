@@ -35,5 +35,19 @@ public interface UserRepository extends JpaRepository<de.hsba.bi.project.user.Us
     @Query("UPDATE User u Set u.name = :name , u.role = :role where u.id = :id")
     void updateUserName(@Param("name") String name, @Param("id") Integer id, @Param("role") Role role);
 
+    @Transactional
+    @Modifying
+    @Query("UPDATE User u SET u.isDeactive = true where u.id = :id")
+    void deactiveUser(@Param("id") Integer id);
 
+    @Query("SELECT u.isDeactive FROM User u WHERE u.id = :id")
+    boolean isUserDeactive(@Param("id") Integer id);
+
+    @Transactional
+    @Modifying
+    @Query("UPDATE User u SET u.isDeactive = false where u.id = :id")
+    void activeUser(@Param("id") Integer id);
+
+    @Query("SELECT u.isDeactive FROM User u WHERE u.id = :id")
+    boolean isUserActive(@Param("id") Integer id);
 }

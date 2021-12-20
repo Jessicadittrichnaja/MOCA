@@ -74,7 +74,25 @@ public class UserController {
         userService.removeUser(user);
         model.addAttribute("user",userService.findAll());
         return "HR/userlist";
+        }
+    //Deaktivieren eines Users
+    @GetMapping("/HR/userlist/deactive/{id}")
+    public String deactiveUser(@PathVariable("id") Integer id, Model model) {
+        User user = userService.findById(id);
+        userService.deactiveUser(id);
+
+        return "redirect:/HR/userlist";
     }
+
+    //Aktivieren eines Users
+    @GetMapping("/HR/userlist/active/{id}")
+    public String activeUser(@PathVariable("id") Integer id, Model model) {
+        User user = userService.findById(id);
+        userService.activeUser(id);
+
+        return "redirect:/HR/userlist";
+    }
+
 
     // Bearbeiten eines Users
 

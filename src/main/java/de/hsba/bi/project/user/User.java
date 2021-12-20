@@ -49,6 +49,11 @@ public class User implements Comparable<User> {
 
     @Basic(optional = false)
     private String password;
+    
+    @Getter
+    @Setter
+    private Boolean isDeactive = false;
+
 
     private Role role;
 

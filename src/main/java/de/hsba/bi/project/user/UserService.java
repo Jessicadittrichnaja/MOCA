@@ -44,6 +44,14 @@ public class UserService {
         user = userRepository.save(user);
         return user;
     }
+
+    public void deactiveUser(int id)  {
+        userRepository.deactiveUser(id);
+    }
+    public void activeUser(int id)  {
+        userRepository.activeUser(id);
+    }
+
     public List<User> findAll() {
         return (List<User>) userRepository.findAll();
     }
@@ -69,4 +77,7 @@ public class UserService {
     public User findUser(Integer id) {
         return userRepository.findById(id).orElse(null);
     }
+
+    public Boolean isUserDeactive(Integer id) {return userRepository.isUserDeactive(id);}
+    public Boolean isUserActive(Integer id) {return userRepository.isUserActive(id);}
 }
