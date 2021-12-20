@@ -80,7 +80,9 @@
 }
 
 body {
-    margin-bottom:50px;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -271,8 +273,31 @@ select {
     text-align: center;
 }
 
+/* Style the links */
+.link1 a {
+    color: black;
+    padding: 12px;
+    text-decoration: none;
+    font-size: 22px;
+    line-height: 25px;
+    border-radius: 4px;
+}
+
+
+/* Change the background color on mouse-over */
+.link1 a:hover {
+    color: white;
+    transform: scale(1.05);
+}
+.link1{
+    overflow: hidden;
+    background-color: #ddd;
+    padding: 20px 10px;
+    text-align: center;
+}
+
 .whole1 {
-    margin-top: 8.5%;
+    margin-top: 6.5%;
     width: 70%;
     margin-left: 15%;
     display: flex;
@@ -292,7 +317,7 @@ select {
 }
 
 .sidenav {
-    margin-top: 15%;
+    margin-top: 13%;
     width: 300px;
     position: fixed;
     z-index: 1;
@@ -435,3 +460,29 @@ select {
 .form-control {
     height: inherit;
 }
+
+    .kursDetailBox {
+        border: 1px solid #ccc!important;
+        text-align: center!important;
+        margin: 3% 20% 3% 20%;
+        background-color: #f5f5f5;
+    }
+
+    .kursDetailBox li ul {
+        padding: 8px 16px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    .kursDetailBox {
+        list-style-type: none;
+        padding: 3% 5% 3% 5%;
+    }
+
+    .kursDetailInfo {
+        font-weight: bold;
+        font-size: 105%;
+    }
+
+    .kursDetailInfoII {
+        text-indent: 2%;
+    }

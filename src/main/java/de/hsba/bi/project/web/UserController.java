@@ -40,23 +40,23 @@ public class UserController {
 
     @GetMapping("/HR/createUser")
     public String Form(Model model) {
-        model.addAttribute("userForm", userFormConverter.toForm(userService.findCurrentUser()));
         model.addAttribute("user", new User());
         return "HR/createUser";
     }
 
-    // Speichern des neuen Users, wenn valide und der Name noch nicht in der Datenbank vorhanden ist
+    // Speichern des neuen Users, wenn valide und der Name noch nicht in der Datenbank vorhanden ist. Wenn Felder nicht gefüllt sind, gibt es eine Fehlermeldung.
 
     @PostMapping("/HR/createUser")
-    public String saveUser(@ModelAttribute("user") User user, @ModelAttribute("userForm") @Valid UserForm form, BindingResult result, Model model) {
+    public String saveUser(@ModelAttribute("user") @Valid UserForm form, BindingResult result, Model model) {
         if (result.hasErrors()) {
             return "HR/createUser";
         }
+        User user = userFormConverter.update(new User(), form);
         if (userRepository.countNumberUsersWithSameName(user.getName()) == 1){
-            model.addAttribute("user", new User());
+            model.addAttribute("error", "Den User gibt es schon.");
             return "HR/createUser";
         }
-        userService.save(userFormConverter.update(user, form));
+        userService.save(user);
         return "HR/userResult";
     }
     @GetMapping("/HR/userlist")

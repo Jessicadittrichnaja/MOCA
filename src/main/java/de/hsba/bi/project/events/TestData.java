@@ -31,5 +31,7 @@ public class TestData {
             eventRepository.save(stadttour);
             eventRepository.save(agileMethoden);
             eventRepository.save(test1);
+            eventRepository.save(test2);
+            eventRepository.save(test3);
         }
     }

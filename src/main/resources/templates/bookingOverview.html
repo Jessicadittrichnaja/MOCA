@@ -8,34 +8,34 @@
 </head>
 <body>
 <div th:replace="allPages/header :: header">...</div>
-<br>
-<h2 style="text-align: center;">Übersicht über deine Buchung</h2>
-<br>
+<br><br>
+<h2 style="text-align: center;">Du hast folgende Veranstaltung gebucht:</h2>
+<div class="tableContainer" style="padding-bottom:80px;">
+    <ul class="kursDetailBox" th:each = "event: ${events}">
+        <li>
+            <ul class="kursDetailInfo">Name</ul>
+            <ul class="kursDetailInfoII" th:text="${event.name}"></ul>
+            <ul class="kursDetailInfo">Beschreibung</ul>
+            <ul class="kursDetailInfoII" th:text="${event.description}"></ul>
+            <ul class="kursDetailInfo">Kategorie</ul>
+            <ul class="kursDetailInfoII" th:text="${event.category}"></ul>
+            <ul class="kursDetailInfo">Dauer</ul>
+            <ul class="kursDetailInfoII" th:text="${event.duration} + ' Stunden'"></ul>
+            <ul class="kursDetailInfo">Ort</ul>
+            <ul class="kursDetailInfoII" th:text="${event.location}"></ul>
+            <ul class="kursDetailInfo">Datum</ul>
+            <ul class="kursDetailInfoII" th:text="${event.date}"></ul>
+            <ul class="kursDetailInfo">Zeit</ul>
+            <ul class="kursDetailInfoII" th:text="${event.time}"></ul>
 
-<table style="background-color: #DCDCDC; color:black; margin-left:20vw; width:60%;font-size:20px;border-radius: 5px;">
-    <tr style="font-weight:bold;font-style:italic;">
-        <td>Name</td>
-        <td>Beschreibung</td>
-        <td>Kategorie</td>
-        <td>Dauer</td>
-        <td>Ort</td>
-        <td>Datum</td>
-        <td>Zeit</td>
-    </tr>
-    <tr th:each="event : ${events}">
-        <td style="width:14%;" th:text="${event.name}"></td>
-        <td style="width:14%;" th:text="${event.description}"></td>
-        <td style="width:14%;" th:text="${event.category}"></td>
-        <td style="width:14%;" th:text="${event.duration}"></td>
-        <td style="width:14%;" th:text="${event.location}"></td>
-        <td style="width:14%;" th:text="${event.date}"></td>
-        <td style="width:14%;" th:text="${event.time}"></td>
-    </tr>
-</table>
-<br>
-<div class="link" style="margin-left:25vw; width:50%;background-color: lightgray;border-radius: 5px;">
-    <p><a th:href="@{/booking}">Sieh dir alle deine gebuchten Veranstaltungen an</a></p>
+        </li>
+    </ul>
+
+    <div class="link1" style="margin-left:25vw; width:50%;background-color:lightgrey;border: 1px solid #ccc;">
+        <p><a th:href="@{/booking}">Sieh dir alle deine gebuchten Veranstaltungen an</a></p>
+    </div>
 </div>
+<br>
 </div>
 <div th:replace="allPages/footer :: footer">...</div>
 
