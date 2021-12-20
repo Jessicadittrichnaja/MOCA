@@ -17,7 +17,7 @@
         <td>Rolle</td>
         <td>Status</td>
     </tr>
-    <tr th:each = "user: ${user}">
+    <tr th:each = "user: ${users}">
         <td style="width:50%;" th:text="${user.name}"></span></td>
         <td style="width:50%;" th:text="${user.role}"></span></td>
         <td style="width:50%;">
@@ -37,10 +37,11 @@
                 </div>
             </div>
         </td>
-
-
     </tr>
 </table>
+<div style="margin-left:25vw;" th:text="${error}">
+</div>
+<br>
 </div>
 <div th:replace="allPages/footer :: footer">...</div>
 
