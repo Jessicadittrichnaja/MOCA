@@ -80,19 +80,22 @@ public class UserController {
         model.addAttribute("users",userService.findAll());
         return "HR/userlist";
         }
-    //Deaktivieren eines Users
+    // Deaktivieren eines Users, wenn es nicht der einzige User mit der Rolle Personalabteilung ist.
     @GetMapping("/HR/userlist/deactive/{id}")
     public String deactiveUser(@PathVariable("id") Integer id, Model model) {
-        User user = userService.findById(id);
+        if (userService.findById(id).getRole() == Role.PERSONALABTEILUNG && userRepository.countNumberUsersWithRoleHR() == 1) {
+            model.addAttribute("error", "Dies ist der einige Mitarbeiter mit der Rolle Personalabteilung. Kein Deaktivieren möglich.");
+            model.addAttribute("users",userService.findAll());
+            return "HR/userlist";
+        }
         userService.deactiveUser(id);
 
         return "redirect:/HR/userlist";
     }
 
-    //Aktivieren eines Users
+    // Aktivieren eines Users
     @GetMapping("/HR/userlist/active/{id}")
     public String activeUser(@PathVariable("id") Integer id, Model model) {
-        User user = userService.findById(id);
         userService.activeUser(id);
 
         return "redirect:/HR/userlist";
