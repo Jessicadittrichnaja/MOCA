@@ -74,17 +74,27 @@ public class UserController {
             model.addAttribute("users",userService.findAll());
             return "HR/userlist";
         }
+        if (userService.findById(id) == userService.findCurrentUser()) {
+            model.addAttribute("error2", "Du kannst dich nicht selber löschen.");
+            model.addAttribute("users",userService.findAll());
+            return "HR/userlist";
+        }
         User user = userService.findById(id);
         eventRepository.addSpotWhenUserDeleted(user);
         userService.removeUser(user);
         model.addAttribute("users",userService.findAll());
         return "HR/userlist";
         }
-    // Deaktivieren eines Users, wenn es nicht der einzige User mit der Rolle Personalabteilung ist.
+    // Deaktivieren eines Users, wenn es nicht der einzige User mit der Rolle Personalabteilung ist und der angemeldete User sich nicht selber deaktivieren würde.
     @GetMapping("/HR/userlist/deactive/{id}")
     public String deactiveUser(@PathVariable("id") Integer id, Model model) {
         if (userService.findById(id).getRole() == Role.PERSONALABTEILUNG && userRepository.countNumberUsersWithRoleHR() == 1) {
             model.addAttribute("error", "Dies ist der einige Mitarbeiter mit der Rolle Personalabteilung. Kein Deaktivieren möglich.");
+            model.addAttribute("users",userService.findAll());
+            return "HR/userlist";
+        }
+        if (userService.findById(id) == userService.findCurrentUser()) {
+            model.addAttribute("error2", "Du kannst dich nicht selber deaktivieren.");
             model.addAttribute("users",userService.findAll());
             return "HR/userlist";
         }
@@ -100,32 +110,6 @@ public class UserController {
 
         return "redirect:/HR/userlist";
     }
-
-
-
-    // Bearbeiten eines Users
-
-//    @GetMapping("/HR/userlist/edit/{id}")
-//    public String editUserPage(@PathVariable("id") int id, Model model) {
-//        model.addAttribute("userForm", userFormConverter.toForm(userService.findUser(id)));
-//        model.addAttribute("user", userRepository.findAll());
-//
-//        return "HR/editUser";
-//    }
-
-    // Speichert Änderungen, wenn valide
-
-//    @PostMapping("/HR/userlist/edit/{id}")
-//    public String editUser(@PathVariable("id") int id, @ModelAttribute("userForm") @Valid UserForm form, BindingResult binding, Model model) {
-//        if (binding.hasErrors()) {
-//            return "HR/editUser";
-//        }
-//
-//        User user = userService.findUser(id);
-//        userService.save(userFormConverter.update(user, form));
-//        model.addAttribute("user", userService.findAll());
-//        return "HR/userlist";
-//    }
 
     
     // erster Teil zum Ändern des Passwortes durch den User, prüft altes Passwort
@@ -190,6 +174,13 @@ public class UserController {
 
         if (userService.findById(id).getRole() == Role.PERSONALABTEILUNG && userRepository.countNumberUsersWithRoleHR() == 1 && user.getRole() != Role.PERSONALABTEILUNG) {
             model.addAttribute("error2", "Dies ist der einige Mitarbeiter mit der Rolle Personalabteilung. Kein Ändern der Rolle möglich.");
+            model.addAttribute("users",userService.findAll());
+            return "HR/editUser";
+        }
+        // Wenn der User, der bearbeitet werden soll, dem angemeldeten User entspricht, gibt es eine Fehlermeldung. User sollen sich nicht selber bearbeiten können.
+
+        if (userService.findById(id) == userService.findCurrentUser()) {
+            model.addAttribute("error3", "Du kannst deine Angaben nicht selber bearbeiten.");
             model.addAttribute("users",userService.findAll());
             return "HR/editUser";
         }
