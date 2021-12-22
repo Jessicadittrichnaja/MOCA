@@ -145,6 +145,10 @@ public class UserController {
     @PostMapping("/editPassword2")
     public String savePassword2(@ModelAttribute("user") User user, Model model) {
         PasswordEncoder passencoder = new BCryptPasswordEncoder();
+        if (user.getPassword().contains(" ")){
+            model.addAttribute("error", "Da hat etwas nicht geklappt. Dein Passwort darf keine Leerzeichen enthalten ");
+            return ("editPassword2");
+        }
         if (user.getPassword() == "" || passencoder.matches(user.getPassword(), userService.findCurrentUser().getPassword()) == true) {
             model.addAttribute("error", "Da hat etwas nicht geklappt. Du hast dein altes oder gar kein Passwort eingegeben.");
             return ("editPassword2");
@@ -169,6 +173,7 @@ public class UserController {
             model.addAttribute("error", "Da hat etwas nicht geklappt. Es fehlt eine Angabe.");
             return ("HR/editUser");
         }
+
 
         // Wenn der User der einzige User mit Rolle Personalabteilung ist, kann diese nicht geändert werden.
 
