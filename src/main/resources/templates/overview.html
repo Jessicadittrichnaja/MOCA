@@ -15,7 +15,7 @@
             <form method="POST" th:action="@{/filterEvents}" th:object="${filter}">
             <div class="fone">
                 <div class="sncontainer">Standort: <br>
-                    <select id="location" th:field="*{selectedLocation}">
+                    <select id="location" th:field="*{selectedLocation}" style="width: 175px; height: 20px;">
                         <option th:value="${null}" selected>Standort auswählen</option>
                         <option th:each="location : ${T(de.hsba.bi.project.events.Location).values()}" th:value="${location}"
                                 th:text="${location.displayValue}">
@@ -23,7 +23,7 @@
                     </select>
                 </div>
                 <div class="sncontainer">Kategorie: <br>
-                    <select id="category" th:field="*{selectedCategory}">
+                    <select id="category" th:field="*{selectedCategory}" style="width: 175px; height: 20px;">
                         <option th:value="${null}" selected>Kategorie auswählen</option>
                         <option th:each="category : ${T(de.hsba.bi.project.events.Category).values()}" th:value="${category}"
                                 th:text="${category.displayValue}">
@@ -32,10 +32,10 @@
                 </div>
                 <div class="sncontainer">
                     <label>Datum:</label>
-                    <input type="date" th:field="*{selectedDate}" style="width: 100%; height: 20px;">
+                    <input type="date" th:field="*{selectedDate}" style="width: 175px; height: 20px;">
                 </div>
                 <div class="sncontainer">Tageszeit: <br>
-                    <select id="time" th:field="*{selectedTime}">
+                    <select id="time" th:field="*{selectedTime}" style="width: 175px; height: 20px;">
                         <option th:value="${null}" selected>Tageszeit auswählen</option>
                         <option th:each="time : ${T(de.hsba.bi.project.events.Time).values()}" th:value="${time}"
                                 th:text="${time.displayValue}">
@@ -51,37 +51,40 @@
         </div>
     </div>
 
-    <div th:each="event : ${events}">
-        <div class="Event" >
-            <div class="EventAnzeige">
-                <div class="EventBild">
+    <div class="overviewParent">
+        <div th:each="event : ${events}" class="overviewChild">
+            <div class="Event" >
+                <div class="EventAnzeige">
+                    <div class="EventBild">
 
-                </div>
-                <div class="EventBeschreibung">
-                    <div class="EventName" th:text="${'Name: ' + event.name}" th:value="${event.name}"></div>
-                    <div class="EventInfo" th:text="${'Kategorie: ' + event.category}" th:value="${event.category}"></div>
-                    <div class="EventInfo" th:text="${'Dauer: ' + event.duration} + ' Stunden'" th:value="${event.duration}"></div>
-                    <div class="EventInfo" th:text="${'Standort: ' + event.location}" th:value="${event.location}"></div>
-                    <div class="EventInfo" th:text="${'Datum: ' + event.date}" th:value="${event.date}"></div>
-                    <div class="EventInfo" th:text="${'Tageszeit: ' + event.time}" th:value="${event.time}"></div>
-                    <div class="EventInfo" th:text="${'Verfügbare Plätze: ' + event.spots}" th:value="${event.spots}"></div>
-                    <div class = "header" style="background-color: rosybrown;">
-                        <div th:switch="${event.isClosed}">
-                            <a th:case="false" th:href="@{/bookingOverview/{id}(id=${event.id})}">Buchen</a>
-                            <p th:case="true">Geschlossen</p>
+                    </div>
+                    <div class="EventBeschreibung">
+                        <div class="EventName" th:text="${'Name: ' + event.name}" th:value="${event.name}"></div>
+                        <div class="EventInfo" th:text="${'Kategorie: ' + event.category}" th:value="${event.category}"></div>
+                        <div class="EventInfo" th:text="${'Dauer: ' + event.duration} + ' Stunden'" th:value="${event.duration}"></div>
+                        <div class="EventInfo" th:text="${'Standort: ' + event.location}" th:value="${event.location}"></div>
+                        <div class="EventInfo" th:text="${'Datum: ' + event.date}" th:value="${event.date}"></div>
+                        <div class="EventInfo" th:text="${'Tageszeit: ' + event.time}" th:value="${event.time}"></div>
+                        <div class="EventInfo" th:text="${'Verfügbare Plätze: ' + event.spots}" th:value="${event.spots}"></div>
+                        <div class = "header" style="background-color: rosybrown;">
+                            <div th:switch="${event.isClosed}">
+                                <a th:case="false" th:href="@{/bookingOverview/{id}(id=${event.id})}">Buchen</a>
+                                <p th:case="true">Geschlossen</p>
+                            </div>
+                            <div class = "header" style="background-color: rosybrown; padding: 1px 1px;">
+                                <a th:href="@{/kursDetails/{id}(id=${event.id})}">
+                                    Details
+                                </a>
+                            </div>
                         </div>
-                        <a class = "header" style="background-color: rosybrown;" th:href="@{/kursDetails/{id}(id=${event.id})}">
-                            Details
-                        </a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
     </div>
 </div>
-
-
 
 <!--<div>
     <form action="#" th:action="@{/overview}" th:object="${event}" method="post">
@@ -113,12 +116,6 @@
         </div>
     </form>
 </div>-->
-
-<!--    <div class="CourseList">
-        <div>Kurs 1</div>
-        <div>Kurs 2</div>
-        <div>Kurs 3</div>
-    </div>-->
 
 <div th:replace="allPages/footer :: footer">...</div>
 
