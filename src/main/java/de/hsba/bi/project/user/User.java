@@ -1,11 +1,10 @@
 package de.hsba.bi.project.user;
 
 import javax.persistence.*;
-
 import de.hsba.bi.project.bookingProcess.Booking;
 import de.hsba.bi.project.events.Event;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
+import de.hsba.bi.project.roles.Role;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -14,17 +13,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
+import java.util.*;
 
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 public class User implements Comparable<User> {
-
-    public static String MITARBEITER_ROLE = "MITARBEITER";
-    public static String PERSONALABTEILUNG_ROLE = "PERSONALABTEILUNG";
-    public static String TERMINVERWALTER_ROLE = "TERMINVERWALTER";
 
     // um angemeldeten User zu ermitteln
 
@@ -49,13 +44,19 @@ public class User implements Comparable<User> {
 
     @Basic(optional = false)
     private String password;
-    
+
     @Getter
     @Setter
     private Boolean isDeactive = false;
 
-
-    private Role role;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @Getter
+    @JoinTable(
+            name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id")
+    )
+    private Set<Role> roles = new HashSet<>();
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Booking> bookings;
@@ -64,10 +65,10 @@ public class User implements Comparable<User> {
         this.name = name;
     }
 
-    public User(String name, String password, Role role) {
+    public User(String name, String password, Set<Role> roles) {
         this.name = name;
         this.password = password;
-        this.role = role;
+        this.roles = roles;
     }
 
     @Override

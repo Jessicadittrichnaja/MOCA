@@ -1,53 +1,44 @@
-package de.hsba.bi.project.bookingProcess;
+package de.hsba.bi.project.UserCreationProcess;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import de.hsba.bi.project.events.Category;
-import de.hsba.bi.project.events.Location;
-import de.hsba.bi.project.events.Time;
 import de.hsba.bi.project.roles.Role;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import de.hsba.bi.project.events.Event;
 import de.hsba.bi.project.user.User;
 import de.hsba.bi.project.user.UserService;
+import de.hsba.bi.project.bookingProcess.BookingRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-class BookingTest {
+class UserTest {
 
     Event event;
     User user;
     UserService userService;
     BookingRepository bookingRepository;
-    BookingService bookingService;
 
 
     @Autowired
     BookingRepository underTest;
 
     @Test
-    @DisplayName("Creating new booking should work")
-    void testCreateBooking() {
+    @DisplayName("Creating new User with chosen role should work")
+    void testCreateUserWithRoleEmployee() {
         // given
         Role roleEmployee = new Role ("MITARBEITER");
         Set<Role> rolesEnrico = new HashSet<>();
         rolesEnrico.add(roleEmployee);
-        event = new Event ("Programmierung 2", "Projekt", Category.Seminar, 10, 1, Location.Hamburg, LocalDate.of(2021, 10, 23), Time.Morgens);
         user  = new User("Enrico", "password", rolesEnrico);
         // when
-        Booking booking = new Booking(event, user);
+        Set<Role> roles = user.getRoles();
         // then
-        String category = "Seminar";
-        String name = "Enrico";
-        assertThat(booking.getEvent().getCategory().toString()).isEqualTo(category);
-        assertThat(booking.getUser().getName()).isEqualTo(name);
-        System.out.printf("%s hat eine Veranstaltung mit der Kategorie %s gebucht.", booking.getUser().getName(), booking.getEvent().getCategory());
+        assertThat(roles).isEqualTo(rolesEnrico);
 
     }
 

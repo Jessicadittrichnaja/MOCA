@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Map;
 
 @RequiredArgsConstructor
 @Service
@@ -19,15 +20,6 @@ public class UserService {
     // Methoden z.B. zum Finden/ Speichern von Usern
 
     private final UserRepository userRepository;
-
-
-//    public List<de.hsba.bi.project.user.User> findAll() {
-//        return userRepository.findAll();
-//    }
-
-    public List<de.hsba.bi.project.user.User> findUsers() {
-        return userRepository.findByRole(User.MITARBEITER_ROLE);
-    }
 
     public de.hsba.bi.project.user.User save(de.hsba.bi.project.user.User user) {
         return userRepository.save(user);
@@ -53,7 +45,7 @@ public class UserService {
     }
 
     public List<User> findAll() {
-        return (List<User>) userRepository.findAll();
+        return userRepository.findAll();
     }
 
     public User findById(Integer id) {
@@ -63,10 +55,6 @@ public class UserService {
         return user;
 
     };
-
-
-
-
 
     public void removeUser(User user)  {
         userRepository.delete(user);
@@ -78,6 +66,11 @@ public class UserService {
         return userRepository.findById(id).orElse(null);
     }
 
-    public Boolean isUserDeactive(Integer id) {return userRepository.isUserDeactive(id);}
-    public Boolean isUserActive(Integer id) {return userRepository.isUserActive(id);}
+    public Boolean isUserDeactive(Integer id) {
+        return userRepository.isUserDeactive(id);
+    }
+
+    public Boolean isUserActive(Integer id) {
+        return userRepository.isUserActive(id);
+    }
 }

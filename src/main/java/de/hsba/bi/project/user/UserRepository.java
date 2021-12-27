@@ -1,6 +1,6 @@
 package de.hsba.bi.project.user;
 
-import de.hsba.bi.project.events.Event;
+import de.hsba.bi.project.roles.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
@@ -10,13 +10,12 @@ import org.springframework.stereotype.Repository;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 @Repository
 public interface UserRepository extends JpaRepository<de.hsba.bi.project.user.User, Long> {
 
     de.hsba.bi.project.user.User findByName(String name);
-
-    List<de.hsba.bi.project.user.User> findByRole(String role);
 
     Optional<User> findById(Integer id);
 
@@ -30,13 +29,14 @@ public interface UserRepository extends JpaRepository<de.hsba.bi.project.user.Us
     @Query("SELECT Count(id) from User u where u.name= :name")
     Integer countNumberUsersWithSameName(@Param("name")String name);
 
-    @Transactional
-    @Modifying
-    @Query("UPDATE User u Set u.name = :name , u.role = :role where u.id = :id")
-    void updateUserName(@Param("name") String name, @Param("id") Integer id, @Param("role") Role role);
+    @Query("SELECT Count(id) from User u where u.name= :name and u.id != :id")
+    Integer countNumberUsersWithSameNameThatAreNotEditedUser(@Param("name")String name, @Param("id")Integer id);
 
-    @Query("SELECT Count(id) from User u where u.role = 0")
+    @Query(value = "SELECT Count(id) from users_roles r INNER JOIN Role ro ON r.role_id = ro.id where ro.role = 'PERSONALABTEILUNG'",  nativeQuery = true)
     Integer countNumberUsersWithRoleHR();
+
+    @Query(value = "SELECT Count(id) from users_roles r INNER JOIN Role ro ON r.role_id = ro.id where ro.role = 'PERSONALABTEILUNG' and r.user_id = :id",  nativeQuery = true)
+    Integer checkIfUserHasRoleHR(@Param("id")Integer id);
 
     @Transactional
     @Modifying
@@ -54,5 +54,8 @@ public interface UserRepository extends JpaRepository<de.hsba.bi.project.user.Us
     @Query("SELECT u.isDeactive FROM User u WHERE u.id = :id")
     boolean isUserActive(@Param("id") Integer id);
 
-
+    @Transactional
+    @Modifying
+    @Query("Delete FROM User u Where u.id = :id")
+    void deleteUser(@Param("id") Integer id);
 }

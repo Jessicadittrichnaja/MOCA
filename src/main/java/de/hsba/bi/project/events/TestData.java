@@ -1,5 +1,7 @@
 package de.hsba.bi.project.events;
 
+import de.hsba.bi.project.roles.Role;
+import de.hsba.bi.project.roles.RoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.event.EventListener;

@@ -6,25 +6,25 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import javax.validation.Valid;
+
 
 @Component
-public class UserFormConverter {
+public class UserFormConverter1 {
     @Autowired
     private PasswordEncoder Encoder;
 
-    // siehe UserForm-Kommentar
+    // siehe UserForm1-Kommentar
 
     UserForm toForm(User user) {
         UserForm form = new UserForm();
         form.setName(user.getName());
-        form.setPassword(user.getPassword());
         form.setRoles(user.getRoles());
         return form;
     }
 
-    User update(User user, UserForm form) {
+    User update(User user, @Valid UserForm1 form) {
         user.setName(form.getName());
-        user.setPassword(Encoder.encode(form.getPassword()));
         user.setRoles(form.getRoles());
         return user;
     }

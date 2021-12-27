@@ -1,12 +1,12 @@
 package de.hsba.bi.project.user;
 
+import de.hsba.bi.project.roles.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.Set;
+import java.util.*;
 
 @RequiredArgsConstructor
 class UserAdapter implements UserDetails {
@@ -15,7 +15,13 @@ class UserAdapter implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Set.of(new SimpleGrantedAuthority("ROLE_" + user.getRole()));
+        Set<Role> roles = user.getRoles();
+        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+
+        for (Role role : roles) {
+            authorities.add(new SimpleGrantedAuthority(role.getRole()));
+        }
+        return authorities;
     }
 
     @Override

@@ -20,10 +20,12 @@ public class Booking implements Serializable {
 
     // Mapping, um Booking-Datenbanktabelle zu erstellen mit Event- und Booking-IDs. Damit lassen sich die nötigen Datenbankabfragen leicht tätigen.
 
-    @OneToOne
+    @Getter
+    @ManyToOne
     @JoinColumn
     private User user;
 
+    @Getter
     @ManyToOne
     @JoinColumn
     private Event event;

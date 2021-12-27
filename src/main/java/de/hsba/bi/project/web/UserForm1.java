@@ -11,19 +11,14 @@ import java.util.List;
 import java.util.Set;
 
 //@Table(name = "USER", uniqueConstraints = @UniqueConstraint(columnNames ={"user"}))
-public class UserForm {
+public class UserForm1 {
 
-    // ermöglicht Fehlermeldungen, wenn Angaben zu neuem User nicht vollständig sind
+    // ermöglicht Fehlermeldungen, wenn Angaben zu neuem User nicht vollständig sind. Passwort wird nicht überprüft (wird genutzt, um Änderungen von Nutzern zu prüfen)
 
     @Getter
     @Setter
     @NotBlank(message = "Der Nutzername darf nicht leer sein")
     private String name;
-
-    @Getter
-    @Setter
-    @NotBlank(message = "Das Passwort darf nicht leer sein")
-    private String password;
 
     @NotEmpty(message = "Bitte einen Rolle eingeben")
     @Getter

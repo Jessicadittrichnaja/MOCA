@@ -1,9 +1,10 @@
 package de.hsba.bi.project.web;
 
-import de.hsba.bi.project.bookingProcess.BookingRepository;
 import de.hsba.bi.project.events.Event;
 import de.hsba.bi.project.events.EventRepository;
-import de.hsba.bi.project.user.Role;
+import de.hsba.bi.project.roles.Role;
+import de.hsba.bi.project.roles.RoleRepository;
+import de.hsba.bi.project.roles.RoleService;
 import de.hsba.bi.project.user.User;
 import de.hsba.bi.project.user.UserRepository;
 import de.hsba.bi.project.user.UserService;
@@ -18,9 +19,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
@@ -28,9 +29,15 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
     @Autowired
+    private RoleRepository roleRepository;
+    @Autowired
     private UserService userService;
     @Autowired
+    private RoleService roleService;
+    @Autowired
     private UserFormConverter userFormConverter;
+    @Autowired
+    private UserFormConverter1 userFormConverter1;
     @Autowired
     private PasswordEncoder encoder;
     @Autowired
@@ -41,6 +48,8 @@ public class UserController {
     @GetMapping("/HR/createUser")
     public String Form(Model model) {
         model.addAttribute("user", new User());
+        List<Role> listRoles = roleService.findAll();
+        model.addAttribute("listRoles", listRoles);
         return "HR/createUser";
     }
 
@@ -68,8 +77,8 @@ public class UserController {
     // Löschen eines Users. Ist nur möglich, wenn es sich nicht um den einzigen User mit der Rolle Personalabteilung handelt.
 
     @GetMapping("/HR/userlist/delete/{id}")
-    public String deleteUser(@PathVariable("id") int id, Model model) {
-        if (userService.findById(id).getRole() == Role.PERSONALABTEILUNG && userRepository.countNumberUsersWithRoleHR() == 1) {
+    public String deleteUser(@PathVariable("id") Integer id, Model model) {
+        if (userRepository.checkIfUserHasRoleHR(id) == 1 && userRepository.countNumberUsersWithRoleHR() == 1) {
             model.addAttribute("error", "Dies ist der einige Mitarbeiter mit der Rolle Personalabteilung. Kein Löschen möglich.");
             model.addAttribute("users",userService.findAll());
             return "HR/userlist";
@@ -81,14 +90,14 @@ public class UserController {
         }
         User user = userService.findById(id);
         eventRepository.addSpotWhenUserDeleted(user);
-        userService.removeUser(user);
+        userRepository.deleteUser(id);
         model.addAttribute("users",userService.findAll());
         return "HR/userlist";
-        }
+    }
     // Deaktivieren eines Users, wenn es nicht der einzige User mit der Rolle Personalabteilung ist und der angemeldete User sich nicht selber deaktivieren würde.
     @GetMapping("/HR/userlist/deactive/{id}")
     public String deactiveUser(@PathVariable("id") Integer id, Model model) {
-        if (userService.findById(id).getRole() == Role.PERSONALABTEILUNG && userRepository.countNumberUsersWithRoleHR() == 1) {
+        if (userRepository.checkIfUserHasRoleHR(id) == 1 && userRepository.countNumberUsersWithRoleHR() == 1) {
             model.addAttribute("error", "Dies ist der einige Mitarbeiter mit der Rolle Personalabteilung. Kein Deaktivieren möglich.");
             model.addAttribute("users",userService.findAll());
             return "HR/userlist";
@@ -111,7 +120,7 @@ public class UserController {
         return "redirect:/HR/userlist";
     }
 
-    
+
     // erster Teil zum Ändern des Passwortes durch den User, prüft altes Passwort
 
     @GetMapping("/editPassword")
@@ -125,7 +134,7 @@ public class UserController {
     @PostMapping("/editPassword")
     public String editPassword(@ModelAttribute("user") User user, Model model) {
         PasswordEncoder passencoder = new BCryptPasswordEncoder();
-        if (passencoder.matches(user.getPassword(), userService.findCurrentUser().getPassword()) == false) {
+        if (!passencoder.matches(user.getPassword(), userService.findCurrentUser().getPassword())) {
             model.addAttribute("error", "Da stimmt etwas nicht. Versuch's nochmal.");
             return "editPassword";
         }
@@ -149,7 +158,7 @@ public class UserController {
             model.addAttribute("error", "Da hat etwas nicht geklappt. Dein Passwort darf keine Leerzeichen enthalten ");
             return ("editPassword2");
         }
-        if (user.getPassword() == "" || passencoder.matches(user.getPassword(), userService.findCurrentUser().getPassword()) == true) {
+        if (user.getPassword() == "" || passencoder.matches(user.getPassword(), userService.findCurrentUser().getPassword())) {
             model.addAttribute("error", "Da hat etwas nicht geklappt. Du hast dein altes oder gar kein Passwort eingegeben.");
             return ("editPassword2");
         }
@@ -161,27 +170,27 @@ public class UserController {
     @GetMapping("/HR/userlist/edit/{id}")
     public String editUser(@PathVariable("id") int id, Model model){
         model.addAttribute("user", userService.findById(id));
+        List<Role> listRoles = roleService.findAll();
+        model.addAttribute("listRoles", listRoles);
+        model.addAttribute("userForm1", userFormConverter1.toForm(userService.findUser(id)));
         return "HR/editUser";
     }
 
     // Speichern des Users, wenn eine Rolle und ein Nutzername vergeben wurden.
 
     @PostMapping("/HR/userlist/edit/{id}")
-    public String saveUser(@ModelAttribute("user") User user, Model model,@PathVariable("id") int id) {
-        PasswordEncoder passencoder = new BCryptPasswordEncoder();
-        if (user.getName() == "" || user.getRole() == null) {
-            model.addAttribute("error", "Da hat etwas nicht geklappt. Es fehlt eine Angabe.");
-            return ("HR/editUser");
+    public String saveUser(@ModelAttribute("userForm1") @Valid UserForm1 userForm1, BindingResult binding, Model model,@PathVariable("id") int id) {
+        if (binding.hasErrors()) {
+            return "HR/editUser";
         }
-
-
         // Wenn der User der einzige User mit Rolle Personalabteilung ist, kann diese nicht geändert werden.
 
-        if (userService.findById(id).getRole() == Role.PERSONALABTEILUNG && userRepository.countNumberUsersWithRoleHR() == 1 && user.getRole() != Role.PERSONALABTEILUNG) {
+        if (userRepository.checkIfUserHasRoleHR(id) == 1 && userRepository.countNumberUsersWithRoleHR() == 1 && !userService.findById(id).getRoles().contains(roleRepository.findByRole("PERSONALABTEILUNG"))) {
             model.addAttribute("error2", "Dies ist der einige Mitarbeiter mit der Rolle Personalabteilung. Kein Ändern der Rolle möglich.");
             model.addAttribute("users",userService.findAll());
             return "HR/editUser";
         }
+
         // Wenn der User, der bearbeitet werden soll, dem angemeldeten User entspricht, gibt es eine Fehlermeldung. User sollen sich nicht selber bearbeiten können.
 
         if (userService.findById(id) == userService.findCurrentUser()) {
@@ -189,7 +198,13 @@ public class UserController {
             model.addAttribute("users",userService.findAll());
             return "HR/editUser";
         }
-        userRepository.updateUserName(user.getName(), id, user.getRole());
+
+        User user = userFormConverter1.update(userService.findUser(id), userForm1);
+        if (userRepository.countNumberUsersWithSameNameThatAreNotEditedUser(user.getName(), user.getId()) == 1){
+            model.addAttribute("error4", "Den User gibt es schon.");
+            return "HR/editUser";
+        }
+        userService.save(user);
         model.addAttribute("users", userService.findAll());
         return "redirect:/HR/userlist";
     }

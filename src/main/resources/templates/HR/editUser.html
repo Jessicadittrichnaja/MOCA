@@ -9,18 +9,25 @@
 <div th:replace="allPages/header :: header">...</div>
 <br>
 <div style="margin-left:34vw;font-size:20px;">
-  <form action="#"  th:action=" @{${'/HR/userlist/edit/' + id}}" th:object="${user}" method="post">
+  <form action="#"  th:action=" @{${'/HR/userlist/edit/' + id}}" th:object="${userForm1}" method="post">
     <div class="form-row">
       <div class="col-md-6 form-group">
         <label>Name</label>
-        <input type="text" class="form-control" th:field="*{name}">
+        <input type="text" class="form-control" th:field="*{name}"
+               th:classappend="${#fields.hasErrors('name')? 'is-invalid' : ''}"/>
+        <span class="text-danger" th:errors="*{name}"></span>
       </div>
       <div class="col-md-6 form-group">
-        <label>Rolle</label>
-        <select class="form-control" th:field="*{role}">
-          <option th:value="${null}" selected>Rolle auswählen</option>
-          <option th:each="role: ${T(de.hsba.bi.project.user.Role).values()}" th:value="${role}" th:text="${role.displayValue}"></option>
-        </select>
+        <label class="col-4 col-form-label">Rollen: </label>
+        <div class="col-8">
+          <th:block th:each="role: ${listRoles}">
+            <input type="checkbox" th:field="*{roles}"
+                   th:text="${role.role}" th:value="${role.id}" class="m-2"
+                   th:classappend="${#fields.hasErrors('roles')? 'is-invalid' : ''}">
+            <br>
+          </th:block>
+          <span class="text-danger" th:errors="*{roles}"></span>
+        </div>
       </div>
       <br>
       <div>
@@ -38,6 +45,8 @@
       <div th:text="${error2}">
       </div>
       <div th:text="${error3}">
+      </div>
+      <div th:text="${error4}">
       </div>
     </div>
   </form>
