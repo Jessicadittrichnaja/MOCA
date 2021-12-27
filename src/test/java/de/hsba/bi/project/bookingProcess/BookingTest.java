@@ -15,6 +15,7 @@ import de.hsba.bi.project.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -38,7 +39,7 @@ class BookingTest {
         Role roleEmployee = new Role ("MITARBEITER");
         Set<Role> rolesEnrico = new HashSet<>();
         rolesEnrico.add(roleEmployee);
-        event = new Event ("Programmierung 2", "Projekt", Category.Seminar, 10, 1, Location.Hamburg, LocalDate.of(2021, 10, 23), Time.Morgens);
+        event = new Event ("Programmierung 2", "Projekt", Category.Seminar, 10, 1, Location.Hamburg, LocalDate.of(2021, 10, 23), LocalTime.of(15, 30));
         user  = new User("Enrico", "password", rolesEnrico);
         // when
         Booking booking = new Booking(event, user);
