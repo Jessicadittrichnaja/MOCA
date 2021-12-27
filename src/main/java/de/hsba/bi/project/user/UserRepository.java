@@ -40,7 +40,7 @@ public interface UserRepository extends JpaRepository<de.hsba.bi.project.user.Us
 
     @Transactional
     @Modifying
-    @Query("UPDATE User u SET u.isDeactive = true where u.id = :id")
+    @Query("UPDATE User u SET u.isDeactive = false where u.id = :id")
     void deactiveUser(@Param("id") Integer id);
 
     @Query("SELECT u.isDeactive FROM User u WHERE u.id = :id")
@@ -48,7 +48,7 @@ public interface UserRepository extends JpaRepository<de.hsba.bi.project.user.Us
 
     @Transactional
     @Modifying
-    @Query("UPDATE User u SET u.isDeactive = false where u.id = :id")
+    @Query("UPDATE User u SET u.isDeactive = true where u.id = :id")
     void activeUser(@Param("id") Integer id);
 
     @Query("SELECT u.isDeactive FROM User u WHERE u.id = :id")

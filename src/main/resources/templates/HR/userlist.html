@@ -24,8 +24,8 @@
         <td style="width:50%;" th:text="${user.roles}"></span></td>
         <td style="width:50%;">
             <div th:switch="${user.isDeactive}">
-                <a th:case="false">Aktiviert</a>
-                <a th:case="true" >Deaktiviert</a>
+                <a th:case="true">Aktiviert</a>
+                <a th:case="false" >Deaktiviert</a>
             </div>
         </td>
         <td>
@@ -34,8 +34,8 @@
                 <a th:href="${'/HR/userlist/edit/' + user.id}">Bearbeiten</a>
 
                 <div th:switch="${user.isDeactive}">
-                    <a th:case="false" th:href="${'/HR/userlist/deactive/' + user.id}">Deaktivieren</a>
-                    <a th:case="true" th:href="${'/HR/userlist/active/' + user.id}">Aktivieren</a>
+                    <a th:case="true" th:href="${'/HR/userlist/deactive/' + user.id}">Deaktivieren</a>
+                    <a th:case="false" th:href="${'/HR/userlist/active/' + user.id}">Aktivieren</a>
                 </div>
             </div>
         </td>
