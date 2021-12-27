@@ -38,8 +38,8 @@ public class FilterService {
         if (filter.getSelectedDate() != null)
             filteredResults.retainAll(eventService.findByDate(filter.getSelectedDate()));
 
-        if (filter.getSelectedTime() != null)
-            filteredResults.retainAll(eventService.findByTime(filter.getSelectedTime()));
+        //if (filter.getSelectedTime() != null)
+        //    filteredResults.retainAll(eventService.findByTime(filter.getSelectedTime()));
 
         return filteredResults;
     }

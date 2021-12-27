@@ -9,6 +9,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 
 // Ermöglicht das Filtern von Events nach verschiedenen Kategorien
@@ -28,8 +29,8 @@ public class Filter {
     @Setter
     private LocalDate selectedDate;
 
-    @Getter
+    /*@Getter
     @Setter
-    private Time selectedTime;
-
+    private LocalTime selectedTime;
+*/
 }

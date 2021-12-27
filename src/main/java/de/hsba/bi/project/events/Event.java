@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -52,7 +53,8 @@ public class Event implements Serializable {
 
     @Getter
     @Setter
-    private Time time;
+    @DateTimeFormat(pattern = "HH:mm")
+    private LocalTime time;
 
     @Getter
     @Setter
@@ -71,7 +73,7 @@ public class Event implements Serializable {
     }
 
 
-    public Event(String name, String description, Category category, Integer duration, Integer spots, Location location, LocalDate date, Time time) {
+    public Event(String name, String description, Category category, Integer duration, Integer spots, Location location, LocalDate date, LocalTime time) {
             this.name = name;
             this.description = description;
             this.category = category;

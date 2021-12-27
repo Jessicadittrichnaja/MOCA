@@ -61,13 +61,10 @@
         <span class="text-danger" th:errors="*{date}"></span>
       </div>
       <div class="col-md-6 form-group">
-        <label>Zeit</label>
-        <select class="form-control" style="height: inherit;" th:field="*{time}">
-          <option th:value="${null}" selected>Tageszeit wählen..</option>
-          <option th:each="time: ${T(de.hsba.bi.project.events.Time).values()}" th:value="${time}" th:text="${time.displayValue}"
-                  th:classappend="${#fields.hasErrors('time')? 'is-invalid' : ''}"></option>
-          <span class="text-danger" th:errors="*{time}"></span>
-        </select>
+        <label>Uhrzeit</label>
+        <input type="time" style="height: inherit;" class="form-control" th:field="*{time}"
+               th:classappend="${#fields.hasErrors('time')? 'is-invalid' : ''}"/>
+        <span class="text-danger" th:errors="*{time}"></span>
       </div>
       <br>
       <div>

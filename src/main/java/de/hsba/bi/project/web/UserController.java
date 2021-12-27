@@ -191,7 +191,7 @@ public class UserController {
         }
 
         // Das neu angelegte Passwort darf nicht dem alten Passwort entsprechen
-        if (user.getPassword() == "" || passencoder.matches(user.getPassword(), userService.findCurrentUser().getPassword()) == true) {
+        if (user.getPassword() == "" || passencoder.matches(user.getPassword(), userService.findCurrentUser().getPassword())) {
             model.addAttribute("error", "Da hat etwas nicht geklappt. Du hast dein altes oder gar kein Passwort eingegeben.");
             return ("editPassword2");
         }
