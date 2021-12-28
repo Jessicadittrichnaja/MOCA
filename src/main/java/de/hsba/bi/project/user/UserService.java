@@ -37,11 +37,11 @@ public class UserService {
         return user;
     }
 
-    public void deactiveUser(int id)  {
-        userRepository.deactiveUser(id);
+    public void disableUser(int id)  {
+        userRepository.disableUser(id);
     }
-    public void activeUser(int id)  {
-        userRepository.activeUser(id);
+    public void enableUser(int id)  {
+        userRepository.enableUser(id);
     }
 
     public List<User> findAll() {
@@ -66,11 +66,11 @@ public class UserService {
         return userRepository.findById(id).orElse(null);
     }
 
-    public Boolean isUserDeactive(Integer id) {
-        return userRepository.isUserDeactive(id);
+    public Boolean isUserDisabled(Integer id) {
+        return userRepository.isUserDisabled(id);
     }
 
-    public Boolean isUserActive(Integer id) {
-        return userRepository.isUserActive(id);
+    public Boolean isUserEnsabled(Integer id) {
+        return userRepository.isUserEnabled(id);
     }
 }

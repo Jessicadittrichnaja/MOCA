@@ -20,7 +20,7 @@
       <div class="col-md-6 form-group">
         <label>Rollen</label>
         <select class="form-control" th:field="*{roles}" multiple>
-          <option th:value="${null}" selected>Rolle wählen..</option>
+          <option th:value="${null}" selected>Bitte wähle mindestens eine Rolle..</option>
           <option th:each="role: ${listRoles}" th:value="${role.id}" th:text="${role.role}"
                   th:classappend="${#fields.hasErrors('roles')? 'is-invalid' : ''}"></option>
           <span class="text-danger" th:errors="*{roles}"></span>
