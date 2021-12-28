@@ -28,9 +28,9 @@ public class TestDataCreator {
 
     public void init() {
 
-        Role roleEmployee = new Role ("MITARBEITER");
-        Role roleHR = new Role ("PERSONALABTEILUNG");
-        Role roleEventPlanner = new Role ("TERMINVERWALTER");
+        Role roleEmployee = new Role ("Mitarbeiter");
+        Role roleHR = new Role ("Personalabteilung");
+        Role roleEventPlanner = new Role ("Terminverwalter");
         roleRepository.save(roleEmployee);
         roleRepository.save(roleHR);
         roleRepository.save(roleEventPlanner);

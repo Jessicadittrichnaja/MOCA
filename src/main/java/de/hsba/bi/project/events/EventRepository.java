@@ -76,4 +76,8 @@ public interface EventRepository extends CrudRepository<Event, Long> {
     @Query("SELECT Count(id) from Event e where e.name= :name")
     Integer countNumberEventsWithSameData(@Param("name")String name);
 
+    List<Event> findTop3ByOrderByIdAsc();
 }
+
+
+

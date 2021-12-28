@@ -28,17 +28,17 @@
             <div class="auswahl">
                 <a th:href="@{/booking}">Buchungen ansehen</a>
             </div>
-            <div class="auswahl" sec:authorize="hasAnyAuthority('TERMINVERWALTER')">
+            <div class="auswahl" sec:authorize="hasAnyAuthority('Terminverwalter')">
                 <a th:href="@{/eventPlanner/createEvent}" >Veranstaltung erstellen</a>
             </div>
-            <div class="auswahl" sec:authorize="hasAnyAuthority('PERSONALABTEILUNG')">
+            <div class="auswahl" sec:authorize="hasAnyAuthority('Terminverwalter')">
+                <a th:href="@{/eventPlanner/event}">Veranstaltungen ansehen</a>
+            </div>
+            <div class="auswahl" sec:authorize="hasAnyAuthority('Personalabteilung')">
                 <a th:href="@{/HR/createUser}" >Neuen User anlegen</a>
             </div>
-            <div class="auswahl" sec:authorize="hasAnyAuthority('PERSONALABTEILUNG')">
+            <div class="auswahl" sec:authorize="hasAnyAuthority('Personalabteilung')">
                 <a th:href="@{/HR/userlist}" >Alle User anzeigen</a>
-            </div>
-            <div class="auswahl" sec:authorize="hasAnyAuthority('TERMINVERWALTER')">
-                <a th:href="@{/eventPlanner/event}">Veranstaltungen ansehen</a>
             </div>
         </div>
     </div>

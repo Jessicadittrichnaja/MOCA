@@ -18,16 +18,13 @@
         <span class="text-danger" th:errors="*{name}"></span>
       </div>
       <div class="col-md-6 form-group">
-        <label class="col-4 col-form-label">Rollen: </label>
-        <div class="col-8">
-          <th:block th:each="role: ${listRoles}">
-            <input type="checkbox" th:field="*{roles}"
-                   th:text="${role.role}" th:value="${role.id}" class="m-2"
-                   th:classappend="${#fields.hasErrors('roles')? 'is-invalid' : ''}">
-            <br>
-          </th:block>
+        <label>Rollen</label>
+        <select class="form-control" th:field="*{roles}" multiple>
+          <option th:value="${null}" selected>Rolle wählen..</option>
+          <option th:each="role: ${listRoles}" th:value="${role.id}" th:text="${role.role}"
+                  th:classappend="${#fields.hasErrors('roles')? 'is-invalid' : ''}"></option>
           <span class="text-danger" th:errors="*{roles}"></span>
-        </div>
+        </select>
       </div>
       <br>
       <div>
@@ -47,6 +44,8 @@
       <div th:text="${error3}">
       </div>
       <div th:text="${error4}">
+      </div>
+      <div th:text="${error5}">
       </div>
     </div>
   </form>

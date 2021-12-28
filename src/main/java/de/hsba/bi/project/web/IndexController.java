@@ -1,5 +1,6 @@
 package de.hsba.bi.project.web;
 
+import de.hsba.bi.project.events.EventRepository;
 import de.hsba.bi.project.user.User;
 import de.hsba.bi.project.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,15 +20,11 @@ public class IndexController {
 
     @Autowired
     private UserService userService;
+    @Autowired
+    private EventRepository eventRepository;
 
     // Mapping von diversen Seiten, die nicht in anderen Controllern aufgeführt werden
 
-
-    @RequestMapping("/index")
-    public String index(Model model) {
-
-        return "index";
-    }
     @RequestMapping("/overview")
     public String overview(Model model) {
 

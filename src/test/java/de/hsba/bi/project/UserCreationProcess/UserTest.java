@@ -31,7 +31,7 @@ class UserTest {
     @DisplayName("Creating new User with chosen role should work")
     void testCreateUserWithRoleEmployee() {
         // given
-        Role roleEmployee = new Role ("MITARBEITER");
+        Role roleEmployee = new Role ("Mitarbeiter");
         Set<Role> rolesEnrico = new HashSet<>();
         rolesEnrico.add(roleEmployee);
         user  = new User("Enrico", "password", rolesEnrico);

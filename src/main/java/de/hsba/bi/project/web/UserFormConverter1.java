@@ -23,7 +23,7 @@ public class UserFormConverter1 {
         return form;
     }
 
-    User update(User user, @Valid UserForm1 form) {
+    User update(User user, UserForm1 form) {
         user.setName(form.getName());
         user.setRoles(form.getRoles());
         return user;

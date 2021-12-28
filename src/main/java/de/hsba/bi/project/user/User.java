@@ -1,6 +1,8 @@
 package de.hsba.bi.project.user;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+
 import de.hsba.bi.project.bookingProcess.Booking;
 import de.hsba.bi.project.events.Event;
 import de.hsba.bi.project.roles.Role;

@@ -57,12 +57,15 @@ public class UserController {
 
     @PostMapping("/HR/createUser")
     public String saveUser(@ModelAttribute("user") @Valid UserForm form, BindingResult result, Model model) {
+        List<Role> listRoles = roleService.findAll();
         if (result.hasErrors()) {
+            model.addAttribute("listRoles", listRoles);
             return "HR/createUser";
         }
         User user = userFormConverter.update(new User(), form);
         if (userRepository.countNumberUsersWithSameName(user.getName()) == 1){
             model.addAttribute("error", "Den User gibt es schon.");
+            model.addAttribute("listRoles", listRoles);
             return "HR/createUser";
         }
         userService.save(user);
@@ -214,15 +217,17 @@ public class UserController {
     // Speichern des Users, wenn eine Rolle und ein Nutzername vergeben wurden.
 
     @PostMapping("/HR/userlist/edit/{id}")
-    public String saveUser(@ModelAttribute("userForm1") @Valid UserForm1 userForm1, BindingResult binding, Model model,@PathVariable("id") int id) {
+    public String saveUser(@ModelAttribute("userForm1") @Valid UserForm1 form, BindingResult binding, Model model,@PathVariable("id") int id) {
+        List<Role> listRoles = roleService.findAll();
         if (binding.hasErrors()) {
+            model.addAttribute("listRoles", listRoles);
             return "HR/editUser";
         }
         // Wenn der User der einzige User mit Rolle Personalabteilung ist, kann diese nicht geändert werden.
 
         if (userRepository.checkIfUserHasRoleHR(id) == 1 && userRepository.countNumberUsersWithRoleHR() == 1 && !userService.findById(id).getRoles().contains(roleRepository.findByRole("PERSONALABTEILUNG"))) {
             model.addAttribute("error2", "Dies ist der einige Mitarbeiter mit der Rolle Personalabteilung. Kein Ändern der Rolle möglich.");
-            model.addAttribute("users",userService.findAll());
+            model.addAttribute("listRoles", listRoles);
             return "HR/editUser";
         }
 
@@ -230,15 +235,18 @@ public class UserController {
 
         if (userService.findById(id) == userService.findCurrentUser()) {
             model.addAttribute("error3", "Du kannst deine Angaben nicht selber bearbeiten.");
-            model.addAttribute("users",userService.findAll());
+            model.addAttribute("listRoles", listRoles);
             return "HR/editUser";
         }
-
-        User user = userFormConverter1.update(userService.findUser(id), userForm1);
+        User user = userFormConverter1.update(userService.findUser(id), form);
         if (userRepository.countNumberUsersWithSameNameThatAreNotEditedUser(user.getName(), user.getId()) == 1){
+            model.addAttribute("listRoles", listRoles);
             model.addAttribute("error4", "Den User gibt es schon.");
             return "HR/editUser";
         }
+        /*if(user.getRoles().size() == 0) {
+            model.addAttribute("error5", "Bitte wähle mindestens eine Rolle aus.");
+        */
         userService.save(user);
         model.addAttribute("users", userService.findAll());
         return "redirect:/HR/userlist";
