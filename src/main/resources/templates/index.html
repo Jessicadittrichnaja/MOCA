@@ -16,17 +16,50 @@
 <div style="float: left; width: 100%; height: 20px;">
 </div>
     <!--Hauptfeld-->
-        <div style="border-radius: 8px; float: left;width: 80vw; margin-left:10vw; height: auto; background-color: #f5f5f5; text-align: center; font-size: 20px;margin-bottom:200px;">
-            <tr th:each = "event: ${events}">
-            <div style="width: 100%; height: 200px;margin-top: 50px;"><div style="float: left; width: 30%; height: 100%; padding-top: 20px; padding-left: 20px;">
-                <img width="100%" height="100%" src="https://www.fuer-gruender.de/fileadmin/blog/oldarticles/uploads/2020/06/workshop-1200.jpg" alt="Workshop 1"></div>
-                <div style=" float: left; width: 70%; height: 100%; text-align: left; padding-left: 50px;">
-                        <td style="width:50%;" th:text="${event.name}"></span></td>
-                        <td style="width:50%;" th:text="${event.description}"></span></td>
+        <div style="border-radius: 8px; float: left;width: 80vw; margin-left:10vw; height: auto; background-color: #f5f5f5; text-align: center; font-size: 20px;margin-bottom:35px;">
+            <tr th:each = "event: ${events}" style="border-bottom: 1px solid #ddd; margin-bottom:35px;">
+            <div style="width: 100%; height: 200px;margin-top: 50px; border-bottom: 1px solid #ddd; padding-bottom: 35px; border-radius: inherit;"><div style="float: left; width: 30%; height: 100%; padding-top: 20px; padding-left: 20px;">
+                <img width="100%" height="100%" src="https://www.fuer-gruender.de/fileadmin/blog/oldarticles/uploads/2020/06/workshop-1200.jpg" alt="Workshop 1" style="margin-top: -15px;"></div>
+                <div style=" float: left; width: 70%; height: 100%; text-align: left; padding-left: 50px; padding-right: 50px;">
+                        <div style="font-weight: bold"><td style="width:50%;" th:text="${event.name}" id="indexTitle"></span></td></div>
+                        <div style="font-weight: normal"><td style="width:50%;" th:text="${event.description}"></span></td></div>
                 </div>
             </div>
             </tr>
         </div>
+
+<div class="indexLocation">
+    <div class="indexLocationContainer">
+        <div class="indexLocationHeader">
+            An diesen Orten ist Ihr Termin buchbar:
+        </div> <br>
+        <table class="indexTable">
+            <tr>
+                <th class="<indexTableHead">
+                    Hamburg:
+                </th>
+                <th class="<indexTableHead">
+                    Berlin:
+                </th>
+                <th class="<indexTableHead">
+                    München:
+                </th>
+            </tr>
+            <tr>
+                <td class="indexTableBox1">
+
+                </td>
+                <td class="indexTableBox2">
+
+                </td>
+                <td class="indexTableBox3">
+
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
 </div>
 <div th:replace="allPages/footer :: footer">...</div>
 </body>
