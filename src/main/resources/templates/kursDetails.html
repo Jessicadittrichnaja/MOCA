@@ -50,12 +50,21 @@
             <ul class="kursDetailInfoII" th:text="${event.time}"></ul>
             <ul class="kursDetailInfo">Verfügbare Plätze</ul>
             <ul class="kursDetailInfoII" th:text="${event.spots}"></ul>
-
+            <br>
+            <div>
+                <a class="Index" type="button" style="background-color: rosybrown;border-radius: 5px;border-style:none;color:ghostwhite;alignment: left" th:href="@{/HR/event}">
+                    Zurück
+                </a>
+            </div>
         </li>
     </ul>
 
 </div>
-
+<div>
+<a class="Index" type="button" style="background-color: rosybrown;border-radius: 5px;border-style:none;color:ghostwhite" th:href="@{/HR/event}">
+    Abbrechen
+</a>
+</div>
 <div th:replace="allPages/footer :: footer">...</div>
 </body>
 </html>
