@@ -13,6 +13,8 @@ class UserAdapter implements UserDetails {
 
     private final de.hsba.bi.project.user.User user;
 
+    //Entsprechend der vergebenen Rollen, kann ein User verschiedene Berechtigungen erhalten
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Set<Role> roles = user.getRoles();
@@ -23,6 +25,8 @@ class UserAdapter implements UserDetails {
         }
         return authorities;
     }
+
+    //Verschiedene Klassen zum Finden/Überprüfen von Usern
 
     @Override
     public String getPassword() {
