@@ -49,7 +49,7 @@ public class User implements Comparable<User> {
 
     @Getter
     @Setter
-    private Boolean isDeactive = true;
+    private Boolean isEnabled = true;
 
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @Getter

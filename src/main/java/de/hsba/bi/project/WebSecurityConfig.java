@@ -12,6 +12,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.web.access.AccessDeniedHandler;
+import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
 @Configuration
 @EnableWebSecurity
@@ -45,27 +47,5 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-//	@Override
-//	public UserDetailsService userDetailsService() {
-//		UserDetails user =
-//			 User.withDefaultPasswordEncoder()
-//				.username("user")
-//				.password("password")
-//				.roles("USER")
-//				.build();
-//		UserDetails enrico =
-//				User.withDefaultPasswordEncoder()
-//						.username("Enrico")
-//						.password("password")
-//						.roles("ADMIN")
-//						.build();
-//		UserDetails dustin =
-//				User.withDefaultPasswordEncoder()
-//						.username("Dustin")
-//						.password("password")
-//						.roles("HR")
-//						.build();
-//		return new InMemoryUserDetailsManager(user, enrico,dustin);
-//	}
 
 }
