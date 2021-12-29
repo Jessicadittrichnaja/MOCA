@@ -51,8 +51,7 @@ class UserAdapter implements UserDetails {
 
     @Override
     public boolean isEnabled() {
-
-        return user.getIsEnabled();
+        return user.getIsDeactive();
     }
 
 }
