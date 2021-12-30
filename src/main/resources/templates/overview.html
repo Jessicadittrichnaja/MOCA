@@ -64,7 +64,7 @@
                         <div class="EventInfo" th:text="${'Dauer: ' + event.duration} + ' Stunden'" th:value="${event.duration}"></div>
                         <div class="EventInfo" th:text="${'Standort: ' + event.location}" th:value="${event.location}"></div>
                         <div class="EventInfo" th:text="${'Datum: ' + event.date}" th:value="${event.date}"></div>
-                        <div class="EventInfo" th:text="${'Tageszeit: ' + event.time}" th:value="${event.time}"></div>
+                        <div class="EventInfo" th:text="${'Tageszeit: ' + event.time}+ ' Uhr'" th:value="${event.time}"></div>
                         <div class="EventInfo" th:text="${'Verfügbare Plätze: ' + event.spots}" th:value="${event.spots}"></div>
                         <div class = "header" style="background-color: rosybrown;">
                             <div th:switch="${event.isClosed}">

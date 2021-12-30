@@ -29,11 +29,11 @@
         <td style="width:12%;" th:text="${event.name}"></td>
         <td style="width:12%;" th:text="${event.description}"></td>
         <td style="width:12%;" th:text="${event.category}"></td>
-        <td style="width:12%;" th:text="${event.duration}"></td>
+        <td style="width:12%;" th:text="${event.duration}+ ' Stunden'"></td>
         <td style="width:12%;" th:text="${event.spots}"></td>
         <td style="width:12%;" th:text="${event.location}"></td>
         <td style="width:12%;" th:text="${event.date}"></td>
-        <td style="width:12%;" th:text="${event.time}"></td>
+        <td style="width:12%;" th:text="${event.time}+ ' Uhr'"></td>
         <td th:switch="${event.isClosed}">
             <div th:case="false">Offen</div>
             <div th:case="true">Geschlossen</div>
