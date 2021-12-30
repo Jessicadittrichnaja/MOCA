@@ -18,7 +18,7 @@ public class kursDetailShowController {
     @Autowired
     private EventService eventService;
 
-    //
+    // zeigt Details zu einem Event
 
     @GetMapping("/kursDetails/{id}")
     public String showChosenEvent(@PathVariable("id") int id, Model model) {

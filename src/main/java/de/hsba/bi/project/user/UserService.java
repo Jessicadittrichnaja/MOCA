@@ -30,7 +30,7 @@ public class UserService {
     }
 
 
-    // Methoden z.B. zum Löschen/ Speichern von Usern
+    // Methoden z.B. zum Löschen/ Deaktivieren/ Aktivieren/ Finden von Usern
 
     public User addUser(User user)  {
         user = userRepository.save(user);

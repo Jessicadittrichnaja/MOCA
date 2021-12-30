@@ -50,6 +50,8 @@ public class BookingShowController {
         return "bookingOverview";
     }
 
+    // Löscht Buchung und fügt einen freien Platz zum Event hinzu, das vom User gelöscht wurde.
+
     @GetMapping("/booking/delete/{id}")
     public String deleteBooking(@PathVariable("id") int id, Model model) {
         bookingService.throwErrorIfBookingIsClosed(id);
@@ -59,6 +61,8 @@ public class BookingShowController {
         model.addAttribute("bookings", bookingRepository.findByUser(userService.findCurrentUser()));
         return "booking";
     }
+
+    // Zeigt, wer alles für das Event angemeldet ist.
 
     @GetMapping("/booking/users/{id}")
     public String showBookingsForEvent(@PathVariable("id") int id, Model model) {

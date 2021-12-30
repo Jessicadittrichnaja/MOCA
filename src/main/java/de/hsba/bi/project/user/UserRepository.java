@@ -19,6 +19,8 @@ public interface UserRepository extends JpaRepository<de.hsba.bi.project.user.Us
 
     Optional<User> findById(Integer id);
 
+    // verschiedene Queries, die in den Controllern genutzt werden. In den entsprechenden Controllern ist beschrieben, was mit Hilfe der Queries erreicht wird
+
     @Transactional
     @Modifying
     @Query("UPDATE User u Set u.password = :password where u.id = :id")

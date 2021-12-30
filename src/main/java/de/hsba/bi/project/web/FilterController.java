@@ -20,7 +20,7 @@ public class FilterController {
     private final EventRepository eventRepository;
     private final UserService userService;
 
-    // zeigt alle verfügbaren Events (nicht gebucht, mehr als 0 freie Plätze)
+    // zeigt alle verfügbaren Events (nicht vom angemeldeten User gebucht, mehr als 0 freie Plätze)
 
     @GetMapping
     public String eventList(Model model) {

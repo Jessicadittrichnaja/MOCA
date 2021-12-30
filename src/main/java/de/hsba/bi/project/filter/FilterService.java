@@ -27,20 +27,20 @@ public class FilterService {
 
     public List<Event> getFilteredEvents(Filter filter) {
 
-        List<Event> filteredResults = eventRepository.findAvailableEvents(userService.findCurrentUser());
+        List<Event> filteredEvents = eventRepository.findAvailableEvents(userService.findCurrentUser());
 
         if (filter.getSelectedCategory() != null)
-            filteredResults.retainAll(eventService.findByCategory(filter.getSelectedCategory()));
+            filteredEvents.retainAll(eventService.findByCategory(filter.getSelectedCategory()));
 
         if (filter.getSelectedLocation() != null)
-            filteredResults.retainAll(eventService.findByLocation(filter.getSelectedLocation()));
+            filteredEvents.retainAll(eventService.findByLocation(filter.getSelectedLocation()));
 
         if (filter.getSelectedDate() != null)
-            filteredResults.retainAll(eventService.findByDate(filter.getSelectedDate()));
+            filteredEvents.retainAll(eventService.findByDate(filter.getSelectedDate()));
 
         //if (filter.getSelectedTime() != null)
         //    filteredResults.retainAll(eventService.findByTime(filter.getSelectedTime()));
 
-        return filteredResults;
+        return filteredEvents;
     }
 }

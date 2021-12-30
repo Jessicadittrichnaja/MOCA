@@ -15,7 +15,8 @@ import java.util.Optional;
 @Repository
 public interface BookingRepository extends CrudRepository<Booking, Integer> {
 
-   // verschiedene Datenbankabfragen, um z.B. zu garantieren, dass ein Event nur einmal von einem User gebucht werden kann und Übersicht über Buchungen zu ermöglichen
+   // verschiedene Datenbankabfragen, um z.B. zu garantieren, dass ein Event nur einmal von einem User gebucht werden kann und Abfragen, um Übersicht über Buchungen zu ermöglichen. In den entsprechenden Controllern werden die Funktionsweisen näher erläutert.
+
    @Query("SELECT e from Booking b INNER JOIN b.event e where b.user= :user")
    List<Event> findByUser(@Param("user")User user);
 

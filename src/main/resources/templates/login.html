@@ -7,13 +7,6 @@
 </head>
 <body>
 <div th:replace="allPages/header :: header">...</div>
-
-<div th:if="${param.error}">
-    Ungültiger Nutzer und/ oder Passwort.
-</div>
-<div th:if="${param.logout}">
-    Du wurdest erfolgreich ausgeloggt. Bis bald!
-</div>
 <br>
 <h2 style="text-align: center;">Login</h2>
 <div height="100%" style="padding:1%">
@@ -28,6 +21,12 @@
     <div><label> Passwort: <input style="border-radius: 4px;border: 0px;" type="password" name="password"/> </label></div>
     <br>
     <div><input class="Index" style="border-radius: 5px;border: 0px;background-color: ghostwhite;padding:5px;" type="submit" value="Einloggen"/></div>
+    <div th:if="${param.error}">
+        Ungültiger Nutzer und/ oder Passwort. Vielleicht wurdest du auch deaktiviert.
+    </div>
+    <div th:if="${param.logout}">
+        Du wurdest erfolgreich ausgeloggt. Bis bald!
+    </div>
 </form>
 </div>
 </div>

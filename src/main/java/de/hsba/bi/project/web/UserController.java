@@ -97,7 +97,9 @@ public class UserController {
         model.addAttribute("users",userService.findAll());
         return "HR/userlist";
     }
+
     // Deaktivieren eines Users, wenn es nicht der einzige User mit der Rolle Personalabteilung ist und der angemeldete User sich nicht selber deaktivieren würde.
+
     @GetMapping("/HR/userlist/disable/{id}")
     public String deactiveUser(@PathVariable("id") Integer id, Model model) {
         if (userRepository.checkIfUserHasRoleHR(id) == 1 && userRepository.countNumberUsersWithRoleHR() == 1) {
@@ -116,6 +118,7 @@ public class UserController {
     }
 
     // Aktivieren eines Users
+
     @GetMapping("/HR/userlist/enable/{id}")
     public String activeUser(@PathVariable("id") Integer id, Model model) {
         userService.enableUser(id);
@@ -152,7 +155,7 @@ public class UserController {
         return "editPassword";
     }
 
-    // Speichern des neuen Passwortes, wenn das neue Passwort kein leerer String ist und nicht dem alten Passwort entspricht
+    // Speichern des neuen Passwortes, wenn das neue Passwort den unten aufgeführten Kriterien entspricht
 
     @PostMapping("/editPassword2")
     public String savePassword2(@ModelAttribute("user") User user, Model model) {
@@ -201,6 +204,7 @@ public class UserController {
 
         // Wenn das neue Passwort allen Anforderungen entspricht, wird es in der Datenbank abgespeichert.
         userRepository.updateUserPassword(encoder.encode(user.getPassword()), userService.findCurrentUser().getId());
+        model.addAttribute("events", eventRepository.findTop3ByOrderByIdAsc());
         return "index";
     }
 
@@ -238,15 +242,15 @@ public class UserController {
             model.addAttribute("listRoles", listRoles);
             return "HR/editUser";
         }
+
+        // Der Name vom User darf nicht einem Namen entsprechen, den es schon in der Datenbank gibt, wenn es nicht der des angemeldeten Users ist.
+
         User user = userFormConverter1.update(userService.findUser(id), form);
         if (userRepository.countNumberUsersWithSameNameThatAreNotEditedUser(user.getName(), user.getId()) == 1){
             model.addAttribute("listRoles", listRoles);
             model.addAttribute("error4", "Den User gibt es schon.");
             return "HR/editUser";
         }
-        /*if(user.getRoles().size() == 0) {
-            model.addAttribute("error5", "Bitte wähle mindestens eine Rolle aus.");
-        */
         userService.save(user);
         model.addAttribute("users", userService.findAll());
         return "redirect:/HR/userlist";

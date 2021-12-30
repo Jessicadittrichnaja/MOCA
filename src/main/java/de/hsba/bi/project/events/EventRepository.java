@@ -31,7 +31,7 @@ public interface EventRepository extends CrudRepository<Event, Long> {
 
     Optional<Event> findById(Integer id);
 
-    // Methoden z.B. zum Runterzählen/ Hochzählen von freien Plätzen für Events bei Buchungen/ Löschen von Buchungen durch Mitarbeiter
+    // Methoden z.B. zum Runterzählen/ Hochzählen von freien Plätzen für Events bei Buchungen/ Löschen von Buchungen durch Mitarbeiter. Die Queries werden in den Controllern genutzt, die Funktionsweise wird dort jeweils näher erläutert.
 
     @Transactional
     @Modifying
@@ -42,9 +42,6 @@ public interface EventRepository extends CrudRepository<Event, Long> {
     @Modifying
     @Query("UPDATE Event e Set e.spots = e.spots+1 where e.id = :id")
     void addSpot(@Param("id") Integer id);
-
-    @Query("SELECT Count(id) from User u where u.name= :name")
-    Integer countNumberUsersWithSameName(@Param("name")String name);
 
     @Query("SELECT e from Event e WHERE e.id NOT IN (SELECT e.id FROM Event e INNER JOIN Booking b ON e.id = b.event WHERE b.user= :user) AND e.spots > 0 AND e.isClosed = false")
     List<Event> findAvailableEvents(@Param("user") User user);
@@ -70,9 +67,6 @@ public interface EventRepository extends CrudRepository<Event, Long> {
     @Query("SELECT e.isClosed FROM Event e WHERE e.id = :id")
     boolean isEventOpen(@Param("id") Integer id);
 
-    /*@Query("SELECT Count(id) from Event e where e.name= :name and e.category= :category and date= :date and description= :description and duration= :duration and location= :location and time= :time and spots= :spots")
-    Integer countNumberEventsWithSameData(@Param("name")String name, @Param("category")Category category, @Param("date") LocalDate date, @Param("description")String description, @Param("duration")Integer duration, @Param("location")Location location, @Param("time")Time time, @Param("spots")Integer spots);
-*/
     @Query("SELECT Count(id) from Event e where e.name= :name")
     Integer countNumberEventsWithSameData(@Param("name")String name);
 

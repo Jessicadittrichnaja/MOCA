@@ -17,7 +17,7 @@ import java.util.*;
 @RequiredArgsConstructor
 public class TestDataCreator {
 
-    // Anlegen von Testusern
+    // Anlegen von Rollen und Test-Usern beim Start der Anwendung
 
     private final UserService userService;
     private final PasswordEncoder passwordEncoder;

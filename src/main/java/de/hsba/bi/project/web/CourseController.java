@@ -36,7 +36,7 @@ public class CourseController {
         return "eventPlanner/createEvent";
     }
 
-    // Speichern des neuen Events. Das Event wird nur gespeichert, wenn es nicht bereits ein Event mit dem gleichen Namen in der Datenbank gibt.
+    // Speichern des neuen Events. Das Event wird nur gespeichert, wenn es nicht bereits ein Event mit dem gleichen Namen in der Datenbank gibt und alle Felder gefüllt sind.
 
     @PostMapping("/eventPlanner/createEvent")
     public String saveEvent(@ModelAttribute("event") @Valid EventForm eventForm, BindingResult result, Model model) {
@@ -44,10 +44,6 @@ public class CourseController {
             return "eventPlanner/createEvent";
         }
         Event event = eventFormConverter.update(new Event(), eventForm);
-        /*if (eventRepository.countNumberEventsWithSameData(event.getName(), event.getCategory(), event.getDate(), event.getDescription(), event.getDuration(), event.getLocation(), event.getTime(), event.getSpots()) == 1) {
-            model.addAttribute("error", "Das Event gibt es schon.");
-            return ("eventPlanner/createEvent");
-        }*/
         if (eventRepository.countNumberEventsWithSameData(event.getName()) == 1) {
             model.addAttribute("error", "Das Event gibt es schon.");
             return ("eventPlanner/createEvent");
@@ -84,19 +80,13 @@ public class CourseController {
             return "eventPlanner/editEvent";
         }
 
-    // Speichert Änderungen nur, wenn es auch welche gibt.
-
         Event event = eventFormConverter.update(eventService.findEvent(id), form);
-        /*if (eventRepository.countNumberEventsWithSameData(event.getName(), event.getCategory(), event.getDate(), event.getDescription(), event.getDuration(), event.getLocation(), event.getTime(), event.getSpots()) == 1) {
-            model.addAttribute("error", "Es wurde noch nichts verändert. Es gibt nichts zu speichern.");
-            return "eventPlanner/editEvent";
-        }*/
         eventService.save(event);
         model.addAttribute("events", eventService.findAll());
         return "eventPlanner/event";
     }
 
-    // Schließen eines Events
+    // Schließen eines Events. Dann sind keine An- oder Abmeldungen mehr möglich.
 
     @GetMapping("/eventPlanner/event/close/{id}")
     public String closeEventPage(@PathVariable("id") Integer id, Model model) {
@@ -106,7 +96,7 @@ public class CourseController {
         return "redirect:/eventPlanner/event";
     }
 
-    // Öffnen eines Events
+    // Öffnen eines Events. An- und Abmeldungen wieder möglich.
 
     @GetMapping("/eventPlanner/event/open/{id}")
     public String openEventPage(@PathVariable("id") Integer id, Model model) {

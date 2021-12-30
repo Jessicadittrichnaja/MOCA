@@ -8,6 +8,8 @@
 <body>
 <div th:replace="allPages/header :: header">...</div>
 <br>
+<h2 style="text-align: center;">Bearbeitung des Users</h2>
+<br>
 <div style="margin-left:34vw;font-size:20px;">
   <form action="#"  th:action=" @{${'/HR/userlist/edit/' + id}}" th:object="${userForm1}" method="post">
     <div class="form-row">
@@ -25,6 +27,9 @@
                   th:classappend="${#fields.hasErrors('roles')? 'is-invalid' : ''}"></option>
           <span class="text-danger" th:errors="*{roles}"></span>
         </select>
+      </div>
+      <div>
+        Um mehrere Rollen zu wählen, halte die Steuerungs-Taste (Windows) oder die Command-Taste (Mac) gedrückt und klicke anschließend auf die gewünschten Rollen.
       </div>
       <br>
       <div>
