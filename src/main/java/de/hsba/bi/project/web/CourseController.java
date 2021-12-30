@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 
 @RequiredArgsConstructor
 @Controller
@@ -39,13 +42,20 @@ public class CourseController {
     // Speichern des neuen Events. Das Event wird nur gespeichert, wenn es nicht bereits ein Event mit dem gleichen Namen in der Datenbank gibt und alle Felder gefüllt sind.
 
     @PostMapping("/eventPlanner/createEvent")
-    public String saveEvent(@ModelAttribute("event") @Valid EventForm eventForm, BindingResult result, Model model) {
+    public String saveEvent(@ModelAttribute("event") @Valid EventForm eventForm, BindingResult result, Model model) throws ParseException {
         if (result.hasErrors()) {
             return "eventPlanner/createEvent";
         }
         Event event = eventFormConverter.update(new Event(), eventForm);
         if (eventRepository.countNumberEventsWithSameData(event.getName()) == 1) {
             model.addAttribute("error", "Das Event gibt es schon.");
+            return ("eventPlanner/createEvent");
+        }
+        // Ende des Events muss vor 24 Uhr sein (Beginn + Dauer)
+        LocalTime startTime = event.getTime();
+        LocalTime endingTime = startTime.plusHours(event.getDuration());
+        if (endingTime.isBefore(LocalTime.parse("08:00"))) {
+            model.addAttribute("error", "Das Event muss vor 24 Uhr enden.");
             return ("eventPlanner/createEvent");
         }
         eventService.save(event);
@@ -81,8 +91,16 @@ public class CourseController {
         }
 
         Event event = eventFormConverter.update(eventService.findEvent(id), form);
+        // Ende des Events muss vor 24 Uhr sein (Beginn + Dauer)
+        LocalTime startTime = event.getTime();
+        LocalTime endingTime = startTime.plusHours(event.getDuration());
+        if (endingTime.isBefore(LocalTime.parse("08:00"))) {
+            model.addAttribute("error", "Das Event muss vor 24 Uhr enden.");
+            return ("eventPlanner/editEvent");
+        }
         eventService.save(event);
         model.addAttribute("events", eventService.findAll());
+        model.addAttribute("endingTime", endingTime);
         return "eventPlanner/event";
     }
 

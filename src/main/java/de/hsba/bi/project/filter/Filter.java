@@ -1,5 +1,6 @@
 package de.hsba.bi.project.filter;
 
+import de.hsba.bi.project.events.Daytime;
 import de.hsba.bi.project.events.Location;
 import de.hsba.bi.project.events.Time;
 import org.springframework.stereotype.Component;
@@ -29,8 +30,11 @@ public class Filter {
     @Setter
     private LocalDate selectedDate;
 
-    /*@Getter
+    @Getter
     @Setter
     private LocalTime selectedTime;
-*/
+
+    @Getter
+    @Setter
+    private Daytime selectedDaytime;
 }

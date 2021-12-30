@@ -71,6 +71,21 @@ public interface EventRepository extends CrudRepository<Event, Long> {
     Integer countNumberEventsWithSameData(@Param("name")String name);
 
     List<Event> findTop3ByOrderByIdAsc();
+
+    // Für die Filterung der Events nach Tageszeiten
+
+    @Query("SELECT e from Event e WHERE e.time < '11:00:00'")
+    List<Event> findEventsMorning();
+
+    @Query("SELECT e from Event e WHERE e.time >= '11:00:00' AND e.time < '14:00:00'")
+    List<Event> findEventsNoon();
+
+    @Query("SELECT e from Event e WHERE e.time >= '14:00:00' AND e.time < '17:00:00'")
+    List<Event> findEventsAfternoon();
+
+    @Query("SELECT e from Event e WHERE e.time >= '17:00:00' AND e.time < '20:00:00'")
+    List<Event> findEventsEvening();
+
 }
 
 

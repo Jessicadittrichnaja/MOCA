@@ -36,8 +36,8 @@
                 </select>
             </div>
             <div class="col-md-6 form-group">
-                <label>Dauer</label>
-                <input type="number" min="1" max="50" class="form-control" th:field="*{duration}"
+                <label>Dauer (in Stunden)</label>
+                <input type="number" min="1" max="8" class="form-control" th:field="*{duration}"
                        th:classappend="${#fields.hasErrors('duration')? 'is-invalid' : ''}"/>
                 <span class="text-danger" th:errors="*{duration}"></span>
             </div>
@@ -64,7 +64,7 @@
             </div>
             <div class="col-md-6 form-group">
                 <label>Uhrzeit</label>
-                <input type="time" style="height: inherit;" class="form-control" th:field="*{time}"
+                <input type="time" min="08:00" max="20:00" style="height: inherit;" class="form-control" th:field="*{time}"
                        th:classappend="${#fields.hasErrors('time')? 'is-invalid' : ''}"/>
                 <span class="text-danger" th:errors="*{time}"></span>
             </div>

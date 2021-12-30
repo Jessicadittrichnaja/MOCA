@@ -21,7 +21,7 @@
         <td>Anzahl Teilnehmer</td>
         <td>Standort</td>
         <td>Datum</td>
-        <td>Tageszeit</td>
+        <td>Uhrzeit</td>
         <td>Status</td>
         <td></td>
     </tr>
@@ -48,6 +48,9 @@
                 </a>
             </div>
         </td>
+    </tr>
+    <tr th:each="endingTime : ${endingTime}">
+        <td style="width:12%;" th:text="${endingTime}"></td>
     </tr>
 </table>
 </div>

@@ -1,9 +1,11 @@
 package de.hsba.bi.project.filter;
 
+import java.time.LocalTime;
 import java.util.List;
 
 import javax.transaction.Transactional;
 
+import de.hsba.bi.project.events.Daytime;
 import de.hsba.bi.project.events.Event;
 import de.hsba.bi.project.events.EventRepository;
 import de.hsba.bi.project.user.UserService;
@@ -37,10 +39,14 @@ public class FilterService {
 
         if (filter.getSelectedDate() != null)
             filteredEvents.retainAll(eventService.findByDate(filter.getSelectedDate()));
-
-        //if (filter.getSelectedTime() != null)
-        //    filteredResults.retainAll(eventService.findByTime(filter.getSelectedTime()));
-
+        if (filter.getSelectedDaytime() == Daytime.Morgens)
+            filteredEvents.retainAll(eventRepository.findEventsMorning());
+        if (filter.getSelectedDaytime() == Daytime.Vormittags)
+            filteredEvents.retainAll(eventRepository.findEventsNoon());
+        if (filter.getSelectedDaytime() == Daytime.Nachmittags)
+            filteredEvents.retainAll(eventRepository.findEventsAfternoon());
+        if (filter.getSelectedDaytime() == Daytime.Abends)
+            filteredEvents.retainAll(eventRepository.findEventsEvening());
         return filteredEvents;
     }
 }
