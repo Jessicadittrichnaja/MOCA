@@ -24,7 +24,7 @@ public class FilterController {
 
     @GetMapping
     public String eventList(Model model) {
-        model.addAttribute("events", eventRepository.findAvailableEvents(userService.findCurrentUser()));
+        model.addAttribute("events", eventService.findEvents(userService.findCurrentUser()));
         model.addAttribute("filter", new Filter());
         return "overview";
     }

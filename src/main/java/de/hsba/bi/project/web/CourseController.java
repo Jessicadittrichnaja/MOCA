@@ -47,7 +47,7 @@ public class CourseController {
             return "eventPlanner/createEvent";
         }
         Event event = eventFormConverter.update(new Event(), eventForm);
-        if (eventRepository.countNumberEventsWithSameData(event.getName()) == 1) {
+        if (eventService.countEventsWithSameData(event.getName()) == 1) {
             model.addAttribute("error", "Das Event gibt es schon.");
             return ("eventPlanner/createEvent");
         }
@@ -77,7 +77,7 @@ public class CourseController {
     @GetMapping("/eventPlanner/event/edit/{id}")
     public String editEventPage(@PathVariable("id") Integer id, Model model) {
         model.addAttribute("eventForm", eventFormConverter.toForm(eventService.findEvent(id)));
-        model.addAttribute("events", eventRepository.findAll());
+        model.addAttribute("events", eventService.findAll());
 
         return "eventPlanner/editEvent";
     }
@@ -97,6 +97,10 @@ public class CourseController {
         if (endingTime.isBefore(LocalTime.parse("08:00"))) {
             model.addAttribute("error", "Das Event muss vor 24 Uhr enden.");
             return ("eventPlanner/editEvent");
+        }
+        if (eventService.countEventsWithSameDataThatAreNotEvent(event.getName(), id) == 1) {
+            model.addAttribute("error", "Das Event gibt es schon.");
+            return ("eventPlanner/createEvent");
         }
         eventService.save(event);
         model.addAttribute("events", eventService.findAll());

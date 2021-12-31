@@ -20,11 +20,6 @@ public interface BookingRepository extends CrudRepository<Booking, Integer> {
    @Query("SELECT e from Booking b INNER JOIN b.event e where b.user= :user")
    List<Event> findByUser(@Param("user")User user);
 
-   @Transactional
-   @Modifying
-   @Query("UPDATE User u Set u.password = :password where u.id = :id")
-   void findAvailableEvents(@Param("password") String password, @Param("id") Integer id);
-
    @Query("SELECT COUNT(id) from Booking b WHERE b.user= :user AND b.event= :event")
    Integer findBookingByUser(@Param("user")User user, @Param("event") Event event);
 

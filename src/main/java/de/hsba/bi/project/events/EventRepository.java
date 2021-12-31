@@ -70,6 +70,9 @@ public interface EventRepository extends CrudRepository<Event, Long> {
     @Query("SELECT Count(id) from Event e where e.name= :name")
     Integer countNumberEventsWithSameData(@Param("name")String name);
 
+    @Query("SELECT Count(id) from Event e where e.name= :name and e.id != :id")
+    Integer countNumberEventsWithSameDataThatAreNotEvent(@Param("name")String name, @Param("id") Integer id);
+
     List<Event> findTop3ByOrderByIdAsc();
 
     // Für die Filterung der Events nach Tageszeiten

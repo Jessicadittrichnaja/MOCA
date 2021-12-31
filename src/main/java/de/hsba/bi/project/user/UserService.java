@@ -29,7 +29,6 @@ public class UserService {
         return userRepository.findByName(de.hsba.bi.project.user.User.getCurrentUsername());
     }
 
-
     // Methoden z.B. zum Löschen/ Deaktivieren/ Aktivieren/ Finden von Usern
 
     public User addUser(User user)  {
@@ -49,18 +48,13 @@ public class UserService {
     }
 
     public User findById(Integer id) {
-
         User user = userRepository.findById(id).orElse(null);
-
         return user;
-
     };
 
     public void removeUser(User user)  {
         userRepository.delete(user);
     }
-
-
 
     public User findUser(Integer id) {
         return userRepository.findById(id).orElse(null);
@@ -73,4 +67,29 @@ public class UserService {
     public Boolean isUserEnsabled(Integer id) {
         return userRepository.isUserEnabled(id);
     }
+
+    public void updateUserPassword(String password, int id)  {
+        userRepository.updateUserPassword(password, id);
+    }
+
+    public Integer countUsersWithSameName(String name)  {
+        return userRepository.countNumberUsersWithSameName(name);
+    }
+
+    public Integer countUsersWithSameNameThatAreNotEditedUser(String name, Integer id)  {
+        return userRepository.countNumberUsersWithSameNameThatAreNotEditedUser(name, id);
+    }
+
+    public Integer countUsersWithRoleHR()  {
+        return userRepository.countNumberUsersWithRoleHR();
+    }
+
+    public Integer checkIfUserHasRoleHR(Integer id)  {
+        return userRepository.checkIfUserHasRoleHR(id);
+    }
+
+    public void deleteUser(Integer id)  {
+        userRepository.deleteUser(id);
+    }
+
 }

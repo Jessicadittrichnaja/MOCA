@@ -39,11 +39,8 @@ public class RoleService {
     }
 
     public Role findById(Integer id) {
-
         Role role = roleRepository.findById(id).orElse(null);
-
         return role;
-
     }
 
     public void removeRole(Role role)  {

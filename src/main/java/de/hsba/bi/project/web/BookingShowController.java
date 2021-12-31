@@ -19,8 +19,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class BookingShowController {
 
     @Autowired
-    private EventRepository eventRepository;
-    @Autowired
     private EventService eventService;
     @Autowired
     private EventFormConverter eventFormConverter;
@@ -29,8 +27,6 @@ public class BookingShowController {
 
     private final BookingService bookingService;
 
-    private final BookingRepository bookingRepository;
-
 
     // speichert Buchung, wenn Buchung noch nicht von User getätigt wurde. Zieht außerdem einen freien Platz vom Event ab.
 
@@ -38,7 +34,7 @@ public class BookingShowController {
     public String showBookedEvent(@PathVariable("id") int id, Model model) {
         bookingService.throwErrorIfBookingIsClosed(id);
 
-        if (bookingRepository.findBookingByUser(userService.findCurrentUser(), eventService.findById(id)) == 1) {
+        if (bookingService.findBookingByUser(userService.findCurrentUser(), eventService.findById(id)) == 1) {
             model.addAttribute("events", eventService.findAll());
             model.addAttribute("filter", new Filter());
             return "overview";
@@ -46,7 +42,7 @@ public class BookingShowController {
         model.addAttribute("events", eventService.findById(id));
         Booking booking = new Booking(eventService.findEvent(id), userService.findCurrentUser());
         bookingService.save(booking);
-        eventRepository.removeSpot(id);
+        eventService.removeSpot(id);
         return "bookingOverview";
     }
 
@@ -55,10 +51,10 @@ public class BookingShowController {
     @GetMapping("/booking/delete/{id}")
     public String deleteBooking(@PathVariable("id") int id, Model model) {
         bookingService.throwErrorIfBookingIsClosed(id);
-        Booking booking = bookingRepository.findBooking(userService.findCurrentUser(), eventService.findById(id));
+        Booking booking = bookingService.findBooking(userService.findCurrentUser(), eventService.findById(id));
         bookingService.removeBooking(booking);
-        eventRepository.addSpot(id);
-        model.addAttribute("bookings", bookingRepository.findByUser(userService.findCurrentUser()));
+        eventService.addSpot(id);
+        model.addAttribute("bookings", bookingService.findByUser(userService.findCurrentUser()));
         return "booking";
     }
 
@@ -66,7 +62,7 @@ public class BookingShowController {
 
     @GetMapping("/booking/users/{id}")
     public String showBookingsForEvent(@PathVariable("id") int id, Model model) {
-        model.addAttribute("bookings", bookingRepository.findBookingsForEvent(eventService.findById(id)));
+        model.addAttribute("bookings", bookingService.findBookingsForEvent(eventService.findById(id)));
         return "bookingsForEvent";
     }
 }

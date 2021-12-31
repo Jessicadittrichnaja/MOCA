@@ -30,11 +30,8 @@ public class BookingService {
     }
 
     public Booking findById(Integer id) {
-
         Booking booking = bookingRepository.findById(id).orElse(null);
-
         return booking;
-
     };
 
     public void removeBooking(Booking booking)  {
@@ -48,5 +45,20 @@ public class BookingService {
         if(eventService.isEventClosed(id)){
             throw new IllegalArgumentException("Event is closed");
         }
+    }
+    public List<Event> findByUser(User user) {
+        return bookingRepository.findByUser(user);
+    }
+
+    public Integer findBookingByUser(User user, Event event) {
+        return bookingRepository.findBookingByUser(user, event);
+    }
+
+    public Booking findBooking(User user, Event event) {
+        return bookingRepository.findBooking(user, event);
+    }
+
+    public List<User> findBookingsForEvent(Event event) {
+        return bookingRepository.findBookingsForEvent(event);
     }
 }

@@ -22,14 +22,13 @@ import lombok.RequiredArgsConstructor;
 public class BookingController {
 
     private final BookingService bookingService;
-    private final BookingRepository bookingRepository;
     private final UserService userService;
 
     // zeigt Buchungen zu einem User
 
     @GetMapping
     public String bookingList(Model model) {
-        model.addAttribute("bookings", bookingRepository.findByUser(userService.findCurrentUser()));
+        model.addAttribute("bookings", bookingService.findByUser(userService.findCurrentUser()));
         return "booking";
     }
 
