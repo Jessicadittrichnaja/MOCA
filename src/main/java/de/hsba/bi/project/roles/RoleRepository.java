@@ -3,7 +3,6 @@ package de.hsba.bi.project.roles;
 import de.hsba.bi.project.events.Category;
 import de.hsba.bi.project.events.Event;
 import de.hsba.bi.project.events.Location;
-import de.hsba.bi.project.events.Time;
 import de.hsba.bi.project.user.User;
 import de.hsba.bi.project.web.EventForm;
 import org.springframework.data.jpa.repository.Modifying;

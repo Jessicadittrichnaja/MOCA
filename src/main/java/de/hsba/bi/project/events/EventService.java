@@ -63,13 +63,13 @@ public class EventService {
 
     ;
 
-    public List<Event> findByTime(Time time) {
+ /*   public List<Event> findByTime(Time time) {
         List<Event> events = eventRepository.findByTime(time);
         for (Event event : events) {
         }
         return events;
     }
-
+*/
     public List<Event> findEvents(User user) {
         return eventRepository.findAvailableEvents(user);
     }

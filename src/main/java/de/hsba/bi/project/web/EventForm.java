@@ -2,7 +2,6 @@ package de.hsba.bi.project.web;
 
 import de.hsba.bi.project.events.Category;
 import de.hsba.bi.project.events.Location;
-import de.hsba.bi.project.events.Time;
 import lombok.Getter;
 import lombok.Setter;
 

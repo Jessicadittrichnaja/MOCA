@@ -5,7 +5,6 @@ package de.hsba.bi.project.roles;
 import de.hsba.bi.project.bookingProcess.Booking;
 import de.hsba.bi.project.events.Category;
 import de.hsba.bi.project.events.Location;
-import de.hsba.bi.project.events.Time;
 import de.hsba.bi.project.user.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

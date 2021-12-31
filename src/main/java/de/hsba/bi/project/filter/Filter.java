@@ -2,7 +2,6 @@ package de.hsba.bi.project.filter;
 
 import de.hsba.bi.project.events.Daytime;
 import de.hsba.bi.project.events.Location;
-import de.hsba.bi.project.events.Time;
 import org.springframework.stereotype.Component;
 
 import de.hsba.bi.project.events.Category;

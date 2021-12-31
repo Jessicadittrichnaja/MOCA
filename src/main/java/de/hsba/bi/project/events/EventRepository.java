@@ -27,8 +27,6 @@ public interface EventRepository extends CrudRepository<Event, Long> {
 
     List<Event> findByDate(LocalDate date);
 
-    List<Event> findByTime(Time time);
-
     Optional<Event> findById(Integer id);
 
     // Methoden z.B. zum Runterzählen/ Hochzählen von freien Plätzen für Events bei Buchungen/ Löschen von Buchungen durch Mitarbeiter. Die Queries werden in den Controllern genutzt, die Funktionsweise wird dort jeweils näher erläutert.
