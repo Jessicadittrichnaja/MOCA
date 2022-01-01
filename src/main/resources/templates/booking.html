@@ -12,27 +12,28 @@
 <h2 style="text-align: center;">Übersicht über deine Buchungen</h2>
 <br>
 <div style="padding-bottom: 100px;">
-<table style="background-color: #f5f5f5; color:black; margin-left:15vw; width:70%;font-size:20px;border: 1px solid #ccc; border-collapse: collapse">
+<table style="background-color: #f5f5f5; color:black; margin-left:2.5vw; width:95%;font-size:20px;border: 1px solid #ccc; border-collapse: collapse">
     <tr style="font-weight:bold;font-style:italic;">
-        <td>Name</td>
-        <td>Beschreibung</td>
-        <td>Kategorie</td>
-        <td>Dauer</td>
-        <td>Ort</td>
-        <td>Datum</td>
-        <td>Zeit</td>
+        <td style="width:10%;border-right: 1px solid #ddd;">Name</td>
+        <td style="width:20%;border-right: 1px solid #ddd;">Beschreibung</td>
+        <td style="width:8%;border-right: 1px solid #ddd;">Kategorie</td>
+        <td style="width:8%;border-right: 1px solid #ddd;">Dauer</td>
+        <td style="width:12%;border-right: 1px solid #ddd;">Raum</td>
+        <td style="width:11%;border-right: 1px solid #ddd;">Datum</td>
+        <td style="width:9%;border-right: 1px solid #ddd;">Beginn</td>
+        <td style="width:9%;border-right: 1px solid #ddd;">Ende</td>
         <td></td>
     </tr>
-    <tr th:each="booking : ${bookings}">
-        <td style="width:14%;" th:text="${booking.name}"></td>
-        <td style="width:14%;" th:text="${booking.description}"></td>
-        <td style="width:14%;" th:text="${booking.category}"></td>
-        <td style="width:14%;" th:text="${booking.duration}"></td>
-        <td style="width:14%;" th:text="${booking.location}"></td>
-        <td style="width:14%;" th:text="${booking.date}"></td>
-        <td style="width:14%;" th:text="${booking.time}"></td>
+    <tr th:each="booking : ${bookings}" style="border: 1px solid #ddd;">
+        <td style="width:10%;border-right: 1px solid #ddd;" th:text="${booking.name}"></td>
+        <td style="width:30%;border-right: 1px solid #ddd;" th:text="${booking.description}"></td>
+        <td style="width:8%;border-right: 1px solid #ddd;" th:text="${booking.category.getDisplayValue()}"></td>
+        <td style="width:8%;border-right: 1px solid #ddd;" th:text="${booking.duration}+ ' Stunden'"></td>
+        <td style="width:12%;border-right: 1px solid #ddd;" th:text="${booking.location.getDisplayValue()}"></td>
+        <td style="width:11%;border-right: 1px solid #ddd;" th:text="${booking.date}"></td>
+        <td style="width:9%;border-right: 1px solid #ddd;" th:text="${booking.startTime}+ ' Uhr'"></td>
+        <td style="width:9%;border-right: 1px solid #ddd;" th:text="${booking.endTime}+ ' Uhr'"></td>
         <td>
-
             <div class="link1">
                 <div th:switch="${booking.isClosed}">
                     <a th:case="false" th:href="@{/booking/delete/{id}(id=${booking.id})}">Abmelden</a>
@@ -43,7 +44,6 @@
             </div>
         </td>
     </tr>
-
 </table>
 </div>
 <div th:replace="allPages/footer :: footer">...</div>

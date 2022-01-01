@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.transaction.Transactional;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -41,7 +42,7 @@ public interface EventRepository extends CrudRepository<Event, Long> {
     @Query("UPDATE Event e Set e.spots = e.spots+1 where e.id = :id")
     void addSpot(@Param("id") Integer id);
 
-    @Query("SELECT e from Event e WHERE e.id NOT IN (SELECT e.id FROM Event e INNER JOIN Booking b ON e.id = b.event WHERE b.user= :user) AND e.spots > 0 AND e.isClosed = false")
+    @Query("SELECT e from Event e WHERE e.id NOT IN (SELECT e.id FROM Event e INNER JOIN Booking b ON e.id = b.event WHERE b.user= :user) AND e.spots > 0 AND e.isClosed = false ORDER BY e.date")
     List<Event> findAvailableEvents(@Param("user") User user);
 
     @Transactional
@@ -75,19 +76,28 @@ public interface EventRepository extends CrudRepository<Event, Long> {
 
     // Für die Filterung der Events nach Tageszeiten
 
-    @Query("SELECT e from Event e WHERE e.time < '11:00:00'")
+    @Query("SELECT e from Event e WHERE e.startTime < '11:00:00'")
     List<Event> findEventsMorning();
 
-    @Query("SELECT e from Event e WHERE e.time >= '11:00:00' AND e.time < '14:00:00'")
+    @Query("SELECT e from Event e WHERE e.startTime >= '11:00:00' AND e.startTime < '14:00:00'")
     List<Event> findEventsNoon();
 
-    @Query("SELECT e from Event e WHERE e.time >= '14:00:00' AND e.time < '17:00:00'")
+    @Query("SELECT e from Event e WHERE e.startTime >= '14:00:00' AND e.startTime < '17:00:00'")
     List<Event> findEventsAfternoon();
 
-    @Query("SELECT e from Event e WHERE e.time >= '17:00:00' AND e.time < '20:00:00'")
+    @Query("SELECT e from Event e WHERE e.startTime >= '17:00:00' AND e.startTime < '20:00:00'")
     List<Event> findEventsEvening();
 
+    //damit keine Überschneidungen von Terminen zur gleichen Zeit im gleichen Raum möglich sind
+
+    @Query("SELECT Count(id) from Event e where e.location= :location and e.date= :date and ((e.startTime <= :startTime and e.endTime >= :endTime) or (e.startTime < :endTime and e.endTime > :endTime) or (e.startTime < :startTime and e.endTime > :startTime))")
+    Integer countNumberEventsWithSameLocationAtSameTime(@Param("location")Location location, @Param("date")LocalDate date, @Param("startTime")LocalTime startTime,  @Param("endTime")LocalTime endTime);
+
+    @Query("SELECT Count(id) from Event e where e.id!= :id and e.location= :location and e.date= :date and ((e.startTime <= :startTime and e.endTime >= :endTime) or (e.startTime < :endTime and e.endTime > :endTime) or (e.startTime < :startTime and e.endTime > :startTime))")
+    Integer countNumberEventsWithSameLocationAtSameTimeExceptCurrentEvent(@Param("id")Integer id, @Param("location")Location location, @Param("date")LocalDate date, @Param("startTime")LocalTime startTime,  @Param("endTime")LocalTime endTime);
+
 }
+
 
 
 

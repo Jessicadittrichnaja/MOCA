@@ -22,7 +22,7 @@ public class EventFormConverter {
         form.setLocation(event.getLocation());
         form.setDate(event.getDate());
         form.setSpots(event.getSpots());
-        form.setTime(event.getTime());
+        form.setStartTime(event.getStartTime());
         return form;
     }
 
@@ -34,7 +34,7 @@ public class EventFormConverter {
         event.setLocation(form.getLocation());
         event.setDate(form.getDate());
         event.setSpots(form.getSpots());
-        event.setTime(form.getTime());
+        event.setStartTime(form.getStartTime());
         return event;
     }
 

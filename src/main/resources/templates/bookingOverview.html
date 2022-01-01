@@ -1,4 +1,3 @@
-<!DOCTYPE HTML>
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
@@ -18,15 +17,17 @@
             <ul class="kursDetailInfo">Beschreibung</ul>
             <ul class="kursDetailInfoII" th:text="${event.description}"></ul>
             <ul class="kursDetailInfo">Kategorie</ul>
-            <ul class="kursDetailInfoII" th:text="${event.category}"></ul>
+            <ul class="kursDetailInfoII" th:text="${event.category.getDisplayValue()}"></ul>
             <ul class="kursDetailInfo">Dauer</ul>
             <ul class="kursDetailInfoII" th:text="${event.duration} + ' Stunden'"></ul>
-            <ul class="kursDetailInfo">Ort</ul>
-            <ul class="kursDetailInfoII" th:text="${event.location}"></ul>
+            <ul class="kursDetailInfo">Raum</ul>
+            <ul class="kursDetailInfoII" th:text="${event.location.getDisplayValue()}"></ul>
             <ul class="kursDetailInfo">Datum</ul>
             <ul class="kursDetailInfoII" th:text="${event.date}"></ul>
-            <ul class="kursDetailInfo">Zeit</ul>
-            <ul class="kursDetailInfoII" th:text="${event.time}"></ul>
+            <ul class="kursDetailInfo">Start</ul>
+            <ul class="kursDetailInfoII" th:text="${event.startTime}"></ul>
+            <ul class="kursDetailInfo">Ende</ul>
+            <ul class="kursDetailInfoII" th:text="${event.endTime}"></ul>
 
         </li>
     </ul>
@@ -38,6 +39,5 @@
 <br>
 </div>
 <div th:replace="allPages/footer :: footer">...</div>
-
 </body>
 </html>

@@ -14,21 +14,21 @@
 <div style="padding-bottom: 100px;">
 <table style="background-color: #f5f5f5; color:black; margin-left:25vw; width:50%;font-size:20px;border: 1px solid #ccc; border-collapse: collapse;">
     <tr style="font-weight:bold;font-style:italic;">
-        <td>Benutzername</td>
-        <td>Rolle</td>
-        <td>Status</td>
+        <td style="border-right: 1px solid #ddd;">Benutzername</td>
+        <td style="border-right: 1px solid #ddd;">Rolle</td>
+        <td style="border-right: 1px solid #ddd;">Status</td>
         <td></td>
     </tr>
-    <tr th:each = "user: ${users}">
-        <td style="width:50%;" th:text="${user.name}"></span></td>
-        <td style="width:50%;" th:text="${user.roles}"></span></td>
-        <td style="width:50%;">
+    <tr th:each = "user: ${users}" style="border: 1px solid #ddd;">
+        <td style="border-right: 1px solid #ddd;width:25%;" th:text="${user.name}"></span></td>
+        <td style="border-right: 1px solid #ddd;width:25%;" th:text="${user.roles}"></span></td>
+        <td style="border-right: 1px solid #ddd;width:25%;">
             <div th:switch="${user.isEnabled}">
                 <a th:case="true">Aktiviert</a>
                 <a th:case="false" >Deaktiviert</a>
             </div>
         </td>
-        <td>
+        <td style="width:25%;">
             <div class="link1">
                 <a th:href="${'/HR/userlist/delete/' + user.id}">Löschen</a>
                 <a th:href="${'/HR/userlist/edit/' + user.id}">Bearbeiten</a>

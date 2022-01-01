@@ -54,7 +54,12 @@ public class Event implements Serializable {
     @Getter
     @Setter
     @DateTimeFormat(pattern = "HH:mm")
-    private LocalTime time;
+    private LocalTime startTime;
+
+    @Getter
+    @Setter
+    @DateTimeFormat(pattern = "HH:mm")
+    private LocalTime endTime;
 
     @Getter
     @Setter
@@ -73,7 +78,7 @@ public class Event implements Serializable {
     }
 
 
-    public Event(String name, String description, Category category, Integer duration, Integer spots, Location location, LocalDate date, LocalTime time) {
+    public Event(String name, String description, Category category, Integer duration, Integer spots, Location location, LocalDate date, LocalTime startTime, LocalTime endTime) {
             this.name = name;
             this.description = description;
             this.category = category;
@@ -81,7 +86,8 @@ public class Event implements Serializable {
             this.spots = spots;
             this.location = location;
             this.date = date;
-            this.time = time;
+            this.startTime = startTime;
+            this.endTime = startTime.plusHours(duration);
         }
 
     public Event() {

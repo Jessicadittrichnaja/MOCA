@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Date;
 import java.util.List;
 
@@ -34,16 +35,12 @@ public class EventService {
         return event;
     }
 
-    ;
-
     public List<Event> findByCategory(Category category) {
         List<Event> events = eventRepository.findByCategory(category);
         for (Event event : events) {
         }
         return events;
     }
-
-    ;
 
     public List<Event> findByLocation(Location location) {
         List<Event> events = eventRepository.findByLocation(location);
@@ -52,24 +49,12 @@ public class EventService {
         return events;
     }
 
-    ;
-
     public List<Event> findByDate(LocalDate date) {
         List<Event> events = eventRepository.findByDate(date);
         for (Event event : events) {
         }
         return events;
     }
-
-    ;
-
- /*   public List<Event> findByTime(Time time) {
-        List<Event> events = eventRepository.findByTime(time);
-        for (Event event : events) {
-        }
-        return events;
-    }
-*/
     public List<Event> findEvents(User user) {
         return eventRepository.findAvailableEvents(user);
     }
@@ -124,5 +109,13 @@ public class EventService {
 
     public List<Event> findTop3() {
         return eventRepository.findTop3ByOrderByIdAsc();
+    }
+
+    public Integer countNumberEventsWithSameLocationAtSameTime(Location location, LocalDate date, LocalTime startTime, LocalTime endTime) {
+        return eventRepository.countNumberEventsWithSameLocationAtSameTime(location, date, startTime, endTime);
+    }
+
+    public Integer countNumberEventsWithSameLocationAtSameTimeExceptCurrentEvent(Integer id, Location location, LocalDate date, LocalTime startTime, LocalTime endTime) {
+        return eventRepository.countNumberEventsWithSameLocationAtSameTimeExceptCurrentEvent(id, location, date, startTime, endTime);
     }
 }

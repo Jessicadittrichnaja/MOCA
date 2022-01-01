@@ -11,7 +11,7 @@
 <br>
 <h2 style="text-align: center;">Erstellung eines Events</h2>
 <br>
-<div style="margin-left:34vw;font-size:20px;">
+<div style="margin-left:34vw;font-size:20px;padding-bottom: 200px;">
     <form action="#" th:action="@{/eventPlanner/createEvent}" th:object="${event}" method="post">
         <div class="form-row">
             <div class="col-md-6 form-group">
@@ -22,9 +22,9 @@
             </div>
             <div class="col-md-6 form-group">
                 <label>Beschreibung</label>
-                <input type="text" class="form-control" th:field="*{description}"
-                       th:classappend="${#fields.hasErrors('description')? 'is-invalid' : ''}"/>
+                <textarea class="form-control" th:field="*{description}" rows="4" cols="50" th:classappend="${#fields.hasErrors('description')? 'is-invalid' : ''}"></textarea>
                 <span class="text-danger" th:errors="*{description}"></span>
+                </textarea>
             </div>
             <div class="col-md-6 form-group">
                 <label>Kategorie</label>
@@ -48,9 +48,9 @@
                 <span class="text-danger" th:errors="*{spots}"></span>
             </div>
             <div class="col-md-6 form-group">
-                <label>Standort</label>
+                <label>Raum</label>
                 <select class="form-control" th:field="*{location}">
-                    <option th:value="${null}" selected>Standort wählen..</option>
+                    <option th:value="${null}" selected>Raum wählen..</option>
                     <option th:each="location: ${T(de.hsba.bi.project.events.Location).values()}" th:value="${location}" th:text="${location.displayValue}"
                             th:classappend="${#fields.hasErrors('location')? 'is-invalid' : ''}"></option>
                     <span class="text-danger" th:errors="*{location}"></span>
@@ -63,17 +63,17 @@
                 <span class="text-danger" th:errors="*{date}"></span>
             </div>
             <div class="col-md-6 form-group">
-                <label>Uhrzeit</label>
-                <input type="time" min="08:00" max="20:00" style="height: inherit;" class="form-control" th:field="*{time}"
-                       th:classappend="${#fields.hasErrors('time')? 'is-invalid' : ''}"/>
-                <span class="text-danger" th:errors="*{time}"></span>
+                <label>Startzeit</label>
+                <input type="time" min="08:00" max="20:00" style="height: inherit;" class="form-control" th:field="*{startTime}"
+                       th:classappend="${#fields.hasErrors('startTime')? 'is-invalid' : ''}"/>
+                <span class="text-danger" th:errors="*{startTime}"></span>
             </div>
             <br>
             <div>
                 <input class="Index" type="submit" style="background-color: rosybrown;border-radius: 5px;border-style:none;color:ghostwhite" value="Veranstaltung anlegen"/>
             </div>
             <br>
-            <a class="Index" type="button" style="background-color: rosybrown;border-radius: 5px;border-style:none;color:ghostwhite" th:href="@{/index}">
+            <a class="Index" type="button" style="background-color: rosybrown;border-radius: 5px;border-style:none;color:ghostwhite; text-decoration:none;" th:href="@{/index}">
                 Abbrechen
             </a>
             <div th:text="${error}">

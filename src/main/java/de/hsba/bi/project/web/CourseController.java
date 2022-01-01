@@ -46,16 +46,25 @@ public class CourseController {
         if (result.hasErrors()) {
             return "eventPlanner/createEvent";
         }
+        eventForm.setEndTime(eventForm.getStartTime().plusHours(eventForm.getDuration()));
         Event event = eventFormConverter.update(new Event(), eventForm);
+        event.setEndTime(eventForm.getEndTime());
+
+        // nicht zwei Events mit dem gleichen Namen
         if (eventService.countEventsWithSameData(event.getName()) == 1) {
             model.addAttribute("error", "Das Event gibt es schon.");
             return ("eventPlanner/createEvent");
         }
+        //im gleichen Raum können nicht gleichzeitig mehrere Events stattfinden
+        if (eventService.countNumberEventsWithSameLocationAtSameTime(event.getLocation(), event.getDate(), event.getStartTime(), event.getEndTime()) == 1) {
+            model.addAttribute("error", "Es gibt schon ein Event in dem Raum zu der Zeit.");
+            return ("eventPlanner/createEvent");
+        }
         // Ende des Events muss vor 24 Uhr sein (Beginn + Dauer)
-        LocalTime startTime = event.getTime();
+        LocalTime startTime = event.getStartTime();
         LocalTime endingTime = startTime.plusHours(event.getDuration());
-        if (endingTime.isBefore(LocalTime.parse("08:00"))) {
-            model.addAttribute("error", "Das Event muss vor 24 Uhr enden.");
+        if (endingTime.isAfter(LocalTime.parse("21:00"))) {
+            model.addAttribute("error", "Das Event darf höchstens bis 21 Uhr gehen.");
             return ("eventPlanner/createEvent");
         }
         eventService.save(event);
@@ -90,17 +99,25 @@ public class CourseController {
             return "eventPlanner/editEvent";
         }
 
+        form.setEndTime(form.getStartTime().plusHours(form.getDuration()));
         Event event = eventFormConverter.update(eventService.findEvent(id), form);
+        event.setEndTime(form.getEndTime());
         // Ende des Events muss vor 24 Uhr sein (Beginn + Dauer)
-        LocalTime startTime = event.getTime();
+        LocalTime startTime = event.getStartTime();
         LocalTime endingTime = startTime.plusHours(event.getDuration());
-        if (endingTime.isBefore(LocalTime.parse("08:00"))) {
-            model.addAttribute("error", "Das Event muss vor 24 Uhr enden.");
+        if (endingTime.isAfter(LocalTime.parse("21:00"))) {
+            model.addAttribute("error", "Das Event darf höchstens bis 21 Uhr gehen.");
             return ("eventPlanner/editEvent");
         }
+        // nicht zwei Events mit dem gleichen Namen
         if (eventService.countEventsWithSameDataThatAreNotEvent(event.getName(), id) == 1) {
             model.addAttribute("error", "Das Event gibt es schon.");
-            return ("eventPlanner/createEvent");
+            return ("eventPlanner/editEvent");
+        }
+        //im gleichen Raum können nicht gleichzeitig mehrere Events stattfinden
+        if (eventService.countNumberEventsWithSameLocationAtSameTimeExceptCurrentEvent(id, event.getLocation(), event.getDate(), event.getStartTime(), event.getEndTime()) == 1) {
+            model.addAttribute("error", "Es gibt schon ein Event in dem Raum zu der Zeit.");
+            return ("eventPlanner/editEvent");
         }
         eventService.save(event);
         model.addAttribute("events", eventService.findAll());
