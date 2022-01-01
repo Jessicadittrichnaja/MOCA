@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import de.hsba.bi.project.events.Category;
 import de.hsba.bi.project.events.Location;
-import de.hsba.bi.project.events.Time;
 import de.hsba.bi.project.roles.Role;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -39,7 +38,7 @@ class BookingTest {
         Role roleEmployee = new Role ("MITARBEITER");
         Set<Role> rolesEnrico = new HashSet<>();
         rolesEnrico.add(roleEmployee);
-        event = new Event ("Programmierung 2", "Projekt", Category.Seminar, 10, 1, Location.Hamburg, LocalDate.of(2021, 10, 23), LocalTime.of(15, 30));
+        event = new Event ("Programmierung 2", "Projekt", Category.Seminar, 8, 1, Location.Seminarraum1, LocalDate.of(2021, 10, 23), LocalTime.of(15, 30), LocalTime.of(15, 30).plusHours(8));
         user  = new User("Enrico", "password", rolesEnrico);
         // when
         Booking booking = new Booking(event, user);
