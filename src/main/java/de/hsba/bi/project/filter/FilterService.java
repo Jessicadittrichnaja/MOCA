@@ -39,6 +39,7 @@ public class FilterService {
 
         if (filter.getSelectedDate() != null)
             filteredEvents.retainAll(eventService.findByDate(filter.getSelectedDate()));
+
         if (filter.getSelectedDaytime() == Daytime.Morgens)
             filteredEvents.retainAll(eventRepository.findEventsMorning());
         if (filter.getSelectedDaytime() == Daytime.Vormittags)
@@ -47,6 +48,7 @@ public class FilterService {
             filteredEvents.retainAll(eventRepository.findEventsAfternoon());
         if (filter.getSelectedDaytime() == Daytime.Abends)
             filteredEvents.retainAll(eventRepository.findEventsEvening());
+
         return filteredEvents;
     }
 }

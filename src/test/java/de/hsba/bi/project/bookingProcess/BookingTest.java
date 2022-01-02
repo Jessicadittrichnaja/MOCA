@@ -43,10 +43,8 @@ class BookingTest {
         // when
         Booking booking = new Booking(event, user);
         // then
-        String category = "Seminar";
-        String name = "Enrico";
-        assertThat(booking.getEvent().getCategory().toString()).isEqualTo(category);
-        assertThat(booking.getUser().getName()).isEqualTo(name);
+        assertThat(booking.getEvent().getCategory().toString()).isEqualTo("Seminar");
+        assertThat(booking.getUser().getName()).isEqualTo("Enrico");
         System.out.printf("%s hat eine Veranstaltung mit der Kategorie %s gebucht.", booking.getUser().getName(), booking.getEvent().getCategory());
 
     }
