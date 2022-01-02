@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 @RequiredArgsConstructor
 @Controller
-public class kursDetailShowController {
+public class courseDetailShowController {
 
     @Autowired
     private EventRepository eventRepository;
@@ -20,9 +20,9 @@ public class kursDetailShowController {
 
     // zeigt Details zu einem Event
 
-    @GetMapping("/kursDetails/{id}")
+    @GetMapping("/courseDetails/{id}")
     public String showChosenEvent(@PathVariable("id") int id, Model model) {
         model.addAttribute("events", eventService.findById(id));
-        return "kursDetails";
+        return "courseDetails";
     }
 }

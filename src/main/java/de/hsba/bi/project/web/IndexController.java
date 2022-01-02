@@ -46,15 +46,15 @@ public class IndexController {
         return "impressum";
     }
 
-    @RequestMapping("/kontakt")
+    @RequestMapping("/contact")
     public String kontakt(Model model) {
 
-        return "kontakt";
+        return "contact";
     }
-    @RequestMapping("/datenschutzerklärung")
+    @RequestMapping("/privacy")
     public String datenschutzerklaerung(Model model) {
 
-        return "datenschutzerklärung";
+        return "privacy";
     }
 
     @RequestMapping("/editPassword")
