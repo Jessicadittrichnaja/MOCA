@@ -16,14 +16,18 @@ public class UserFormConverter {
 
     UserForm toForm(User user) {
         UserForm form = new UserForm();
-        form.setName(user.getName());
+        form.setFirstName(user.getFirstName());
+        form.setLastName(user.getLastName());
+        form.setUserName(user.getUserName());
         form.setPassword(user.getPassword());
         form.setRoles(user.getRoles());
         return form;
     }
 
     User update(User user, UserForm form) {
-        user.setName(form.getName());
+        user.setFirstName(form.getFirstName());
+        user.setLastName(form.getLastName());
+        user.setUserName(form.getUserName());
         user.setPassword(Encoder.encode(form.getPassword()));
         user.setRoles(form.getRoles());
         return user;

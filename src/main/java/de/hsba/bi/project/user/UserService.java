@@ -25,7 +25,7 @@ public class UserService {
     }
 
     public de.hsba.bi.project.user.User findCurrentUser() {
-        return userRepository.findByName(de.hsba.bi.project.user.User.getCurrentUsername());
+        return userRepository.findByUserName(de.hsba.bi.project.user.User.getCurrentUsername());
     }
 
     // Methoden z.B. zum Löschen/ Deaktivieren/ Aktivieren/ Finden von Usern
@@ -71,12 +71,12 @@ public class UserService {
         userRepository.updateUserPassword(password, id);
     }
 
-    public Integer countUsersWithSameName(String name)  {
-        return userRepository.countNumberUsersWithSameName(name);
+    public Integer countUsersWithSameName(String userName)  {
+        return userRepository.countNumberUsersWithSameName(userName);
     }
 
-    public Integer countUsersWithSameNameThatAreNotEditedUser(String name, Integer id)  {
-        return userRepository.countNumberUsersWithSameNameThatAreNotEditedUser(name, id);
+    public Integer countUsersWithSameNameThatAreNotEditedUser(String userName, Integer id)  {
+        return userRepository.countNumberUsersWithSameNameThatAreNotEditedUser(userName, id);
     }
 
     public Integer countUsersWithRoleHR()  {

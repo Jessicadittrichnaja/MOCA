@@ -3,6 +3,7 @@ package de.hsba.bi.project.events;
 import de.hsba.bi.project.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 
@@ -59,12 +60,12 @@ public class EventService {
         return eventRepository.findAvailableEvents(user);
     }
 
-    public Integer countEventsWithSameData(String name) {
-        return eventRepository.countNumberEventsWithSameData(name);
+    public Integer countEventsWithSameData(Category category, LocalDate date, String description, Integer duration, LocalTime endTime, Location location, LocalTime startTime, String name, Integer spots) {
+        return eventRepository.countNumberEventsWithSameData(category, date, description, duration, endTime, location, startTime, name, spots);
     }
 
-    public Integer countEventsWithSameDataThatAreNotEvent(String name, Integer id) {
-        return eventRepository.countNumberEventsWithSameDataThatAreNotEvent(name, id);
+    public Integer countEventsWithSameDataThatAreNotEvent(Category category, LocalDate date, String description, Integer duration, LocalTime endTime, Location location, LocalTime startTime, String name, Integer id, Integer spots) {
+        return eventRepository.countNumberEventsWithSameDataThatAreNotEvent(category, date, description, duration, endTime, location, startTime, name, id, spots);
     }
 
     public void removeEvent(Event event) {

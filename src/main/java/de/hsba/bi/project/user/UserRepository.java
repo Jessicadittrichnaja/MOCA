@@ -15,7 +15,7 @@ import java.util.Set;
 @Repository
 public interface UserRepository extends JpaRepository<de.hsba.bi.project.user.User, Long> {
 
-    de.hsba.bi.project.user.User findByName(String name);
+    de.hsba.bi.project.user.User findByUserName(String userName);
 
     Optional<User> findById(Integer id);
 
@@ -28,11 +28,11 @@ public interface UserRepository extends JpaRepository<de.hsba.bi.project.user.Us
 
     // um sicherzustellen, dass ein Username nur einmal existiert
 
-    @Query("SELECT Count(id) from User u where u.name= :name")
-    Integer countNumberUsersWithSameName(@Param("name")String name);
+    @Query("SELECT Count(id) from User u where u.userName= :userName")
+    Integer countNumberUsersWithSameName(@Param("userName")String userName);
 
-    @Query("SELECT Count(id) from User u where u.name= :name and u.id != :id")
-    Integer countNumberUsersWithSameNameThatAreNotEditedUser(@Param("name")String name, @Param("id")Integer id);
+    @Query("SELECT Count(id) from User u where u.userName= :userName and u.id != :id")
+    Integer countNumberUsersWithSameNameThatAreNotEditedUser(@Param("userName")String userName, @Param("id")Integer id);
 
     @Query(value = "SELECT Count(id) from users_roles r INNER JOIN Role ro ON r.role_id = ro.id where ro.role = 'PERSONALABTEILUNG'",  nativeQuery = true)
     Integer countNumberUsersWithRoleHR();

@@ -18,13 +18,13 @@ public class UserFormConverter1 {
 
     UserForm toForm(User user) {
         UserForm form = new UserForm();
-        form.setName(user.getName());
+        form.setUserName(user.getUserName());
         form.setRoles(user.getRoles());
         return form;
     }
 
     User update(User user, UserForm1 form) {
-        user.setName(form.getName());
+        user.setUserName(form.getUserName());
         user.setRoles(form.getRoles());
         return user;
     }

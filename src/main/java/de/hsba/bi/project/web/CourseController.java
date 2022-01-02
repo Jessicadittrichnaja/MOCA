@@ -50,8 +50,8 @@ public class CourseController {
         Event event = eventFormConverter.update(new Event(), eventForm);
         event.setEndTime(eventForm.getEndTime());
 
-        // nicht zwei Events mit dem gleichen Namen
-        if (eventService.countEventsWithSameData(event.getName()) == 1) {
+        // nicht zweimal das gleiche Event
+        if (eventService.countEventsWithSameData(event.getCategory(), event.getDate(), event.getDescription(), event.getDuration(), event.getEndTime(), event.getLocation(), event.getStartTime(), event.getName(), event.getSpots()) == 1) {
             model.addAttribute("error", "Das Event gibt es schon.");
             return ("eventPlanner/createEvent");
         }
@@ -109,8 +109,8 @@ public class CourseController {
             model.addAttribute("error", "Das Event darf höchstens bis 21 Uhr gehen.");
             return ("eventPlanner/editEvent");
         }
-        // nicht zwei Events mit dem gleichen Namen
-        if (eventService.countEventsWithSameDataThatAreNotEvent(event.getName(), id) == 1) {
+        // nicht zweimal das gleiche Event
+        if (eventService.countEventsWithSameDataThatAreNotEvent(event.getCategory(), event.getDate(), event.getDescription(), event.getDuration(), event.getEndTime(), event.getLocation(), event.getStartTime(), event.getName(), id, event.getSpots()) == 1) {
             model.addAttribute("error", "Das Event gibt es schon.");
             return ("eventPlanner/editEvent");
         }

@@ -66,7 +66,7 @@ public class UserController {
             return "HR/createUser";
         }
         User user = userFormConverter.update(new User(), form);
-        if (userService.countUsersWithSameName(user.getName()) == 1){
+        if (userService.countUsersWithSameName(user.getUserName()) == 1){
             model.addAttribute("error", "Den User gibt es schon.");
             model.addAttribute("listRoles", listRoles);
             return "HR/createUser";
@@ -249,7 +249,7 @@ public class UserController {
         // Der Name vom User darf nicht einem Namen entsprechen, den es schon in der Datenbank gibt, wenn es nicht der des angemeldeten Users ist.
 
         User user = userFormConverter1.update(userService.findUser(id), form);
-        if (userService.countUsersWithSameNameThatAreNotEditedUser(user.getName(), user.getId()) == 1){
+        if (userService.countUsersWithSameNameThatAreNotEditedUser(user.getUserName(), user.getId()) == 1){
             model.addAttribute("listRoles", listRoles);
             model.addAttribute("error4", "Den User gibt es schon.");
             return "HR/editUser";

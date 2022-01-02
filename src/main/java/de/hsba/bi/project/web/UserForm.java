@@ -17,8 +17,18 @@ public class UserForm {
 
     @Getter
     @Setter
+    @NotBlank(message = "Der Vorname darf nicht leer sein")
+    private String firstName;
+
+    @Getter
+    @Setter
+    @NotBlank(message = "Der Nachname darf nicht leer sein")
+    private String lastName;
+
+    @Getter
+    @Setter
     @NotBlank(message = "Der Nutzername darf nicht leer sein")
-    private String name;
+    private String userName;
 
     @Getter
     @Setter

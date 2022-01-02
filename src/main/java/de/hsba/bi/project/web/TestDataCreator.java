@@ -51,14 +51,14 @@ public class TestDataCreator {
 
 
        // add some users
-        User enrico = createUser("Enrico", "password", rolesEnrico);
-        User jessica = createUser("Jessica", "password", rolesJessica);
-        User fynn = createUser("Fynn", "password", rolesFynn);
-        User daniel = createUser("Daniel", "password", rolesDaniel);
+        User enrico = createUser("Enrico", "Nehls", "enrico", "password", rolesEnrico);
+        User jessica = createUser("Jessica", "Dittrich", "jessica", "password", rolesJessica);
+        User fynn = createUser("Fynn", "Thode", "fynn", "password", rolesFynn);
+        User daniel = createUser("Daniel", "Fuhrmann", "daniel", "password", rolesDaniel);
     }
 
-    private User createUser(String name, String password, Set<Role> roles) {
-        return userService.save(new User(name, passwordEncoder.encode(password), roles));
+    private User createUser(String firstName, String lastName, String name, String password, Set<Role> roles) {
+        return userService.save(new User(firstName, lastName, name, passwordEncoder.encode(password), roles));
 
 
     }

@@ -42,7 +42,7 @@
                 <span class="text-danger" th:errors="*{duration}"></span>
             </div>
             <div class="col-md-6 form-group">
-                <label>Anzahl Teilnehmer</label>
+                <label>Anzahl möglicher Teilnehmer</label>
                 <input type="number" min="1" max="50" class="form-control" th:field="*{spots}"
                        th:classappend="${#fields.hasErrors('spots')? 'is-invalid' : ''}"/>
                 <span class="text-danger" th:errors="*{spots}"></span>

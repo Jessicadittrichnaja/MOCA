@@ -19,7 +19,7 @@ public class UserForm1 {
     @Getter
     @Setter
     @NotBlank(message = "Der Nutzername darf nicht leer sein")
-    private String name;
+    private String userName;
 
     @NotEmpty(message = "Bitte wähle mindestens eine Rolle")
     @Getter

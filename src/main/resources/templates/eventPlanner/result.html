@@ -20,6 +20,8 @@
             <ul class="kursDetailInfoII" th:text="${event.category.getDisplayValue()}"></ul>
             <ul class="kursDetailInfo">Dauer</ul>
             <ul class="kursDetailInfoII" th:text="${event.duration} + ' Stunden'"></ul>
+            <ul class="kursDetailInfo">Anzahl möglicher Teilnehmer</ul>
+            <ul class="kursDetailInfoII" th:text="${event.spots}"></ul>
             <ul class="kursDetailInfo">Raum</ul>
             <ul class="kursDetailInfoII" th:text="${event.location.getDisplayValue()}"></ul>
             <ul class="kursDetailInfo">Datum</ul>

@@ -42,7 +42,17 @@ public class User implements Comparable<User> {
     @Getter
     @Setter
     @Basic(optional = false)
-    private String name;
+    private String firstName;
+
+    @Getter
+    @Setter
+    @Basic(optional = false)
+    private String lastName;
+
+    @Getter
+    @Setter
+    @Basic(optional = false)
+    private String userName;
 
     @Basic(optional = false)
     private String password;
@@ -64,23 +74,25 @@ public class User implements Comparable<User> {
     private List<Booking> bookings;
 
     public User(String name) {
-        this.name = name;
+        this.userName = userName;
     }
 
-    public User(String name, String password, Set<Role> roles) {
-        this.name = name;
+    public User(String firstName, String lastName, String userName, String password, Set<Role> roles) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userName = userName;
         this.password = password;
         this.roles = roles;
     }
 
     @Override
     public int compareTo(User other) {
-        return this.name.compareTo(other.name);
+        return this.userName.compareTo(other.userName);
     }
 
     @Override
     public String toString() {
-        return name;
+        return userName;
     }
 
 }
