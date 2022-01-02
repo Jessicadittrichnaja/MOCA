@@ -60,13 +60,13 @@ public class EventService {
         return eventRepository.findAvailableEvents(user);
     }
 
-    public Integer countEventsWithSameData(Category category, LocalDate date, String description, Integer duration, LocalTime endTime, Location location, LocalTime startTime, String name, Integer spots) {
+    /*public Integer countEventsWithSameData(Category category, LocalDate date, String description, Integer duration, LocalTime endTime, Location location, LocalTime startTime, String name, Integer spots) {
         return eventRepository.countNumberEventsWithSameData(category, date, description, duration, endTime, location, startTime, name, spots);
     }
 
     public Integer countEventsWithSameDataThatAreNotEvent(Category category, LocalDate date, String description, Integer duration, LocalTime endTime, Location location, LocalTime startTime, String name, Integer id, Integer spots) {
         return eventRepository.countNumberEventsWithSameDataThatAreNotEvent(category, date, description, duration, endTime, location, startTime, name, id, spots);
-    }
+    }*/
 
     public void removeEvent(Event event) {
         eventRepository.delete(event);
