@@ -57,7 +57,7 @@ public class CourseController {
         }
         //im gleichen Raum können nicht gleichzeitig mehrere Events stattfinden
         if (eventService.countNumberEventsWithSameLocationAtSameTime(event.getLocation(), event.getDate(), event.getStartTime(), event.getEndTime()) == 1) {
-            model.addAttribute("error", "Es gibt schon ein Event in dem Raum zu der Zeit.");
+            model.addAttribute("error", "Es gibt in dem Zeitraum schon ein Event im gewählten Raum.");
             return ("eventPlanner/createEvent");
         }
         // Ende des Events muss vor 24 Uhr sein (Beginn + Dauer)
@@ -116,7 +116,7 @@ public class CourseController {
         }
         //im gleichen Raum können nicht gleichzeitig mehrere Events stattfinden
         if (eventService.countNumberEventsWithSameLocationAtSameTimeExceptCurrentEvent(id, event.getLocation(), event.getDate(), event.getStartTime(), event.getEndTime()) == 1) {
-            model.addAttribute("error", "Es gibt schon ein Event in dem Raum zu der Zeit.");
+            model.addAttribute("error", "Es gibt in dem Zeitraum schon ein Event im gewählten Raum.");
             return ("eventPlanner/editEvent");
         }
         eventService.save(event);
