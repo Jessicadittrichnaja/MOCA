@@ -2,6 +2,7 @@ package de.hsba.bi.project.filter;
 
 import de.hsba.bi.project.events.Daytime;
 import de.hsba.bi.project.events.Location;
+import de.hsba.bi.project.events.headSeminar;
 import org.springframework.stereotype.Component;
 
 import de.hsba.bi.project.events.Category;
@@ -16,6 +17,10 @@ import java.util.Date;
 
 @Component
 public class Filter {
+
+    @Getter
+    @Setter
+    private headSeminar selectedHeadSeminar;
 
     @Getter
     @Setter

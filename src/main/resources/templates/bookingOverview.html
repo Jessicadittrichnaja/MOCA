@@ -18,16 +18,20 @@
             <ul class="kursDetailInfoII" th:text="${event.description}"></ul>
             <ul class="kursDetailInfo">Kategorie</ul>
             <ul class="kursDetailInfoII" th:text="${event.category.getDisplayValue()}"></ul>
-            <ul class="kursDetailInfo">Dauer</ul>
-            <ul class="kursDetailInfoII" th:text="${event.duration} + ' Stunden'"></ul>
+            <ul class="kursDetailInfo">Seminarleiter(in)</ul>
+            <ul class="kursDetailInfoII" th:text="${event.headSeminar.getDisplayValue()}"></ul>
             <ul class="kursDetailInfo">Raum</ul>
             <ul class="kursDetailInfoII" th:text="${event.location.getDisplayValue()}"></ul>
             <ul class="kursDetailInfo">Datum</ul>
             <ul class="kursDetailInfoII" th:text="${event.date}"></ul>
+            <ul class="kursDetailInfo">Dauer</ul>
+            <ul class="kursDetailInfoII" th:text="${event.duration} + ' Stunden'"></ul>
             <ul class="kursDetailInfo">Start</ul>
             <ul class="kursDetailInfoII" th:text="${event.startTime}"></ul>
             <ul class="kursDetailInfo">Ende</ul>
             <ul class="kursDetailInfoII" th:text="${event.endTime}"></ul>
+            <ul class="kursDetailInfo">Anzahl möglicher Teilnehmer</ul>
+            <ul class="kursDetailInfoII" th:text="${event.spots}"></ul>
 
         </li>
     </ul>

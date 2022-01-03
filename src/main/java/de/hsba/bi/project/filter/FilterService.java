@@ -40,6 +40,9 @@ public class FilterService {
         if (filter.getSelectedDate() != null)
             filteredEvents.retainAll(eventService.findByDate(filter.getSelectedDate()));
 
+        if (filter.getSelectedHeadSeminar() != null)
+            filteredEvents.retainAll(eventService.findByHeadSeminar(filter.getSelectedHeadSeminar()));
+
         if (filter.getSelectedDaytime() == Daytime.Morgens)
             filteredEvents.retainAll(eventRepository.findEventsMorning());
         if (filter.getSelectedDaytime() == Daytime.Vormittags)

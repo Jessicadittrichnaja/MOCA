@@ -40,6 +40,8 @@
             <ul class="kursDetailInfoII" th:text="${event.description}"></ul>
             <ul class="kursDetailInfo">Kategorie</ul>
             <ul class="kursDetailInfoII" th:text="${event.category.getDisplayValue()}"></ul>
+            <ul class="kursDetailInfo">Seminarleiter(in)</ul>
+            <ul class="kursDetailInfoII" th:text="${event.headSeminar.getDisplayValue()}"></ul>
             <ul class="kursDetailInfo">Dauer</ul>
             <ul class="kursDetailInfoII" th:text="${event.duration} + ' Stunden'"></ul>
             <ul class="kursDetailInfo">Raum</ul>

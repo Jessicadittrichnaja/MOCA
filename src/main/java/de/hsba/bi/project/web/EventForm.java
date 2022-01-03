@@ -2,6 +2,7 @@ package de.hsba.bi.project.web;
 
 import de.hsba.bi.project.events.Category;
 import de.hsba.bi.project.events.Location;
+import de.hsba.bi.project.events.headSeminar;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -37,6 +38,11 @@ public class EventForm {
     @Getter
     @Setter
     private String description;
+
+    @NotNull(message = "Bitte eine Seminiarleiterin/ einen Seminarleiter wählen")
+    @Getter
+    @Setter
+    private headSeminar headSeminar;
 
     @NotNull(message = "Bitte eine Dauer wählen")
     @Getter

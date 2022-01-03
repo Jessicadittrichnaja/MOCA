@@ -32,6 +32,10 @@ public class Event implements Serializable {
 
     @Getter
     @Setter
+    private headSeminar headSeminar;
+
+    @Getter
+    @Setter
     private Category category;
 
     @Getter
@@ -78,9 +82,10 @@ public class Event implements Serializable {
     }
 
 
-    public Event(String name, String description, Category category, Integer duration, Integer spots, Location location, LocalDate date, LocalTime startTime, LocalTime endTime) {
+    public Event(String name, String description, headSeminar headSeminar, Category category, Integer duration, Integer spots, Location location, LocalDate date, LocalTime startTime, LocalTime endTime) {
             this.name = name;
             this.description = description;
+            this.headSeminar = headSeminar;
             this.category = category;
             this.duration = duration;
             this.spots = spots;

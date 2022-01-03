@@ -36,16 +36,13 @@
         </select>
       </div>
       <div class="col-md-6 form-group">
-        <label>Dauer (in Stunden)</label>
-        <input type="number" min="1" max="8" class="form-control" th:field="*{duration}"
-               th:classappend="${#fields.hasErrors('duration')? 'is-invalid' : ''}"/>
-        <span class="text-danger" th:errors="*{duration}"></span>
-      </div>
-      <div class="col-md-6 form-group">
-        <label>Anzahl freier Plätze</label>
-        <input type="number" min="1" max="50" class="form-control" th:field="*{spots}"
-               th:classappend="${#fields.hasErrors('spots')? 'is-invalid' : ''}"/>
-        <span class="text-danger" th:errors="*{spots}"></span>
+        <label>Seminarleiter(in)</label>
+        <select class="form-control" th:field="*{headSeminar}">
+          <option th:value="${null}" selected>Seminarleiter(in) wählen..</option>
+          <option th:each="headSeminar: ${T(de.hsba.bi.project.events.headSeminar).values()}" th:value="${headSeminar}" th:text="${headSeminar.displayValue}"
+                  th:classappend="${#fields.hasErrors('headSeminar')? 'is-invalid' : ''}"></option>
+          <span class="text-danger" th:errors="*{headSeminar}"></span>
+        </select>
       </div>
       <div class="col-md-6 form-group">
         <label>Raum</label>
@@ -55,6 +52,12 @@
                   th:classappend="${#fields.hasErrors('location')? 'is-invalid' : ''}"></option>
           <span class="text-danger" th:errors="*{location}"></span>
         </select>
+      </div>
+      <div class="col-md-6 form-group">
+        <label>Dauer (in Stunden)</label>
+        <input type="number" min="1" max="8" class="form-control" th:field="*{duration}"
+               th:classappend="${#fields.hasErrors('duration')? 'is-invalid' : ''}"/>
+        <span class="text-danger" th:errors="*{duration}"></span>
       </div>
       <div class="col-md-6 form-group">
         <label>Datum</label>
@@ -67,6 +70,12 @@
         <input type="time" min="08:00" max="20:00" style="height: inherit;" class="form-control" th:field="*{startTime}"
                th:classappend="${#fields.hasErrors('startTime')? 'is-invalid' : ''}"/>
         <span class="text-danger" th:errors="*{startTime}"></span>
+      </div>
+      <div class="col-md-6 form-group">
+        <label>Anzahl freier Plätze</label>
+        <input type="number" min="1" max="50" class="form-control" th:field="*{spots}"
+               th:classappend="${#fields.hasErrors('spots')? 'is-invalid' : ''}"/>
+        <span class="text-danger" th:errors="*{spots}"></span>
       </div>
       <br>
       <div>

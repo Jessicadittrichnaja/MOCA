@@ -17,9 +17,10 @@
         <td style="width:10%;border-right: 1px solid #ddd;">Name</td>
         <td style="width:18%;border-right: 1px solid #ddd;">Beschreibung</td>
         <td style="width:8%;border-right: 1px solid #ddd;">Kategorie</td>
-        <td style="width:8%;border-right: 1px solid #ddd;">Dauer</td>
+        <td style="width:8%;border-right: 1px solid #ddd;">Seminarleiter(in)</td>
         <td style="width:9%;border-right: 1px solid #ddd;">Raum</td>
         <td style="width:11%;border-right: 1px solid #ddd;">Datum</td>
+        <td style="width:8%;border-right: 1px solid #ddd;">Dauer</td>
         <td style="width:9%;border-right: 1px solid #ddd;">Beginn</td>
         <td style="width:9%;border-right: 1px solid #ddd;">Ende</td>
         <td></td>
@@ -28,9 +29,10 @@
         <td style="width:10%;border-right: 1px solid #ddd;" th:text="${booking.name}"></td>
         <td style="width:18%;border-right: 1px solid #ddd;" th:text="${booking.description}"></td>
         <td style="width:8%;border-right: 1px solid #ddd;" th:text="${booking.category.getDisplayValue()}"></td>
-        <td style="width:8%;border-right: 1px solid #ddd;" th:text="${booking.duration}+ ' Stunden'"></td>
+        <td style="width:8%;border-right: 1px solid #ddd;" th:text="${booking.headSeminar.getDisplayValue()}"></td>
         <td style="width:9%;border-right: 1px solid #ddd;" th:text="${booking.location.getDisplayValue()}"></td>
         <td style="width:11%;border-right: 1px solid #ddd;" th:text="${booking.date}"></td>
+        <td style="width:8%;border-right: 1px solid #ddd;" th:text="${booking.duration}+ ' Stunden'"></td>
         <td style="width:9%;border-right: 1px solid #ddd;" th:text="${booking.startTime}+ ' Uhr'"></td>
         <td style="width:9%;border-right: 1px solid #ddd;" th:text="${booking.endTime}+ ' Uhr'"></td>
         <td>

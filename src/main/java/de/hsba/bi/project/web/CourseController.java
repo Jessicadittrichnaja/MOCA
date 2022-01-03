@@ -60,6 +60,10 @@ public class CourseController {
             model.addAttribute("error", "Es gibt in dem Zeitraum schon ein Event im gewählten Raum.");
             return ("eventPlanner/createEvent");
         }
+        if (eventService.countNumberEventsWithSameHeadSeminarAtSameTime(event.getHeadSeminar(), event.getDate(), event.getStartTime(), event.getEndTime()) == 1) {
+            model.addAttribute("error", "Der/ die Seminarleiter(in) ist für den Zeitraum leider nicht verfügbar.");
+            return ("eventPlanner/createEvent");
+        }
         // Ende des Events muss vor 24 Uhr sein (Beginn + Dauer)
         LocalTime startTime = event.getStartTime();
         LocalTime endingTime = startTime.plusHours(event.getDuration());
@@ -117,6 +121,10 @@ public class CourseController {
         //im gleichen Raum können nicht gleichzeitig mehrere Events stattfinden
         if (eventService.countNumberEventsWithSameLocationAtSameTimeExceptCurrentEvent(id, event.getLocation(), event.getDate(), event.getStartTime(), event.getEndTime()) == 1) {
             model.addAttribute("error", "Es gibt in dem Zeitraum schon ein Event im gewählten Raum.");
+            return ("eventPlanner/editEvent");
+        }
+        if (eventService.countNumberEventsWithSameHeadSeminarAtSameTimeExceptCurrentEvent(id, event.getHeadSeminar(), event.getDate(), event.getStartTime(), event.getEndTime()) == 1) {
+            model.addAttribute("error", "Der/ die Seminarleiter(in) ist für den Zeitraum leider nicht verfügbar.");
             return ("eventPlanner/editEvent");
         }
         eventService.save(event);

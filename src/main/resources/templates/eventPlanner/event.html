@@ -17,12 +17,13 @@
         <td style="width:10%;border-right: 1px solid #ddd;">Name</td>
         <td style="width:20%;border-right: 1px solid #ddd;">Beschreibung</td>
         <td style="width:8%;border-right: 1px solid #ddd;">Kategorie</td>
-        <td style="width:7%;border-right: 1px solid #ddd;">Dauer</td>
-        <td style="width:7%;border-right: 1px solid #ddd;">Anzahl freier Plätze</td>
+        <td style="width:8%;border-right: 1px solid #ddd;">Seminarleiter(in)</td>
         <td style="width:9%;border-right: 1px solid #ddd;">Raum</td>
+        <td style="width:7%;border-right: 1px solid #ddd;">Dauer</td>
         <td style="width:11%;border-right: 1px solid #ddd;">Datum</td>
         <td style="width:9%;border-right: 1px solid #ddd;">Beginn</td>
         <td style="width:9%;border-right: 1px solid #ddd;">Ende</td>
+        <td style="width:7%;border-right: 1px solid #ddd;">Anzahl freier Plätze</td>
         <td style="border-right: 1px solid #ddd;">Status</td>
         <td></td>
     </tr>
@@ -30,12 +31,13 @@
         <td style="width:10%;border-right: 1px solid #ddd;" th:text="${event.name}"></td>
         <td style="width:20%;border-right: 1px solid #ddd;" th:text="${event.description}"></td>
         <td style="width:8%;border-right: 1px solid #ddd;" th:text="${event.category.getDisplayValue()}"></td>
-        <td style="width:7%;border-right: 1px solid #ddd;" th:text="${event.duration}+ ' Stunden'"></td>
-        <td style="width:7%;border-right: 1px solid #ddd;" th:text="${event.spots}"></td>
+        <td style="width:8%;border-right: 1px solid #ddd;" th:text="${event.headSeminar.getDisplayValue()}"></td>
         <td style="width:9%;border-right: 1px solid #ddd;" th:text="${event.location.getDisplayValue()}"></td>
+        <td style="width:7%;border-right: 1px solid #ddd;" th:text="${event.duration}+ ' Stunden'"></td>
         <td style="width:11%;border-right: 1px solid #ddd;" th:text="${event.date}"></td>
         <td style="width:9%;border-right: 1px solid #ddd;" th:text="${event.startTime}+ ' Uhr'"></td>
         <td style="width:9%;border-right: 1px solid #ddd;" th:text="${event.endTime}+ ' Uhr'"></td>
+        <td style="width:7%;border-right: 1px solid #ddd;" th:text="${event.spots}"></td>
         <td style="border-right: 1px solid #ddd;" th:switch="${event.isClosed}">
             <div th:case="false">Offen</div>
             <div th:case="true">Geschlossen</div>

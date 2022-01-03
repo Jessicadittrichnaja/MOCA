@@ -17,6 +17,7 @@ public class EventFormConverter {
         EventForm form = new EventForm();
         form.setName(event.getName());
         form.setDescription(event.getDescription());
+        form.setHeadSeminar(event.getHeadSeminar());
         form.setCategory(event.getCategory());
         form.setDuration(event.getDuration());
         form.setLocation(event.getLocation());
@@ -29,6 +30,7 @@ public class EventFormConverter {
     Event update(Event event, EventForm form) {
         event.setName(form.getName());
         event.setDescription(form.getDescription());
+        event.setHeadSeminar(form.getHeadSeminar());
         event.setCategory(form.getCategory());
         event.setDuration(form.getDuration());
         event.setLocation(form.getLocation());

@@ -56,6 +56,14 @@ public class EventService {
         }
         return events;
     }
+
+    public List<Event> findByHeadSeminar(headSeminar headSeminar) {
+        List<Event> events = eventRepository.findByHeadSeminar(headSeminar);
+        for (Event event : events) {
+        }
+        return events;
+    }
+
     public List<Event> findEvents(User user) {
         return eventRepository.findAvailableEvents(user);
     }
@@ -118,5 +126,13 @@ public class EventService {
 
     public Integer countNumberEventsWithSameLocationAtSameTimeExceptCurrentEvent(Integer id, Location location, LocalDate date, LocalTime startTime, LocalTime endTime) {
         return eventRepository.countNumberEventsWithSameLocationAtSameTimeExceptCurrentEvent(id, location, date, startTime, endTime);
+    }
+
+    public Integer countNumberEventsWithSameHeadSeminarAtSameTime(headSeminar headSeminar, LocalDate date, LocalTime startTime, LocalTime endTime) {
+        return eventRepository.countNumberEventsWithSameHeadSeminarAtSameTime(headSeminar, date, startTime, endTime);
+    }
+
+    public Integer countNumberEventsWithSameHeadSeminarAtSameTimeExceptCurrentEvent(Integer id, headSeminar headSeminar, LocalDate date, LocalTime startTime, LocalTime endTime) {
+        return eventRepository.countNumberEventsWithSameHeadSeminarAtSameTimeExceptCurrentEvent(id, headSeminar, date, startTime, endTime);
     }
 }

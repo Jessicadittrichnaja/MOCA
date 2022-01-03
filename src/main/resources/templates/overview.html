@@ -30,6 +30,14 @@
                         </option>
                     </select>
                 </div>
+                <div class="sncontainer">Seminarleiter(in): <br>
+                    <select id="headSeminar" th:field="*{selectedHeadSeminar}" style="width: 175px; height: 20px;">
+                        <option th:value="${null}" selected>Kategorie auswählen</option>
+                        <option th:each="headSeminar : ${T(de.hsba.bi.project.events.headSeminar).values()}" th:value="${headSeminar}"
+                                th:text="${headSeminar.displayValue}">
+                        </option>
+                    </select>
+                </div>
                 <div class="sncontainer">
                     <label>Datum:</label>
                     <input type="date" th:field="*{selectedDate}" style="width: 175px; height: 20px;">
@@ -61,6 +69,7 @@
                     <div class="EventBeschreibung">
                         <div style ="font-weight:bold;font-size:20px;" class="EventName" th:text="${event.name}" th:value="${event.name}"></div>
                         <div class="EventInfo" th:text="${'Kategorie: ' + event.category.getDisplayValue()}" th:value="${event.category.getDisplayValue()}"></div>
+                        <div class="EventInfo" th:text="${'Seminarleiter(in): ' + event.headSeminar.getDisplayValue()}" th:value="${event.headSeminar.getDisplayValue()}"></div>
                         <div class="EventInfo" th:text="${'Raum: ' + event.location.getDisplayValue()}" th:value="${event.location.getDisplayValue()}"></div>
                         <div class="EventInfo" th:text="${'Datum: ' + event.date}" th:value="${event.date}"></div>
                         <div class="EventInfo" th:text="${'Start: ' + event.startTime}+ ' Uhr'" th:value="${event.startTime}"></div>

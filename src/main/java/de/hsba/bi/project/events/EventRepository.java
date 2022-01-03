@@ -28,6 +28,8 @@ public interface EventRepository extends CrudRepository<Event, Long> {
 
     List<Event> findByDate(LocalDate date);
 
+    List<Event> findByHeadSeminar(headSeminar headSeminar);
+
     Optional<Event> findById(Integer id);
 
     // Methoden z.B. zum Runterzählen/ Hochzählen von freien Plätzen für Events bei Buchungen/ Löschen von Buchungen durch Mitarbeiter. Die Queries werden in den Controllern genutzt, die Funktionsweise wird dort jeweils näher erläutert.
@@ -96,6 +98,11 @@ public interface EventRepository extends CrudRepository<Event, Long> {
     @Query("SELECT Count(id) from Event e where e.id!= :id and e.location= :location and e.date= :date and ((e.startTime <= :startTime and e.endTime >= :endTime) or (e.startTime < :endTime and e.endTime > :endTime) or (e.startTime < :startTime and e.endTime > :startTime))")
     Integer countNumberEventsWithSameLocationAtSameTimeExceptCurrentEvent(@Param("id")Integer id, @Param("location")Location location, @Param("date")LocalDate date, @Param("startTime")LocalTime startTime,  @Param("endTime")LocalTime endTime);
 
+    @Query("SELECT Count(id) from Event e where e.headSeminar= :headSeminar and e.date= :date and ((e.startTime <= :startTime and e.endTime >= :endTime) or (e.startTime < :endTime and e.endTime > :endTime) or (e.startTime < :startTime and e.endTime > :startTime))")
+    Integer countNumberEventsWithSameHeadSeminarAtSameTime(@Param("headSeminar")headSeminar headSeminar, @Param("date")LocalDate date, @Param("startTime")LocalTime startTime,  @Param("endTime")LocalTime endTime);
+
+    @Query("SELECT Count(id) from Event e where e.id!= :id and e.headSeminar= :headSeminar and e.date= :date and ((e.startTime <= :startTime and e.endTime >= :endTime) or (e.startTime < :endTime and e.endTime > :endTime) or (e.startTime < :startTime and e.endTime > :startTime))")
+    Integer countNumberEventsWithSameHeadSeminarAtSameTimeExceptCurrentEvent(@Param("id")Integer id, @Param("headSeminar")headSeminar headSeminar, @Param("date")LocalDate date, @Param("startTime")LocalTime startTime,  @Param("endTime")LocalTime endTime);
 }
 
 
