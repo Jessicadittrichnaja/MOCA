@@ -36,6 +36,11 @@ public class EventService {
         return event;
     }
 
+    public Event findByName(String name) {
+        Event event = eventRepository.findByName(name).orElse(null);
+        return event;
+    }
+
     public List<Event> findByCategory(Category category) {
         List<Event> events = eventRepository.findByCategory(category);
         for (Event event : events) {

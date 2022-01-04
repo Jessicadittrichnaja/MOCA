@@ -34,6 +34,11 @@ public class BookingService {
         return booking;
     };
 
+    public Booking findByEvent(Event event) {
+        Booking booking = bookingRepository.findByEvent(event).orElse(null);
+        return booking;
+    };
+
     public void removeBooking(Booking booking)  {
         bookingRepository.delete(booking);
     }

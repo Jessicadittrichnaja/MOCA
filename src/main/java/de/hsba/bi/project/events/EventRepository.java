@@ -18,7 +18,7 @@ import java.util.Optional;
 @Repository
 public interface EventRepository extends CrudRepository<Event, Long> {
 
-    Event findByName(String name);
+    Optional<Event> findByName(String name);
 
     List<Event> findByNameContaining(String name);
 

@@ -1,5 +1,6 @@
 package de.hsba.bi.project.events;
 
+import de.hsba.bi.project.bookingProcess.Booking;
 import de.hsba.bi.project.roles.Role;
 import de.hsba.bi.project.roles.RoleRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ public class TestData {
         @Transactional
         public void init() {
             // add some events
-            Event programmierung = new Event ("Programmierung 2", "Ziel des Kurses Programmierung 2 ist das Erlernen grundlegender Konzepte der imperativen und objektorientierten Programmierung anhand der Programmiersprache Java.", headSeminar.Günther, Category.Seminar, 8, 1, Location.Seminarraum1, LocalDate.of(2022, 1, 23), LocalTime.of(10, 15), LocalTime.of(10,15).plusHours(8));
+            /*Event programmierung = new Event ("Programmierung 2", "Ziel des Kurses Programmierung 2 ist das Erlernen grundlegender Konzepte der imperativen und objektorientierten Programmierung anhand der Programmiersprache Java.", headSeminar.Günther, Category.Seminar, 8, 1, Location.Seminarraum1, LocalDate.of(2022, 1, 23), LocalTime.of(10, 15), LocalTime.of(10,15).plusHours(8));
             Event backen = new Event("Weihnachtliches Kekse backen", "Werden Sie zum Keks-Profi in diesem lustigen Backkurs. Der stärkt nicht nur das Team, sondern auch Sie.", headSeminar.Anne, Category.Teamtag, 3, 15, Location.grosseHalle, LocalDate.of(2022, 12, 20), LocalTime.of(11, 30), LocalTime.of(11,30).plusHours(3));
             Event agileMethoden = new Event("Agile Methoden", "In diesem Seminar lernen Sie alles zum Thema agile Methoden.", headSeminar.Klausi, Category.Seminar, 3, 15, Location.Beamerraum, LocalDate.of(2022, 4, 8), LocalTime.of(15, 45), LocalTime.of(15,45).plusHours(3));
             Event excel1 = new Event ("Excel Kurs (Basiswissen)", "Der Umgang mit Microsoft Excel ist mittlerweile zu einer Grundvoraussetzung im Büroalltag geworden. Das Basiswissen und die wichtigsten Funktionalitäten von Microsoft Excel werden in diesem Kurs vermittelt.", headSeminar.Sabine, Category.Seminar, 4, 15, Location.Seminarraum2, LocalDate.of(2022, 10, 23), LocalTime.of(9, 00), LocalTime.of(9,00).plusHours(4));
@@ -63,6 +64,6 @@ public class TestData {
             eventService.save(tableau2);
             eventService.save(sql2);
             eventService.save(weinverkostung);
-            eventService.save(trommeln);
+            eventService.save(trommeln);*/
         }
     }
