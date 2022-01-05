@@ -22,10 +22,10 @@
         <td></td>
     </tr>
     <tr th:each = "user: ${users}" style="border: 1px solid #ddd;">
-        <td style="border-right: 1px solid #ddd;width:25%;" th:text="${user.firstName}"></span></td>
-        <td style="border-right: 1px solid #ddd;width:25%;" th:text="${user.lastName}"></span></td>
-        <td style="border-right: 1px solid #ddd;width:25%;" th:text="${user.userName}"></span></td>
-        <td style="border-right: 1px solid #ddd;width:25%;" th:text="${user.roles}"></span></td>
+        <td style="border-right: 1px solid #ddd;width:25%;" th:text="${user.firstName}"></td>
+        <td style="border-right: 1px solid #ddd;width:25%;" th:text="${user.lastName}"></td>
+        <td style="border-right: 1px solid #ddd;width:25%;" th:text="${user.userName}"></td>
+        <td style="border-right: 1px solid #ddd;width:25%;"> <p th:each="userRole : ${user.roles}" th:text="${userRole}"></p></td>
         <td style="border-right: 1px solid #ddd;width:25%;">
             <div th:switch="${user.isEnabled}">
                 <a th:case="true">Aktiviert</a>

@@ -2,6 +2,7 @@ package de.hsba.bi.project.web;
 
 import de.hsba.bi.project.events.EventRepository;
 import de.hsba.bi.project.events.EventService;
+import de.hsba.bi.project.filter.FilterService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
