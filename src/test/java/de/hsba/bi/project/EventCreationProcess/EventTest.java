@@ -1,10 +1,7 @@
 package de.hsba.bi.project.EventCreationProcess;
 
 
-import de.hsba.bi.project.events.Category;
-import de.hsba.bi.project.events.Event;
-import de.hsba.bi.project.events.EventRepository;
-import de.hsba.bi.project.events.Location;
+import de.hsba.bi.project.events.*;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +15,7 @@ class EventTest {
 
     String              name;
     String              description;
+    headSeminar         headSeminar;
     Category            category;
     Integer             duration;
     Integer             spots;
@@ -37,6 +35,7 @@ class EventTest {
         // given
         name        = new String("Programmierung 2");
         description = new String("Programmierveranstaltung");
+        headSeminar = headSeminar.Günther;
         category    = Category.Seminar;
         duration    = 3;
         spots       = 1;
@@ -46,11 +45,12 @@ class EventTest {
         endTime     = LocalTime.of(15,30).plusHours(3);
 
         // when
-        Event event = new Event(name, description, category, duration, spots, location, date,startTime,endTime);
+        Event event = new Event(name, description, headSeminar, category, duration, spots, location, date,startTime,endTime);
 
         // then
         String name         = "Programmierung 2";
         String description  = "Programmierveranstaltung";
+        String headSeminar  = "Günther";
         String category     = "Seminar";
         Integer duration    =  3;
         Integer spots       =  1;

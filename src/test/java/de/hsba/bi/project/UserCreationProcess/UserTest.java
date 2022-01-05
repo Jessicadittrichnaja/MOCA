@@ -34,7 +34,7 @@ class UserTest {
         Role roleEmployee = new Role ("Mitarbeiter");
         Set<Role> rolesEnrico = new HashSet<>();
         rolesEnrico.add(roleEmployee);
-        user  = new User("Enrico", "password", rolesEnrico);
+        user  = new User("Enrico", "Nehls", "enrico", "password", rolesEnrico);
         // when
         Set<Role> roles = user.getRoles();
         // then

@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import de.hsba.bi.project.events.Category;
 import de.hsba.bi.project.events.Location;
+import de.hsba.bi.project.events.headSeminar;
 import de.hsba.bi.project.roles.Role;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -38,14 +39,14 @@ class BookingTest {
         Role roleEmployee = new Role ("MITARBEITER");
         Set<Role> rolesEnrico = new HashSet<>();
         rolesEnrico.add(roleEmployee);
-        event = new Event ("Programmierung 2", "Projekt", Category.Seminar, 8, 1, Location.Seminarraum1, LocalDate.of(2021, 10, 23), LocalTime.of(15, 30), LocalTime.of(15, 30).plusHours(8));
-        user  = new User("Enrico", "password", rolesEnrico);
+        event = new Event ("Programmierung 2", "Projekt", headSeminar.Anne, Category.Seminar, 8, 1, Location.Seminarraum1, LocalDate.of(2021, 10, 23), LocalTime.of(15, 30), LocalTime.of(15, 30).plusHours(8));
+        user  = new User("Enrico", "Nehls", "enrico", "password", rolesEnrico);
         // when
         Booking booking = new Booking(event, user);
         // then
         assertThat(booking.getEvent().getCategory().toString()).isEqualTo("Seminar");
-        assertThat(booking.getUser().getName()).isEqualTo("Enrico");
-        System.out.printf("%s hat eine Veranstaltung mit der Kategorie %s gebucht.", booking.getUser().getName(), booking.getEvent().getCategory());
+        assertThat(booking.getUser().getUserName()).isEqualTo("enrico");
+        System.out.printf("%s hat eine Veranstaltung mit der Kategorie %s gebucht.", booking.getUser().getUserName(), booking.getEvent().getCategory());
 
     }
 
