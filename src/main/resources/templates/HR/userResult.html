@@ -19,10 +19,10 @@
 
     </tr>
     <tr th:each = "user: ${user}" style="border: 1px solid #ddd;">
-        <td style="width:50%;border-right: 1px solid #ddd;" th:text="${user.firstName}"></span></td>
-        <td style="width:50%;border-right: 1px solid #ddd;" th:text="${user.lastName}"></span></td>
-        <td style="width:50%;border-right: 1px solid #ddd;" th:text="${user.userName}"></span></td>
-        <td style="width:50%;" th:text="${user.roles}"></span></td>
+        <td style="width:25%;border-right: 1px solid #ddd;" th:text="${user.firstName}"></span></td>
+        <td style="width:25%;border-right: 1px solid #ddd;" th:text="${user.lastName}"></span></td>
+        <td style="width:25%;border-right: 1px solid #ddd;" th:text="${user.userName}"></span></td>
+        <td style="border-right: 1px solid #ddd;width:25%;"> <p th:each="userRole : ${user.roles}" th:text="${userRole}"></p></td>
     </tr>
 </table>
 <br>

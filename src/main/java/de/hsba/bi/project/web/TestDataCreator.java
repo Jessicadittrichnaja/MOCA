@@ -44,7 +44,6 @@ public class TestDataCreator {
         roleRepository.save(roleEventPlanner);
 
         Set<Role> rolesEnrico = new HashSet<>();
-        rolesEnrico.add(roleEmployee);
         rolesEnrico.add(roleEventPlanner);
 
         Set<Role> rolesJessica = new HashSet<>();
@@ -55,7 +54,7 @@ public class TestDataCreator {
         rolesFynn.add(roleEventPlanner);
 
         Set<Role> rolesDaniel = new HashSet<>();
-        rolesDaniel.add(roleEmployee);
+        rolesDaniel.add(roleHR);
 
        // add some users
         User enrico = createUser("Enrico", "Nehls", "enrico", "password", rolesEnrico);

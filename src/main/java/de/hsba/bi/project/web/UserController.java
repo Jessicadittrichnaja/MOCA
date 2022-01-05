@@ -71,6 +71,21 @@ public class UserController {
             model.addAttribute("listRoles", listRoles);
             return "HR/createUser";
         }
+        if (user.getRoles().contains(roleService.findByRole("Terminverwalter")) && user.getRoles().contains(roleService.findByRole("Personalabteilung")) && user.getRoles().contains(roleService.findByRole("Mitarbeiter"))){
+            model.addAttribute("error", "Der User kann entweder die Rolle Mitarbeiter haben oder die Rolle Terminverwalter und/ oder Personalabteilung, aber nicht alle 3.");
+            model.addAttribute("listRoles", listRoles);
+            return "HR/createUser";
+        }
+        if (user.getRoles().contains(roleService.findByRole("Personalabteilung")) && user.getRoles().contains(roleService.findByRole("Mitarbeiter"))){
+            model.addAttribute("error", "Der User kann nicht gleichzeitig die Rolle Mitarbeiter und Personalabteilung haben.");
+            model.addAttribute("listRoles", listRoles);
+            return "HR/createUser";
+        }
+        if (user.getRoles().contains(roleService.findByRole("Terminverwalter")) && user.getRoles().contains(roleService.findByRole("Mitarbeiter"))){
+            model.addAttribute("error", "Der User kann nicht gleichzeitig die Rolle Mitarbeiter und Terminverwalter haben.");
+            model.addAttribute("listRoles", listRoles);
+            return "HR/createUser";
+        }
         userService.save(user);
         return "HR/userResult";
     }
@@ -232,8 +247,8 @@ public class UserController {
         }
         // Wenn der User der einzige User mit Rolle Personalabteilung ist, kann diese nicht geändert werden.
 
-        if (userService.checkIfUserHasRoleHR(id) == 1 && userService.countUsersWithRoleHR() == 1 && !userService.findById(id).getRoles().contains(roleRepository.findByRole("PERSONALABTEILUNG"))) {
-            model.addAttribute("error2", "Dies ist der einige Mitarbeiter mit der Rolle Personalabteilung. Kein Ändern der Rolle möglich.");
+        if (userService.checkIfUserHasRoleHR(id) == 1 && userService.countUsersWithRoleHR() == 1 && !userService.findById(id).getRoles().contains(roleService.findByRole("PERSONALABTEILUNG"))) {
+            model.addAttribute("error", "Dies ist der einige Mitarbeiter mit der Rolle Personalabteilung. Kein Ändern der Rolle möglich.");
             model.addAttribute("listRoles", listRoles);
             return "HR/editUser";
         }
@@ -241,7 +256,7 @@ public class UserController {
         // Wenn der User, der bearbeitet werden soll, dem angemeldeten User entspricht, gibt es eine Fehlermeldung. User sollen sich nicht selber bearbeiten können.
 
         if (userService.findById(id) == userService.findCurrentUser()) {
-            model.addAttribute("error3", "Du kannst deine Angaben nicht selber bearbeiten.");
+            model.addAttribute("error", "Du kannst deine Angaben nicht selber bearbeiten.");
             model.addAttribute("listRoles", listRoles);
             return "HR/editUser";
         }
@@ -251,7 +266,22 @@ public class UserController {
         User user = userFormConverter1.update(userService.findUser(id), form);
         if (userService.countUsersWithSameNameThatAreNotEditedUser(user.getUserName(), user.getId()) == 1){
             model.addAttribute("listRoles", listRoles);
-            model.addAttribute("error4", "Den User gibt es schon.");
+            model.addAttribute("error", "Den User gibt es schon.");
+            return "HR/editUser";
+        }
+        if (user.getRoles().contains(roleService.findByRole("Terminverwalter")) && user.getRoles().contains(roleService.findByRole("Personalabteilung")) && user.getRoles().contains(roleService.findByRole("Mitarbeiter"))){
+            model.addAttribute("error", "Der User kann entweder die Rolle Mitarbeiter haben oder die Rolle Terminverwalter und/ oder Personalabteilung, aber nicht alle 3.");
+            model.addAttribute("listRoles", listRoles);
+            return "HR/editUser";
+        }
+        if (user.getRoles().contains(roleService.findByRole("Personalabteilung")) && user.getRoles().contains(roleService.findByRole("Mitarbeiter"))){
+            model.addAttribute("error", "Der User kann nicht gleichzeitig die Rolle Mitarbeiter und Personalabteilung haben.");
+            model.addAttribute("listRoles", listRoles);
+            return "HR/editUser";
+        }
+        if (user.getRoles().contains(roleService.findByRole("Terminverwalter")) && user.getRoles().contains(roleService.findByRole("Mitarbeiter"))){
+            model.addAttribute("error", "Der User kann nicht gleichzeitig die Rolle Mitarbeiter und Terminverwalter haben.");
+            model.addAttribute("listRoles", listRoles);
             return "HR/editUser";
         }
         userService.save(user);

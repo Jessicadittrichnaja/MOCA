@@ -42,6 +42,11 @@ public class RoleService {
         return role;
     }
 
+    public Role findByRole(String roleUser) {
+        Role role = roleRepository.findByRole(roleUser);
+        return role;
+    }
+
     public void removeRole(Role role)  {
         roleRepository.delete(role);
     }
