@@ -21,8 +21,11 @@
         <td style="width:50%;" th:text="${booking.firstName}"></td>
         <td style="width:50%;" th:text="${booking.lastName}"></td>
     </tr>
-
 </table>
+<div style="height: 100px; text-align: center;padding-top:25px;">
+    <a type="button" style="background-color: rosybrown;border-radius: 5px;border-style:none;color:ghostwhite; text-decoration:none;" th:href="@{/booking}">
+        Zurück
+    </a>
 </div>
 <div th:replace="allPages/footer :: footer">...</div>
 
