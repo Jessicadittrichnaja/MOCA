@@ -429,7 +429,7 @@ select {
     align-items: center;
     flex-direction: column;
     text-align:center;
-    height:350px;
+    height:400px;
 
 }
 
@@ -441,7 +441,7 @@ select {
 }
 
 .EventInfo {
-    font-size: 18px;
+    font-size: 16px;
     color: #fff;
 }
 
