@@ -24,7 +24,6 @@ import java.util.*;
 public class User implements Comparable<User> {
 
     // um angemeldeten User zu ermitteln
-
     public static String getCurrentUsername() {
         Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         if (principal instanceof UserDetails) {

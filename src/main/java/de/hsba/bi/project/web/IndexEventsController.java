@@ -21,7 +21,6 @@ public class IndexEventsController {
     private final EventRepository eventRepository;
 
     // zeigt Beispiel-Events auf der Index-Seite
-
     @GetMapping
     public String eventsIndex(Model model) {
         model.addAttribute("events", eventRepository.findTop3ByOrderByIdAsc());

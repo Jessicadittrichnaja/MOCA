@@ -20,7 +20,6 @@ public class EventController {
     private final EventService eventService;
 
     // zeigt alle Events
-
     @GetMapping
     public String eventList(Model model) {
         model.addAttribute("events", eventService.findAll());

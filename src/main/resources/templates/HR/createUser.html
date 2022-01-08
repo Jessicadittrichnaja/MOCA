@@ -11,7 +11,7 @@
 <br>
 <h2 style="text-align: center;">Neuen User anlegen</h2>
 <br>
-<div style="margin-left:34vw;font-size:20px;padding-bottom:100px;">
+<div style="margin-left:34vw;font-size:20px;">
     <form action="#" th:action="@{/HR/createUser}" th:object="${user}" method="post">
         <div class="form-row">
             <div class="col-md-6 form-group">
@@ -27,7 +27,7 @@
                 <span class="text-danger" th:errors="*{lastName}"></span>
             </div>
             <div class="col-md-6 form-group">
-                <label>Benutzername</label>
+                <label>Nutzername</label>
                 <input type="text" class="form-control" th:field="*{userName}"
                        th:classappend="${#fields.hasErrors('userName')? 'is-invalid' : ''}"/>
                 <span class="text-danger" th:errors="*{userName}"></span>

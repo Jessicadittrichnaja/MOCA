@@ -68,12 +68,6 @@ public interface EventRepository extends CrudRepository<Event, Long> {
     @Query("SELECT e.isClosed FROM Event e WHERE e.id = :id")
     boolean isEventOpen(@Param("id") Integer id);
 
-    /*@Query("SELECT Count(id) from Event e where e.category= :category and e.date= :date and e.description= :description and e.duration= :duration and e.endTime= :endTime and e.location= :location and e.startTime= :startTime and e.name= :name and e.spots= :spots")
-    Integer countNumberEventsWithSameData(@Param("category")Category category, @Param("date")LocalDate date, @Param("description")String description, @Param("duration")Integer duration, @Param("endTime")LocalTime endTime, @Param("location")Location location, @Param("startTime")LocalTime startTime, @Param("name")String name, @Param("spots")Integer spots);
-
-    @Query("SELECT Count(id) from Event e where e.category= :category and e.date= :date and e.description= :description and e.duration= :duration and e.endTime= :endTime and e.location= :location and e.startTime= :startTime and e.name= :name and e.spots= :spots and e.id != :id")
-    Integer countNumberEventsWithSameDataThatAreNotEvent(@Param("category")Category category, @Param("date")LocalDate date, @Param("description")String description, @Param("duration")Integer duration, @Param("endTime")LocalTime endTime, @Param("location")Location location, @Param("startTime")LocalTime startTime, @Param("name")String name, @Param("id") Integer id, @Param("spots")Integer spots);
-*/
     List<Event> findTop3ByOrderByIdAsc();
 
     // Für die Filterung der Events nach Tageszeiten
@@ -92,16 +86,16 @@ public interface EventRepository extends CrudRepository<Event, Long> {
 
     //damit keine Überschneidungen von Terminen zur gleichen Zeit im gleichen Raum möglich sind
 
-    @Query("SELECT Count(id) from Event e where e.location= :location and e.date= :date and ((e.startTime <= :startTime and e.endTime >= :endTime) or (e.startTime < :endTime and e.endTime > :endTime) or (e.startTime < :startTime and e.endTime > :startTime))")
+    @Query("SELECT Count(id) from Event e where e.location= :location and e.date= :date and (e.startTime < :endTime AND e.endTime > :startTime)")
     Integer countNumberEventsWithSameLocationAtSameTime(@Param("location")Location location, @Param("date")LocalDate date, @Param("startTime")LocalTime startTime,  @Param("endTime")LocalTime endTime);
 
-    @Query("SELECT Count(id) from Event e where e.id!= :id and e.location= :location and e.date= :date and ((e.startTime <= :startTime and e.endTime >= :endTime) or (e.startTime < :endTime and e.endTime > :endTime) or (e.startTime < :startTime and e.endTime > :startTime))")
+    @Query("SELECT Count(id) from Event e where e.id!= :id and e.location= :location and e.date= :date and (e.startTime < :endTime AND e.endTime > :startTime)")
     Integer countNumberEventsWithSameLocationAtSameTimeExceptCurrentEvent(@Param("id")Integer id, @Param("location")Location location, @Param("date")LocalDate date, @Param("startTime")LocalTime startTime,  @Param("endTime")LocalTime endTime);
 
-    @Query("SELECT Count(id) from Event e where e.headSeminar= :headSeminar and e.date= :date and ((e.startTime <= :startTime and e.endTime >= :endTime) or (e.startTime < :endTime and e.endTime > :endTime) or (e.startTime < :startTime and e.endTime > :startTime))")
+    @Query("SELECT Count(id) from Event e where e.headSeminar= :headSeminar and e.date= :date and (e.startTime < :endTime AND e.endTime > :startTime)")
     Integer countNumberEventsWithSameHeadSeminarAtSameTime(@Param("headSeminar")headSeminar headSeminar, @Param("date")LocalDate date, @Param("startTime")LocalTime startTime,  @Param("endTime")LocalTime endTime);
 
-    @Query("SELECT Count(id) from Event e where e.id!= :id and e.headSeminar= :headSeminar and e.date= :date and ((e.startTime <= :startTime and e.endTime >= :endTime) or (e.startTime < :endTime and e.endTime > :endTime) or (e.startTime < :startTime and e.endTime > :startTime))")
+    @Query("SELECT Count(id) from Event e where e.id!= :id and e.headSeminar= :headSeminar and e.date= :date and (e.startTime < :endTime AND e.endTime > :startTime)")
     Integer countNumberEventsWithSameHeadSeminarAtSameTimeExceptCurrentEvent(@Param("id")Integer id, @Param("headSeminar")headSeminar headSeminar, @Param("date")LocalDate date, @Param("startTime")LocalTime startTime,  @Param("endTime")LocalTime endTime);
 }
 

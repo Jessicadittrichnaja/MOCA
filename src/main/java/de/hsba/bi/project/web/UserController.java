@@ -47,7 +47,6 @@ public class UserController {
     private EventService eventService;
 
     // Erstellung eines neuen Users
-
     @GetMapping("/HR/createUser")
     public String Form(Model model) {
         model.addAttribute("user", new User());
@@ -57,7 +56,6 @@ public class UserController {
     }
 
     // Speichern des neuen Users, wenn valide und der Name noch nicht in der Datenbank vorhanden ist. Wenn Felder nicht gefüllt sind, gibt es eine Fehlermeldung.
-
     @PostMapping("/HR/createUser")
     public String saveUser(@ModelAttribute("user") @Valid UserForm form, BindingResult result, Model model) {
         List<Role> listRoles = roleService.findAll();
@@ -65,30 +63,32 @@ public class UserController {
             model.addAttribute("listRoles", listRoles);
             return "HR/createUser";
         }
-        User user = userFormConverter.update(new User(), form);
-        if (userService.countUsersWithSameName(user.getUserName()) == 1){
+        if (userService.countUsersWithSameName(form.getUserName()) == 1){
             model.addAttribute("error", "Den User gibt es schon.");
             model.addAttribute("listRoles", listRoles);
             return "HR/createUser";
         }
-        if (user.getRoles().contains(roleService.findByRole("Terminverwalter")) && user.getRoles().contains(roleService.findByRole("Personalabteilung")) && user.getRoles().contains(roleService.findByRole("Mitarbeiter"))){
+        if (form.getRoles().contains(roleService.findByRole("Terminverwalter")) && form.getRoles().contains(roleService.findByRole("Personalabteilung")) && form.getRoles().contains(roleService.findByRole("Mitarbeiter"))){
             model.addAttribute("error", "Der User kann entweder die Rolle Mitarbeiter haben oder die Rolle Terminverwalter und/ oder Personalabteilung, aber nicht alle 3.");
             model.addAttribute("listRoles", listRoles);
             return "HR/createUser";
         }
-        if (user.getRoles().contains(roleService.findByRole("Personalabteilung")) && user.getRoles().contains(roleService.findByRole("Mitarbeiter"))){
+        if (form.getRoles().contains(roleService.findByRole("Personalabteilung")) && form.getRoles().contains(roleService.findByRole("Mitarbeiter"))){
             model.addAttribute("error", "Der User kann nicht gleichzeitig die Rolle Mitarbeiter und Personalabteilung haben.");
             model.addAttribute("listRoles", listRoles);
             return "HR/createUser";
         }
-        if (user.getRoles().contains(roleService.findByRole("Terminverwalter")) && user.getRoles().contains(roleService.findByRole("Mitarbeiter"))){
+        if (form.getRoles().contains(roleService.findByRole("Terminverwalter")) && form.getRoles().contains(roleService.findByRole("Mitarbeiter"))){
             model.addAttribute("error", "Der User kann nicht gleichzeitig die Rolle Mitarbeiter und Terminverwalter haben.");
             model.addAttribute("listRoles", listRoles);
             return "HR/createUser";
         }
+        User user = userFormConverter.update(new User(), form);
         userService.save(user);
         return "HR/userResult";
     }
+
+    // Anzeigen der User-Liste
     @GetMapping("/HR/userlist")
     public String userList(Model model) {
         model.addAttribute("users", userService.findAll());
@@ -96,7 +96,6 @@ public class UserController {
     }
 
     // Löschen eines Users. Ist nur möglich, wenn es sich nicht um den einzigen User mit der Rolle Personalabteilung handelt.
-
     @GetMapping("/HR/userlist/delete/{id}")
     public String deleteUser(@PathVariable("id") Integer id, Model model) {
         if (userService.checkIfUserHasRoleHR(id) == 1 && userService.countUsersWithRoleHR() == 1) {
@@ -117,7 +116,6 @@ public class UserController {
     }
 
     // Deaktivieren eines Users, wenn es nicht der einzige User mit der Rolle Personalabteilung ist und der angemeldete User sich nicht selber deaktivieren würde.
-
     @GetMapping("/HR/userlist/disable/{id}")
     public String deactiveUser(@PathVariable("id") Integer id, Model model) {
         if (userService.checkIfUserHasRoleHR(id) == 1 && userService.countUsersWithRoleHR() == 1) {
@@ -131,12 +129,10 @@ public class UserController {
             return "HR/userlist";
         }
         userService.disableUser(id);
-
         return "redirect:/HR/userlist";
     }
 
     // Aktivieren eines Users
-
     @GetMapping("/HR/userlist/enable/{id}")
     public String activeUser(@PathVariable("id") Integer id, Model model) {
         userService.enableUser(id);
@@ -144,9 +140,7 @@ public class UserController {
         return "redirect:/HR/userlist";
     }
 
-
     // erster Teil zum Ändern des Passwortes durch den User, prüft altes Passwort
-
     @GetMapping("/editPassword")
     public String editPassword(Model model) {
         model.addAttribute("user", userService.findCurrentUser());
@@ -154,7 +148,6 @@ public class UserController {
     }
 
     // prüft, ob Eingabe des alten Passwortes korrekt war
-
     @PostMapping("/editPassword")
     public String editPassword(@ModelAttribute("user") User user, Model model) {
         PasswordEncoder passencoder = new BCryptPasswordEncoder();
@@ -166,7 +159,6 @@ public class UserController {
     }
 
     // Ändern des eigenen Passwortes durch den Mitarbeiter
-
     @GetMapping("/editPassword2")
     public String editPassword2(Model model) {
         model.addAttribute("user", userService.findCurrentUser());
@@ -174,7 +166,6 @@ public class UserController {
     }
 
     // Speichern des neuen Passwortes, wenn das neue Passwort den unten aufgeführten Kriterien entspricht
-
     @PostMapping("/editPassword2")
     public String savePassword2(@ModelAttribute("user") User user, Model model) {
         PasswordEncoder passencoder = new BCryptPasswordEncoder();
@@ -183,50 +174,43 @@ public class UserController {
             model.addAttribute("error", "Hinweis: Dein Passwort muss mindestens 8 Stellen lang sein ");
             return ("editPassword2");
         };
-
         // Das neu angelegte Passwort darf keine Leerzeichen enthalten.
         if (user.getPassword().contains(" ")){
             model.addAttribute("error", "Hinweis: Dein Passwort darf keine Leerzeichen enthalten ");
             return ("editPassword2");
         }
-
         // Das neu angelegte Passwort muss mindestens eine Zahl enthalten.
         if (!user.getPassword().matches(".*\\d.*")){
             model.addAttribute("error", "Hinweis: Dein Passwort muss eine Zahl enthalten ");
             return ("editPassword2");
         };
-
         // Das neu angelegte Passwort muss mindestens ein Sonderzeichen enthalten.
         if (!user.getPassword().matches(".*?[#?!@$%^&*-]")){
             model.addAttribute("error", "Hinweis: Dein Passwort muss mindestens ein Sonderzeichen enthalten ");
             return ("editPassword2");
         };
-
         // Das neu angelegte Passwort muss mindestens einen Großbuchstaben enthalten.
         if (!user.getPassword().chars().anyMatch(Character::isUpperCase)){
             model.addAttribute("error", "Hinweis: Dein Passwort muss mindestens einen Großbuchstaben enthalten. ");
             return ("editPassword2");
         }
-
         // Das neu angelegte Passwort muss mindestens einen Kleinbuchstaben enthalten.
         if (!user.getPassword().chars().anyMatch(Character::isLowerCase)){
             model.addAttribute("error", "Hinweis: Dein Passwort muss mindestens einen Kleinbuchstaben enthalten. ");
             return ("editPassword2");
         }
-
         // Das neu angelegte Passwort darf nicht dem alten Passwort entsprechen
         if (user.getPassword() == "" || passencoder.matches(user.getPassword(), userService.findCurrentUser().getPassword())) {
             model.addAttribute("error", "Da hat etwas nicht geklappt. Du hast dein altes oder gar kein Passwort eingegeben.");
             return ("editPassword2");
         }
-
         // Wenn das neue Passwort allen Anforderungen entspricht, wird es in der Datenbank abgespeichert.
         userService.updateUserPassword(encoder.encode(user.getPassword()), userService.findCurrentUser().getId());
         model.addAttribute("events", eventService.findTop3());
         return "index";
     }
 
-
+    // Aufrufen der Bearbeiten-Seite für einen User
     @GetMapping("/HR/userlist/edit/{id}")
     public String editUser(@PathVariable("id") int id, Model model){
         model.addAttribute("user", userService.findById(id));
@@ -237,7 +221,6 @@ public class UserController {
     }
 
     // Speichern des Users, wenn eine Rolle und ein Nutzername vergeben wurden.
-
     @PostMapping("/HR/userlist/edit/{id}")
     public String saveUser(@ModelAttribute("userForm1") @Valid UserForm1 form, BindingResult binding, Model model,@PathVariable("id") int id) {
         List<Role> listRoles = roleService.findAll();
@@ -246,47 +229,42 @@ public class UserController {
             return "HR/editUser";
         }
         // Wenn der User der einzige User mit Rolle Personalabteilung ist, kann diese nicht geändert werden.
-
         if (userService.checkIfUserHasRoleHR(id) == 1 && userService.countUsersWithRoleHR() == 1 && !userService.findById(id).getRoles().contains(roleService.findByRole("PERSONALABTEILUNG"))) {
             model.addAttribute("error", "Dies ist der einige Mitarbeiter mit der Rolle Personalabteilung. Kein Ändern der Rolle möglich.");
             model.addAttribute("listRoles", listRoles);
             return "HR/editUser";
         }
-
         // Wenn der User, der bearbeitet werden soll, dem angemeldeten User entspricht, gibt es eine Fehlermeldung. User sollen sich nicht selber bearbeiten können.
-
         if (userService.findById(id) == userService.findCurrentUser()) {
             model.addAttribute("error", "Du kannst deine Angaben nicht selber bearbeiten.");
             model.addAttribute("listRoles", listRoles);
             return "HR/editUser";
         }
-
         // Der Name vom User darf nicht einem Namen entsprechen, den es schon in der Datenbank gibt, wenn es nicht der des angemeldeten Users ist.
-
-        User user = userFormConverter1.update(userService.findUser(id), form);
-        if (userService.countUsersWithSameNameThatAreNotEditedUser(user.getUserName(), user.getId()) == 1){
+        if (userService.countUsersWithSameNameThatAreNotEditedUser(form.getUserName(), id) == 1){
             model.addAttribute("listRoles", listRoles);
             model.addAttribute("error", "Den User gibt es schon.");
             return "HR/editUser";
         }
-        if (user.getRoles().contains(roleService.findByRole("Terminverwalter")) && user.getRoles().contains(roleService.findByRole("Personalabteilung")) && user.getRoles().contains(roleService.findByRole("Mitarbeiter"))){
+        if (form.getRoles().contains(roleService.findByRole("Terminverwalter")) && form.getRoles().contains(roleService.findByRole("Personalabteilung")) && form.getRoles().contains(roleService.findByRole("Mitarbeiter"))){
             model.addAttribute("error", "Der User kann entweder die Rolle Mitarbeiter haben oder die Rolle Terminverwalter und/ oder Personalabteilung, aber nicht alle 3.");
             model.addAttribute("listRoles", listRoles);
             return "HR/editUser";
         }
-        if (user.getRoles().contains(roleService.findByRole("Personalabteilung")) && user.getRoles().contains(roleService.findByRole("Mitarbeiter"))){
+        if (form.getRoles().contains(roleService.findByRole("Personalabteilung")) && form.getRoles().contains(roleService.findByRole("Mitarbeiter"))){
             model.addAttribute("error", "Der User kann nicht gleichzeitig die Rolle Mitarbeiter und Personalabteilung haben.");
             model.addAttribute("listRoles", listRoles);
             return "HR/editUser";
         }
-        if (user.getRoles().contains(roleService.findByRole("Terminverwalter")) && user.getRoles().contains(roleService.findByRole("Mitarbeiter"))){
+        if (form.getRoles().contains(roleService.findByRole("Terminverwalter")) && form.getRoles().contains(roleService.findByRole("Mitarbeiter"))){
             model.addAttribute("error", "Der User kann nicht gleichzeitig die Rolle Mitarbeiter und Terminverwalter haben.");
             model.addAttribute("listRoles", listRoles);
             return "HR/editUser";
         }
+        User user = userFormConverter1.update(userService.findUser(id), form);
         userService.save(user);
         model.addAttribute("users", userService.findAll());
-        return "redirect:/HR/userlist";
+        return "HR/userlist";
     }
 
 }

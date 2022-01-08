@@ -1,7 +1,6 @@
 package de.hsba.bi.project.events;
 
-// Ermöglicht Auswahl verschiedener Kategorien beim Erstellen/ Ändern von Events
-
+// Ermöglicht Auswahl verschiedener Tageszeiten beim Erstellen/ Ändern von Events
 public enum Daytime {
     Morgens("Morgens"), Vormittags("Vormittags"), Nachmittags("Nachmittags"), Abends("Abends");
 

@@ -27,7 +27,6 @@ public interface UserRepository extends JpaRepository<de.hsba.bi.project.user.Us
     void updateUserPassword(@Param("password") String password, @Param("id") Integer id);
 
     // um sicherzustellen, dass ein Username nur einmal existiert
-
     @Query("SELECT Count(id) from User u where u.userName= :userName")
     Integer countNumberUsersWithSameName(@Param("userName")String userName);
 

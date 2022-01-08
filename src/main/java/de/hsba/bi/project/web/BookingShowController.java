@@ -29,11 +29,9 @@ public class BookingShowController {
 
 
     // speichert Buchung, wenn Buchung noch nicht von User getätigt wurde. Zieht außerdem einen freien Platz vom Event ab.
-
     @GetMapping("/bookingOverview/{id}")
     public String showBookedEvent(@PathVariable("id") int id, Model model) {
         bookingService.throwErrorIfBookingIsClosed(id);
-
         if (bookingService.findBookingByUser(userService.findCurrentUser(), eventService.findById(id)) == 1) {
             model.addAttribute("events", eventService.findAll());
             model.addAttribute("filter", new Filter());
@@ -47,7 +45,6 @@ public class BookingShowController {
     }
 
     // Löscht Buchung und fügt einen freien Platz zum Event hinzu, das vom User gelöscht wurde.
-
     @GetMapping("/booking/delete/{id}")
     public String deleteBooking(@PathVariable("id") int id, Model model) {
         bookingService.throwErrorIfBookingIsClosed(id);
@@ -59,7 +56,6 @@ public class BookingShowController {
     }
 
     // Zeigt, wer alles für das Event angemeldet ist.
-
     @GetMapping("/booking/users/{id}")
     public String showBookingsForEvent(@PathVariable("id") int id, Model model) {
         model.addAttribute("bookings", bookingService.findBookingsForEvent(eventService.findById(id)));

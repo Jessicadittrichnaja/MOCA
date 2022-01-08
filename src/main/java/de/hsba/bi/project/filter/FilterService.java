@@ -26,7 +26,6 @@ public class FilterService {
     private UserService userService;
 
     // gibt nach Filterung verfügbare Events aus
-
     public List<Event> getFilteredEvents(Filter filter) {
 
         List<Event> filteredEvents = eventRepository.findAvailableEvents(userService.findCurrentUser());

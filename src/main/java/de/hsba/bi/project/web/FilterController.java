@@ -21,7 +21,6 @@ public class FilterController {
     private final UserService userService;
 
     // zeigt alle verfügbaren Events (nicht vom angemeldeten User gebucht, mehr als 0 freie Plätze)
-
     @GetMapping
     public String eventList(Model model) {
         model.addAttribute("events", eventService.findEvents(userService.findCurrentUser()));

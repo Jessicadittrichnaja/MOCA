@@ -20,7 +20,6 @@ public class courseDetailShowController {
     private EventService eventService;
 
     // zeigt Details zu einem Event
-
     @GetMapping("/courseDetails/{id}")
     public String showChosenEvent(@PathVariable("id") int id, Model model) {
         model.addAttribute("events", eventService.findById(id));

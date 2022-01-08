@@ -24,42 +24,38 @@ public class IndexController {
     private EventRepository eventRepository;
 
     // Mapping von diversen Seiten, die nicht in anderen Controllern aufgeführt werden
-
     @RequestMapping("/overview")
     public String overview(Model model) {
-
         return "overview";
     }
+
     @RequestMapping("/login")
     public String login(Model model) {
-
         return "login";
     }
+
     @RequestMapping("/logout")
     public String logout(Model model) {
-
         return "logout";
     }
+
     @RequestMapping("/impressum")
     public String impressum(Model model) {
-
         return "impressum";
     }
 
     @RequestMapping("/contact")
     public String kontakt(Model model) {
-
         return "contact";
     }
+
     @RequestMapping("/privacy")
     public String datenschutzerklaerung(Model model) {
-
         return "privacy";
     }
 
     @RequestMapping("/editPassword")
     public String editPassword(Model model) {
-
         return "editPassword";
     }
 

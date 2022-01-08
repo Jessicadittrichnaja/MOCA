@@ -35,7 +35,7 @@ public class TestDataCreator {
 
     public void init() {
 
-        // add roles
+        // Erstellen der Rollen
         Role roleEmployee = new Role ("Mitarbeiter");
         Role roleHR = new Role ("Personalabteilung");
         Role roleEventPlanner = new Role ("Terminverwalter");
@@ -56,13 +56,13 @@ public class TestDataCreator {
         Set<Role> rolesDaniel = new HashSet<>();
         rolesDaniel.add(roleHR);
 
-       // add some users
+       // Hinzufügen von Usern
         User enrico = createUser("Enrico", "Nehls", "enrico", "password", rolesEnrico);
         User jessica = createUser("Jessica", "Dittrich", "jessica", "password", rolesJessica);
         User fynn = createUser("Fynn", "Thode", "fynn", "password", rolesFynn);
         User daniel = createUser("Daniel", "Fuhrmann", "daniel", "password", rolesDaniel);
 
-        // add some events
+        // Erstellung Events
         Event programmierung = new Event ("Programmierung 2", "Ziel des Kurses Programmierung 2 ist das Erlernen grundlegender Konzepte der imperativen und objektorientierten Programmierung anhand der Programmiersprache Java.", headSeminar.Günther, Category.Seminar, 8, 1, Location.Seminarraum1, LocalDate.of(2022, 1, 23), LocalTime.of(10, 15), LocalTime.of(10,15).plusHours(8));
         Event backen = new Event("Weihnachtliches Kekse backen", "Werden Sie zum Keks-Profi in diesem lustigen Backkurs. Der stärkt nicht nur das Team, sondern auch Sie.", headSeminar.Anne, Category.Teamtag, 3, 15, Location.grosseHalle, LocalDate.of(2022, 12, 20), LocalTime.of(11, 30), LocalTime.of(11,30).plusHours(3));
         Event agileMethoden = new Event("Agile Methoden", "In diesem Seminar lernen Sie alles zum Thema agile Methoden.", headSeminar.Klausi, Category.Seminar, 3, 15, Location.Beamerraum, LocalDate.of(2022, 4, 8), LocalTime.of(15, 45), LocalTime.of(15,45).plusHours(3));
@@ -104,7 +104,7 @@ public class TestDataCreator {
         eventService.save(weinverkostung);
         eventService.save(trommeln);
 
-        // add some bookings
+        // Buchungen
         Booking booking1 = new Booking(excel1, enrico);
         Booking booking2 = new Booking(buchführung1, daniel);
         Booking booking3 = new Booking(tableau1, jessica);

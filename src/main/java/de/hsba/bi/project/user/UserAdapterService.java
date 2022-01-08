@@ -20,7 +20,6 @@ public class UserAdapterService implements UserDetailsService {
     private final UserRepository repository;
 
     // Wenn ein User nicht gefunden werden kann, wird UsernameNotFoundException aufgerufen
-
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = repository.findByUserName(username);

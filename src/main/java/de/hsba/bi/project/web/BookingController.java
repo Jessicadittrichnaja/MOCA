@@ -25,7 +25,6 @@ public class BookingController {
     private final UserService userService;
 
     // zeigt Buchungen zu einem User
-
     @GetMapping
     public String bookingList(Model model) {
         model.addAttribute("bookings", bookingService.findByUser(userService.findCurrentUser()));
