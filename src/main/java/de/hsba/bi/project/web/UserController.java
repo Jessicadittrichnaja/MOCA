@@ -83,6 +83,11 @@ public class UserController {
             model.addAttribute("listRoles", listRoles);
             return "HR/createUser";
         }
+        if (form.getPassword().contains(" ")) {
+            model.addAttribute("error", "Das Passwort darf keine Leerzeichen enthalten.");
+            model.addAttribute("listRoles", listRoles);
+            return "HR/createUser";
+        }
         User user = userFormConverter.update(new User(), form);
         userService.save(user);
         return "HR/userResult";

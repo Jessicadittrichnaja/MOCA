@@ -34,7 +34,7 @@
             </div>
             <div class="col-md-6 form-group">
                 <label>Passwort</label>
-                <input type="password" class="form-control" maxlength="40" th:field="*{password}"
+                <input type="password" class="form-control" maxlength="20" th:field="*{password}"
                        th:classappend="${#fields.hasErrors('password')? 'is-invalid' : ''}"/>
                 <span class="text-danger" th:errors="*{password}"></span>
             </div>
