@@ -96,7 +96,6 @@ public class Event implements Serializable {
         }
 
     public Event() {
-
     }
 
 }

@@ -32,7 +32,6 @@ public class User implements Comparable<User> {
         return ((UserDetails) principal).getUsername();
     }
 
-
     @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

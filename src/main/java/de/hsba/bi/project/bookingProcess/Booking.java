@@ -5,6 +5,8 @@ import de.hsba.bi.project.user.User;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -22,12 +24,14 @@ public class Booking implements Serializable {
 
     @Getter
     @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
-    @JoinColumn(name = "iduser", insertable = false, updatable = false)
+    @JoinColumn()
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
     @Getter
     @ManyToOne (fetch = FetchType.LAZY, targetEntity = Event.class)
-    @JoinColumn(name = "idevent", insertable = false, updatable = false)
+    @JoinColumn()
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Event event;
 
     public Booking(Event event, User user) {this.event = event; this.user = user;};
