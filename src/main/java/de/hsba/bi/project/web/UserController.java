@@ -169,34 +169,9 @@ public class UserController {
     @PostMapping("/editPassword2")
     public String savePassword2(@ModelAttribute("user") User user, Model model) {
         PasswordEncoder passencoder = new BCryptPasswordEncoder();
-        // Das neu angelegte Passwort muss mindestens 8 Stellen lang sein.
-        if (!user.getPassword().matches(".{8,}")){
-            model.addAttribute("error", "Hinweis: Dein Passwort muss mindestens 8 Stellen lang sein ");
-            return ("editPassword2");
-        };
-        // Das neu angelegte Passwort darf keine Leerzeichen enthalten.
-        if (user.getPassword().contains(" ")){
-            model.addAttribute("error", "Hinweis: Dein Passwort darf keine Leerzeichen enthalten ");
-            return ("editPassword2");
-        }
-        // Das neu angelegte Passwort muss mindestens eine Zahl enthalten.
-        if (!user.getPassword().matches(".*\\d.*")){
-            model.addAttribute("error", "Hinweis: Dein Passwort muss eine Zahl enthalten ");
-            return ("editPassword2");
-        };
-        // Das neu angelegte Passwort muss mindestens ein Sonderzeichen enthalten.
-        if (!user.getPassword().matches(".*?[#?!@$%^&*-]")){
-            model.addAttribute("error", "Hinweis: Dein Passwort muss mindestens ein Sonderzeichen enthalten ");
-            return ("editPassword2");
-        };
-        // Das neu angelegte Passwort muss mindestens einen Großbuchstaben enthalten.
-        if (!user.getPassword().chars().anyMatch(Character::isUpperCase)){
-            model.addAttribute("error", "Hinweis: Dein Passwort muss mindestens einen Großbuchstaben enthalten. ");
-            return ("editPassword2");
-        }
-        // Das neu angelegte Passwort muss mindestens einen Kleinbuchstaben enthalten.
-        if (!user.getPassword().chars().anyMatch(Character::isLowerCase)){
-            model.addAttribute("error", "Hinweis: Dein Passwort muss mindestens einen Kleinbuchstaben enthalten. ");
+        // regulärer Ausdruck, um Kriterien für das Passwort zu überprüfen (siehe editPassword2.html)
+        if (!user.getPassword().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()!])(?=\\S+$).{8,20}$")) {
+            model.addAttribute("error", "Hinweis: Dein Passwort erfüllt nicht die Kriterien.");
             return ("editPassword2");
         }
         // Das neu angelegte Passwort darf nicht dem alten Passwort entsprechen
