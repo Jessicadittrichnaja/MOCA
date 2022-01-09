@@ -16,9 +16,10 @@ import java.util.List;
 @Entity
 public class Event implements Serializable {
 
+    @Getter
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
+    @Column(name = "idevent", unique = true, nullable = false)
     private Integer id;
 
     @Getter
@@ -71,7 +72,6 @@ public class Event implements Serializable {
 
  
     @OneToMany(mappedBy = "event", cascade = CascadeType.ALL, orphanRemoval = true)
-
     private List<Booking> bookings;
 
     public List<Booking> getBookings() {

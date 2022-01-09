@@ -33,9 +33,10 @@ public class User implements Comparable<User> {
     }
 
 
-    @Setter(AccessLevel.NONE)
+    @Getter
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "iduser", unique = true, nullable = false)
     private Integer id;
 
     @Getter
@@ -71,6 +72,13 @@ public class User implements Comparable<User> {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Booking> bookings;
+
+    public List<Booking> getBookings() {
+        if (bookings == null) {
+            bookings = new ArrayList<>();
+        }
+        return bookings;
+    }
 
     public User(String name) {
         this.userName = userName;
