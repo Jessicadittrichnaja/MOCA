@@ -27,7 +27,7 @@
                 <span class="text-danger" th:errors="*{lastName}"></span>
             </div>
             <div class="col-md-6 form-group">
-                <label>Nutzername</label>
+                <label>Benutzername</label>
                 <input type="text" class="form-control" th:field="*{userName}"
                        th:classappend="${#fields.hasErrors('userName')? 'is-invalid' : ''}"/>
                 <span class="text-danger" th:errors="*{userName}"></span>
