@@ -16,13 +16,13 @@
         <div class="form-row">
             <div class="col-md-6 form-group">
                 <label>Titel</label>
-                <input type="text" class="form-control" th:field="*{name}"
+                <input type="text" class="form-control" maxlength="50" th:field="*{name}"
                        th:classappend="${#fields.hasErrors('name')? 'is-invalid' : ''}"/>
                 <span class="text-danger" th:errors="*{name}"></span>
             </div>
             <div class="col-md-6 form-group">
                 <label>Beschreibung</label>
-                <textarea class="form-control" th:field="*{description}" rows="4" cols="50" th:classappend="${#fields.hasErrors('description')? 'is-invalid' : ''}"></textarea>
+                <textarea maxlength="250" class="form-control" th:field="*{description}" rows="4" cols="50" th:classappend="${#fields.hasErrors('description')? 'is-invalid' : ''}"></textarea>
                 <span class="text-danger" th:errors="*{description}"></span>
                 </textarea>
             </div>

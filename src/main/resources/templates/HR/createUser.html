@@ -16,25 +16,25 @@
         <div class="form-row">
             <div class="col-md-6 form-group">
                 <label>Vorname</label>
-                <input type="text" class="form-control" th:field="*{firstName}"
+                <input type="text" class="form-control" maxlength="30" th:field="*{firstName}"
                        th:classappend="${#fields.hasErrors('firstName')? 'is-invalid' : ''}"/>
                 <span class="text-danger" th:errors="*{firstName}"></span>
             </div>
             <div class="col-md-6 form-group">
                 <label>Nachname</label>
-                <input type="text" class="form-control" th:field="*{lastName}"
+                <input type="text" class="form-control" maxlength="30" th:field="*{lastName}"
                        th:classappend="${#fields.hasErrors('lastName')? 'is-invalid' : ''}"/>
                 <span class="text-danger" th:errors="*{lastName}"></span>
             </div>
             <div class="col-md-6 form-group">
                 <label>Benutzername</label>
-                <input type="text" class="form-control" th:field="*{userName}"
+                <input type="text" class="form-control" maxlength="30" th:field="*{userName}"
                        th:classappend="${#fields.hasErrors('userName')? 'is-invalid' : ''}"/>
                 <span class="text-danger" th:errors="*{userName}"></span>
             </div>
             <div class="col-md-6 form-group">
                 <label>Passwort</label>
-                <input type="password" class="form-control" th:field="*{password}"
+                <input type="password" class="form-control" maxlength="40" th:field="*{password}"
                        th:classappend="${#fields.hasErrors('password')? 'is-invalid' : ''}"/>
                 <span class="text-danger" th:errors="*{password}"></span>
             </div>

@@ -15,7 +15,7 @@
     <div class="form-row">
       <div class="col-md-6 form-group">
         <label>Benutzername</label>
-        <input type="text" class="form-control" th:field="*{userName}"
+        <input type="text" class="form-control" maxlength="30" th:field="*{userName}"
                th:classappend="${#fields.hasErrors('userName')? 'is-invalid' : ''}"/>
         <span class="text-danger" th:errors="*{userName}"></span>
       </div>
