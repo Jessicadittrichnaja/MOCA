@@ -42,7 +42,7 @@
                     <label>Datum:</label>
                     <input type="date" th:field="*{selectedDate}" style="width: 175px; height: 20px;">
                 </div>
-                <div class="sncontainer">Tageszeit: <br>
+                <div class="sncontainer">Startzeit (Tageszeit): <br>
                     <select id="daytime" th:field="*{selectedDaytime}" style="width: 175px; height: 20px;">
                         <option th:value="${null}" selected>Tageszeit auswählen</option>
                         <option th:each="daytime : ${T(de.hsba.bi.project.events.Daytime).values()}" th:value="${daytime}"
