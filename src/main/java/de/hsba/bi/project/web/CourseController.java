@@ -17,6 +17,7 @@ package de.hsba.bi.project.web;
         import javax.validation.Valid;
         import java.text.ParseException;
         import java.text.SimpleDateFormat;
+        import java.time.LocalDate;
         import java.time.LocalTime;
 
 @RequiredArgsConstructor
@@ -53,6 +54,7 @@ public class CourseController {
             model.addAttribute("error", "Es gibt in dem Zeitraum schon ein Event im gewählten Raum.");
             return ("eventPlanner/createEvent");
         }
+        // Seminarleiter können nur eine Veranstaltung zur Zeit leiten
         if (eventService.countNumberEventsWithSameHeadSeminarAtSameTime(event.getHeadSeminar(), event.getDate(), event.getStartTime(), event.getEndTime()) == 1) {
             model.addAttribute("error", "Der/ die Seminarleiter(in) ist für den Zeitraum leider nicht verfügbar.");
             return ("eventPlanner/createEvent");
@@ -62,6 +64,12 @@ public class CourseController {
         LocalTime endingTime = startTime.plusHours(event.getDuration());
         if (endingTime.isAfter(LocalTime.parse("21:00")) || endingTime.isBefore(LocalTime.parse("08:00"))) {
             model.addAttribute("error", "Das Event darf höchstens bis 21 Uhr gehen.");
+            return ("eventPlanner/createEvent");
+        }
+        // Datum darf nicht in der Vergangenheit liegen
+        LocalDate current = LocalDate.now();
+        if (event.getDate().isBefore(current)) {
+            model.addAttribute("error", "Das Datum darf nicht in der Vergangenheit liegen.");
             return ("eventPlanner/createEvent");
         }
         eventService.save(event);
@@ -108,8 +116,15 @@ public class CourseController {
             model.addAttribute("error", "Es gibt in dem Zeitraum schon ein Event im gewählten Raum.");
             return ("eventPlanner/editEvent");
         }
+        // Seminarleiter können nur eine Veranstaltung zur Zeit leiten
         if (eventService.countNumberEventsWithSameHeadSeminarAtSameTimeExceptCurrentEvent(id, event.getHeadSeminar(), event.getDate(), event.getStartTime(), event.getEndTime()) == 1) {
             model.addAttribute("error", "Der/ die Seminarleiter(in) ist für den Zeitraum leider nicht verfügbar.");
+            return ("eventPlanner/editEvent");
+        }
+        // Datum darf nicht in der Vergangenheit liegen
+        LocalDate current = LocalDate.now();
+        if (event.getDate().isBefore(current)) {
+            model.addAttribute("error", "Das Datum darf nicht in der Vergangenheit liegen.");
             return ("eventPlanner/editEvent");
         }
         eventService.save(event);

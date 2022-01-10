@@ -64,7 +64,7 @@ public class UserController {
             return "HR/createUser";
         }
         if (userService.countUsersWithSameName(form.getUserName()) == 1){
-            model.addAttribute("error", "Den User gibt es schon.");
+            model.addAttribute("error", "Den Benutzernamen gibt es schon.");
             model.addAttribute("listRoles", listRoles);
             return "HR/createUser";
         }
@@ -87,6 +87,11 @@ public class UserController {
             model.addAttribute("error", "Das Passwort darf keine Leerzeichen enthalten.");
             model.addAttribute("listRoles", listRoles);
             return "HR/createUser";
+        }
+        if (!form.getPassword().matches(".{4,20}$")) {
+            model.addAttribute("error", "Das Passwort muss mindestens 4 und höchstens 20 Stellen haben.");
+            model.addAttribute("listRoles", listRoles);
+            return ("HR/createUser");
         }
         User user = userFormConverter.update(new User(), form);
         userService.save(user);
@@ -176,12 +181,12 @@ public class UserController {
         PasswordEncoder passencoder = new BCryptPasswordEncoder();
         // regulärer Ausdruck, um Kriterien für das Passwort zu überprüfen (siehe editPassword2.html)
         if (!user.getPassword().matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&-+=()!])(?=\\S+$).{8,20}$")) {
-            model.addAttribute("error", "Hinweis: Dein Passwort erfüllt nicht die Kriterien.");
+            model.addAttribute("error", "Hinweis: Dein Passwort erfüllt nicht alle Kriterien.");
             return ("editPassword2");
         }
         // Das neu angelegte Passwort darf nicht dem alten Passwort entsprechen
         if (user.getPassword() == "" || passencoder.matches(user.getPassword(), userService.findCurrentUser().getPassword())) {
-            model.addAttribute("error", "Da hat etwas nicht geklappt. Du hast dein altes oder gar kein Passwort eingegeben.");
+            model.addAttribute("error", "Da hat etwas nicht geklappt. Du hast anscheinend dein altes Passwort eingegeben.");
             return ("editPassword2");
         }
         // Wenn das neue Passwort allen Anforderungen entspricht, wird es in der Datenbank abgespeichert.
@@ -223,7 +228,7 @@ public class UserController {
         // Der Name vom User darf nicht einem Namen entsprechen, den es schon in der Datenbank gibt, wenn es nicht der des angemeldeten Users ist.
         if (userService.countUsersWithSameNameThatAreNotEditedUser(form.getUserName(), id) == 1){
             model.addAttribute("listRoles", listRoles);
-            model.addAttribute("error", "Den User gibt es schon.");
+            model.addAttribute("error", "Den Benutzernamen gibt es schon.");
             return "HR/editUser";
         }
         if (form.getRoles().contains(roleService.findByRole("Terminverwalter")) && form.getRoles().contains(roleService.findByRole("Personalabteilung")) && form.getRoles().contains(roleService.findByRole("Mitarbeiter"))){
